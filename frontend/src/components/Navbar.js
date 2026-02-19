@@ -32,13 +32,13 @@ export default function Navbar() {
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-12">
+          <div className="hidden md:flex items-center gap-10">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 to={link.href}
                 data-testid={`nav-${link.label.toLowerCase().replace(' ', '-')}`}
-                className={`text-sm uppercase tracking-widest transition-opacity duration-300 ${
+                className={`text-sm uppercase tracking-widest transition-opacity duration-300 whitespace-nowrap ${
                   isActive(link.href) 
                     ? 'text-foreground font-medium' 
                     : 'text-muted-foreground hover:text-foreground'
