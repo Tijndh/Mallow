@@ -1,0 +1,154 @@
+{
+  "brand_identity": {
+    "name": "Mallow",
+    "archetype": "Organic & Earthy",
+    "mood": "Calm, Pure, Luxurious, Honest, Grounded",
+    "theme": "light",
+    "design_philosophy": "Botanical Luxury. Fusion of botanical illustrations with minimalist Swiss typography. High focus on negative space and texture."
+  },
+  "typography": {
+    "headings": {
+      "family": "Playfair Display, serif",
+      "weights": ["400", "600"],
+      "usage": "Use for all H1-H3. Tight tracking (-0.02em).",
+      "install_command": "@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap');"
+    },
+    "body": {
+      "family": "Mulish, sans-serif",
+      "weights": ["300", "400", "500"],
+      "usage": "Use for all body text, UI elements, and prices. Relaxed line-height.",
+      "install_command": "@import url('https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;700&display=swap');"
+    }
+  },
+  "colors": {
+    "palette": {
+      "background": "#F9F9F7",
+      "foreground": "#1C1C1C",
+      "primary": "#2C362B",
+      "primary_foreground": "#F9F9F7",
+      "secondary": "#E8E6E1",
+      "secondary_foreground": "#1C1C1C",
+      "accent": "#C66B3D",
+      "accent_foreground": "#FFFFFF",
+      "muted": "#F0EFEA",
+      "muted_foreground": "#666666",
+      "border": "#E2E0D9",
+      "card": "#FFFFFF",
+      "card_foreground": "#1C1C1C",
+      "input": "#E2E0D9",
+      "ring": "#2C362B"
+    },
+    "gradients": {
+      "subtle_overlay": "linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(249,249,247,1) 100%)"
+    }
+  },
+  "visual_enhancers": {
+    "texture": {
+      "name": "Organic Grain",
+      "css_rule": "background-image: url(\"data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E\");",
+      "usage": "Apply as a fixed overlay on the body with pointer-events-none to give a paper-like feel."
+    },
+    "borders": {
+      "style": "1px solid",
+      "color": "var(--border)",
+      "radius": "2px"
+    },
+    "shadows": {
+      "soft": "0 4px 20px -2px rgba(44, 54, 43, 0.05)",
+      "hover": "0 10px 40px -10px rgba(44, 54, 43, 0.1)"
+    }
+  },
+  "layout_strategies": {
+    "grid_system": {
+      "homepage": "Bento Grid Mode A (Asymmetric)",
+      "shop": "Bento Grid Mode B (High Density, uniform)",
+      "spacing": "Generous. Use p-8 to p-24 for section padding."
+    },
+    "containers": {
+      "max_width": "max-w-7xl",
+      "alignment": "Center usually, but use asymmetric columns for content."
+    }
+  },
+  "components": {
+    "buttons": {
+      "style": "Sharp edges (rounded-sm) or Pill (rounded-full).",
+      "primary": "bg-primary text-primary-foreground hover:bg-primary/90 transition-all duration-300 uppercase tracking-widest text-xs",
+      "secondary": "border border-primary text-primary hover:bg-primary hover:text-white transition-all duration-300 uppercase tracking-widest text-xs"
+    },
+    "cards": {
+      "style": "Flat, no shadow by default. 1px solid border. Padding p-6 or p-8.",
+      "hover": "Subtle lift (-2px) and shadow-soft."
+    },
+    "inputs": {
+      "style": "bg-transparent border-b border-input rounded-none focus:border-primary focus:ring-0 px-0 py-4"
+    }
+  },
+  "image_urls": {
+    "products": [
+      {
+        "url": "https://customer-assets.emergentagent.com/job_17aea5b5-60fd-49c6-a8ac-e25439437904/artifacts/c97c3sfn_image.png",
+        "description": "Puur Twellow Balsem (Amber jar)",
+        "category": "product_primary"
+      },
+      {
+        "url": "https://customer-assets.emergentagent.com/job_17aea5b5-60fd-49c6-a8ac-e25439437904/artifacts/kp498wxu_image.png",
+        "description": "Honingbalsem (Honey Balm)",
+        "category": "product_primary"
+      },
+      {
+        "url": "https://customer-assets.emergentagent.com/job_17aea5b5-60fd-49c6-a8ac-e25439437904/artifacts/falyyyco_image.png",
+        "description": "Castorbalsem (Castor Balm)",
+        "category": "product_primary"
+      }
+    ],
+    "atmosphere": [
+      {
+        "url": "https://images.unsplash.com/photo-1762327161548-66c0633335b8?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzB8MHwxfHNlYXJjaHwxfHx3b21hbiUyMGFwcGx5aW5nJTIwZmFjZSUyMGNyZWFtJTIwbmF0dXJhbCUyMGxpZ2h0JTIwbWluaW1hbGlzdHxlbnwwfHx8fDE3NzE1MTc3MTV8MA&ixlib=rb-4.1.0&q=85",
+        "description": "Close up of skin texture/neck (Hero Image)",
+        "category": "hero_lifestyle"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1769258263607-d997358546a7?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzMzl8MHwxfHNlYXJjaHwxfHxob25leWNvbWIlMjB0ZXh0dXJlJTIwbWFjcm8lMjBhbWJlciUyMGxpZ2h0fGVufDB8fHx8MTc3MTUxNzcxNXww&ixlib=rb-4.1.0&q=85",
+        "description": "Honeycomb Texture (Ingredient Highlight)",
+        "category": "texture"
+      },
+      {
+        "url": "https://images.pexels.com/photos/29302245/pexels-photo-29302245.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+        "description": "Dried Orange Slices (Ingredient Highlight)",
+        "category": "texture"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1749803848970-0824922db673?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NTN8MHwxfHNlYXJjaHwzfHxsYXZlbmRlciUyMGZsb3dlcnMlMjBzb2Z0JTIwZm9jdXN8ZW58MHx8fHwxNzcxNTE3NzE4fDA&ixlib=rb-4.1.0&q=85",
+        "description": "Lavender Flowers (Ingredient Highlight)",
+        "category": "texture"
+      },
+      {
+        "url": "https://images.pexels.com/photos/30754235/pexels-photo-30754235.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+        "description": "Shea Butter Texture (About Us)",
+        "category": "texture"
+      }
+    ]
+  },
+  "instructions_to_main_agent": [
+    "Install 'lucide-react' for icons.",
+    "Install 'framer-motion' for subtle entrance animations.",
+    "Install 'clsx' and 'tailwind-merge' for class handling.",
+    "Use the provided 'Organic Grain' SVG as a background overlay on the <body> tag to create a physical paper texture.",
+    "Implement the 'Bento Grid Mode A' for the Homepage Hero section: Mix the product images with the atmospheric textures (honeycomb, lavender).",
+    "On the Product Page: Use a sticky layout where the product image stays fixed on the left while the user scrolls through the description on the right.",
+    "For the 'Add to Cart' button: It must be full width on mobile, and sharp-edged (rounded-sm) to match the boxy, brutalist-lite aesthetic.",
+    "Language: EVERYTHING must be in Dutch (Nederlands).",
+    "Use 'Playfair Display' for all Headings (H1-H4) and 'Mulish' for body text. IMPORT THESE FONTS in index.css.",
+    "Use the 'Deep Charcoal' (#1C1C1C) for text, never pure black.",
+    "Use 'Bone White' (#F9F9F7) as the main background color, avoiding stark #FFFFFF except for product cards to create depth."
+  ],
+  "UNIVERSAL_GUIDELINES": [
+    "Do not use generic centered layouts. Use asymmetry.",
+    "Use 2-3x more spacing than typical. e.g. py-24 or py-32 for sections.",
+    "Every interactive element must have a hover state (opacity change or border color change).",
+    "All interactive elements must include data-testid attributes.",
+    "Use sonner for toasts.",
+    "Do not use gradients for backgrounds, use solid colors or the grain texture.",
+    "Ensure all text has sufficient contrast (APCA standards)."
+  ]
+}
