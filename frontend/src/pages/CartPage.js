@@ -1,19 +1,34 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Minus, Plus, Trash2, ShoppingBag, ArrowRight } from 'lucide-react';
 import axios from 'axios';
 import { Button } from '../components/ui/button';
 import { useCart } from '../context/CartContext';
+import { toast } from 'sonner';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
 
 export default function CartPage() {
-  const { cart, cartId, updateQuantity, removeFromCart, loading } = useCart();
+  const { cart, cartId, updateQuantity, removeFromCart, addToCart, loading } = useCart();
+  const [allProducts, setAllProducts] = useState([]);
+  const [addingProduct, setAddingProduct] = useState(null);
 
   useEffect(() => {
     window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await axios.get(`${API}/products`);
+        setAllProducts(response.data);
+      } catch (e) {
+        console.error('Error fetching products:', e);
+      }
+    };
+    fetchProducts();
   }, []);
 
   const handleCheckout = async () => {
@@ -32,6 +47,22 @@ export default function CartPage() {
     }
   };
 
+  const handleQuickAdd = async (productId, productName) => {
+    setAddingProduct(productId);
+    const success = await addToCart(productId, 1);
+    if (success) {
+      toast.success('Toegevoegd', {
+        description: productName,
+        duration: 2000,
+      });
+    }
+    setAddingProduct(null);
+  };
+
+  // Get products not in cart
+  const cartProductIds = cart.items.map(item => item.product_id);
+  const suggestedProducts = allProducts.filter(p => !cartProductIds.includes(p.id));
+
   if (cart.items.length === 0) {
     return (
       <div className="min-h-screen pt-20" data-testid="cart-page-empty">
@@ -49,13 +80,50 @@ export default function CartPage() {
                 Ontdek onze collectie natuurlijke balsems en voeg je favorieten toe.
               </p>
               <Link to="/shop" data-testid="continue-shopping-empty">
-                <Button className="btn-primary rounded-sm">
+                <Button className="bg-primary text-primary-foreground hover:bg-primary/90 transition-all duration-500 uppercase tracking-[0.2em] text-xs px-10 py-6 rounded-none">
                   Bekijk producten
                   <ArrowRight className="ml-2 w-4 h-4" />
                 </Button>
               </Link>
             </motion.div>
           </div>
+
+          {/* Show all products when cart is empty */}
+          {allProducts.length > 0 && (
+            <div className="max-w-5xl mx-auto mt-20">
+              <h2 className="font-serif text-2xl text-center mb-10">Onze Collectie</h2>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                {allProducts.map((product) => (
+                  <div key={product.id} className="group">
+                    <Link to={`/product/${product.id}`}>
+                      <div className="aspect-square bg-card border border-border overflow-hidden mb-4">
+                        <img
+                          src={product.image_url}
+                          alt={product.name}
+                          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        />
+                      </div>
+                    </Link>
+                    <div className="flex justify-between items-start">
+                      <div>
+                        <h3 className="font-serif text-lg">{product.name}</h3>
+                        <p className="text-sm text-muted-foreground">€{product.price.toFixed(2).replace('.', ',')}</p>
+                      </div>
+                      <Button
+                        onClick={() => handleQuickAdd(product.id, product.name)}
+                        disabled={addingProduct === product.id}
+                        variant="outline"
+                        size="sm"
+                        className="text-xs uppercase tracking-wider rounded-none border-foreground/20 hover:bg-foreground hover:text-background"
+                      >
+                        {addingProduct === product.id ? '...' : 'Toevoegen'}
+                      </Button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       </div>
     );
@@ -171,6 +239,55 @@ export default function CartPage() {
                 <ArrowRight className="w-4 h-4 mr-2 rotate-180" />
                 Verder winkelen
               </Link>
+
+              {/* Suggested Products */}
+              {suggestedProducts.length > 0 && (
+                <div className="pt-12 mt-12 border-t border-border">
+                  <h3 className="font-serif text-xl mb-6">Misschien vind je dit ook leuk</h3>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    {suggestedProducts.map((product) => (
+                      <div 
+                        key={product.id} 
+                        className="flex gap-4 p-4 border border-border hover:border-foreground/30 transition-colors"
+                      >
+                        <Link 
+                          to={`/product/${product.id}`}
+                          className="w-20 h-20 bg-card border border-border overflow-hidden flex-shrink-0"
+                        >
+                          <img
+                            src={product.image_url}
+                            alt={product.name}
+                            className="w-full h-full object-cover"
+                          />
+                        </Link>
+                        <div className="flex-1 flex flex-col justify-between">
+                          <div>
+                            <Link 
+                              to={`/product/${product.id}`}
+                              className="font-serif text-base hover:opacity-70 transition-opacity"
+                            >
+                              {product.name}
+                            </Link>
+                            <p className="text-sm text-muted-foreground">
+                              €{product.price.toFixed(2).replace('.', ',')}
+                            </p>
+                          </div>
+                          <Button
+                            onClick={() => handleQuickAdd(product.id, product.name)}
+                            disabled={addingProduct === product.id}
+                            variant="outline"
+                            size="sm"
+                            className="w-fit text-xs uppercase tracking-wider rounded-none border-foreground/20 hover:bg-foreground hover:text-background mt-2"
+                            data-testid={`quick-add-${product.id}`}
+                          >
+                            {addingProduct === product.id ? 'Toevoegen...' : 'Toevoegen'}
+                          </Button>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
 
             {/* Order Summary */}
@@ -208,7 +325,7 @@ export default function CartPage() {
 
                 <Button
                   onClick={handleCheckout}
-                  className="btn-primary rounded-sm w-full"
+                  className="bg-primary text-primary-foreground hover:bg-primary/90 transition-all duration-500 uppercase tracking-[0.2em] text-xs px-10 py-6 rounded-none w-full"
                   data-testid="checkout-button"
                 >
                   Afrekenen
