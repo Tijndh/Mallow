@@ -43,9 +43,10 @@ export default function ProductPage() {
     if (success) {
       toast.success('Toegevoegd aan winkelwagen', {
         description: `${quantity}x ${product.name}`,
+        duration: 2000,
       });
     } else {
-      toast.error('Er ging iets mis');
+      toast.error('Er ging iets mis', { duration: 2000 });
     }
     setAdding(false);
   };
