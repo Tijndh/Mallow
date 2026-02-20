@@ -31,7 +31,7 @@ function App() {
           </main>
           <Footer />
         </BrowserRouter>
-        <Toaster position="top-right" />
+        <Toaster position="top-right" duration={2000} closeButton />
       </div>
     </CartProvider>
   );
