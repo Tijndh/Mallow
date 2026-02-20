@@ -1,7 +1,12 @@
+import { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Leaf, Heart, Sparkles } from 'lucide-react';
 
 export default function AboutPage() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div className="min-h-screen pt-20" data-testid="about-page">
       {/* Hero */}
