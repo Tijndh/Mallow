@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Minus, Plus, Trash2, ShoppingBag, ArrowRight } from 'lucide-react';
@@ -10,6 +11,10 @@ const API = `${BACKEND_URL}/api`;
 
 export default function CartPage() {
   const { cart, cartId, updateQuantity, removeFromCart, loading } = useCart();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const handleCheckout = async () => {
     try {
