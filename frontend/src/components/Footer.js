@@ -41,10 +41,10 @@ export default function Footer() {
                 </li>
                 <li>
                   <Link 
-                    to="/product/puur-twellow-balsem" 
+                    to="/product/puur-Mallow-balsem" 
                     className="text-sm text-primary-foreground/80 hover:text-primary-foreground transition-colors"
                   >
-                    Puur Twellow Balsem
+                    Puur Mallow Balsem
                   </Link>
                 </li>
                 <li>

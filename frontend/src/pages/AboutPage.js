@@ -37,7 +37,7 @@ export default function AboutPage() {
               className="aspect-[4/3] bg-card border border-border overflow-hidden"
             >
               <img
-                src="https://images.pexels.com/photos/30754235/pexels-photo-30754235.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+                src="https://hetreestdal.nl/wp/wp-content/uploads/2016/10/Mooie-relatie-tussen-boer-en-zijn-vee2.jpg"
                 alt="Natuurlijke ingrediënten"
                 className="w-full h-full object-cover"
               />
@@ -187,7 +187,7 @@ export default function AboutPage() {
               </div>
               <div className="aspect-square bg-card border border-border overflow-hidden mt-8">
                 <img
-                  src="https://images.pexels.com/photos/30754235/pexels-photo-30754235.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+                  src="https://thefoodfarm.com.au/cdn/shop/files/FullSizeRender_2048x.jpg?v=1715871865"
                   alt="Sheaboter"
                   className="w-full h-full object-cover"
                 />
