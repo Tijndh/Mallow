@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import axios from 'axios';
 import ProductCard from '../components/ProductCard';
 
-const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || 'https://mallow.onrender.com';
 const API = `${BACKEND_URL}/api`;
 
 export default function ShopPage() {

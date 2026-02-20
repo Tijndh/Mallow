@@ -6,7 +6,7 @@ import { useLocation } from "react-router-dom";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 
-const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || 'https://mallow.onrender.com';
 const API = `${BACKEND_URL}/api`;
 
 export default function DiscountPopup() {

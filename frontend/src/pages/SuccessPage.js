@@ -6,7 +6,7 @@ import axios from 'axios';
 import { Button } from '../components/ui/button';
 import { useCart } from '../context/CartContext';
 
-const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || 'https://mallow.onrender.com';
 const API = `${BACKEND_URL}/api`;
 
 export default function SuccessPage() {
