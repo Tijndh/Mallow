@@ -13,10 +13,11 @@ import CartPage from "./pages/CartPage";
 import SuccessPage from "./pages/SuccessPage";
 
 function App() {
+  const basename = process.env.PUBLIC_URL || '/';
   return (
     <CartProvider>
       <div className="App min-h-screen bg-background">
-        <BrowserRouter>
+        <BrowserRouter basename={basename}>
           <Navbar />
           <main>
             <Routes>
