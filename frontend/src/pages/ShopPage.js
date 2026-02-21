@@ -18,7 +18,7 @@ export default function ShopPage() {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get(`${API}/products`);
+        const response = await axios.get(`${API}/products`, { timeout: 8000 });
         const nextProducts = Array.isArray(response.data) && response.data.length > 0
           ? response.data
           : FALLBACK_PRODUCTS;
