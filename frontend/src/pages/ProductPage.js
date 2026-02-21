@@ -13,8 +13,10 @@ const API = `${BACKEND_URL}/api`;
 
 export default function ProductPage() {
   const { id } = useParams();
-  const [product, setProduct] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [product, setProduct] = useState(
+    () => FALLBACK_PRODUCTS.find((p) => p.id === id) || null
+  );
+  const [loading, setLoading] = useState(false);
   const [quantity, setQuantity] = useState(1);
   const [adding, setAdding] = useState(false);
   const { addToCart } = useCart();
@@ -26,13 +28,16 @@ export default function ProductPage() {
 
   useEffect(() => {
     const fetchProduct = async () => {
+      const fallbackProduct = FALLBACK_PRODUCTS.find((p) => p.id === id) || null;
+      setProduct(fallbackProduct);
+      setLoading(false);
+
       try {
         const response = await axios.get(`${API}/products/${id}`, { timeout: 8000 });
         setProduct(response.data);
       } catch (e) {
         console.error('Error fetching product:', e);
-        const fallbackProduct = FALLBACK_PRODUCTS.find((p) => p.id === id);
-        setProduct(fallbackProduct || null);
+        setProduct(fallbackProduct);
       } finally {
         setLoading(false);
       }
