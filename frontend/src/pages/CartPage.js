@@ -6,6 +6,7 @@ import axios from 'axios';
 import { Button } from '../components/ui/button';
 import { useCart } from '../context/CartContext';
 import { toast } from 'sonner';
+import { FALLBACK_PRODUCTS } from '../lib/fallbackProducts';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || 'https://mallow.onrender.com';
 const API = `${BACKEND_URL}/api`;
@@ -23,9 +24,13 @@ export default function CartPage() {
     const fetchProducts = async () => {
       try {
         const response = await axios.get(`${API}/products`);
-        setAllProducts(response.data);
+        const nextProducts = Array.isArray(response.data) && response.data.length > 0
+          ? response.data
+          : FALLBACK_PRODUCTS;
+        setAllProducts(nextProducts);
       } catch (e) {
         console.error('Error fetching products:', e);
+        setAllProducts(FALLBACK_PRODUCTS);
       }
     };
     fetchProducts();

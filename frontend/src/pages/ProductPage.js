@@ -6,6 +6,7 @@ import axios from 'axios';
 import { Button } from '../components/ui/button';
 import { useCart } from '../context/CartContext';
 import { toast } from 'sonner';
+import { FALLBACK_PRODUCTS } from '../lib/fallbackProducts';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || 'https://mallow.onrender.com';
 const API = `${BACKEND_URL}/api`;
@@ -30,6 +31,8 @@ export default function ProductPage() {
         setProduct(response.data);
       } catch (e) {
         console.error('Error fetching product:', e);
+        const fallbackProduct = FALLBACK_PRODUCTS.find((p) => p.id === id);
+        setProduct(fallbackProduct || null);
       } finally {
         setLoading(false);
       }
