@@ -8,8 +8,8 @@ const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || 'https://mallow.onrende
 const API = `${BACKEND_URL}/api`;
 
 export default function ShopPage() {
-  const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [products, setProducts] = useState(FALLBACK_PRODUCTS);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     window.scrollTo(0, 0);
