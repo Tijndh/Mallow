@@ -31,14 +31,6 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
-      - name: Validate frontend backend URL variable
-        run: |
-          if [ -z "${{ vars.REACT_APP_BACKEND_URL }}" ]; then
-            echo "Missing GitHub variable: REACT_APP_BACKEND_URL"
-            echo "Set it in: Settings > Secrets and variables > Actions > Variables"
-            exit 1
-          fi
-
       - name: Install dependencies
         working-directory: frontend
         run: yarn install
