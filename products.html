@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <base href="/">
+  <title>Product | mallow.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root { 
+      --color-bg: #F5F2E9; 
+      --color-surface: #ffffff;
+      --color-text: #4A453E;
+      --color-muted: #837B70;
+      --color-green: #264132;
+      --color-green-hover: #1F342A;
+      --border: rgba(38,65,50,0.12);
+      --border-light: rgba(38,65,50,0.06);
+      --font-serif: 'Cormorant Garamond', serif; 
+      --font-sans: 'Montserrat', sans-serif; 
+    }
+    
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: var(--font-sans); color: var(--color-text); background-color: var(--color-bg); overflow-x: hidden; }
+    a { color: inherit; text-decoration: none; }
+
+    .head { padding: 1.2rem 5%; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-light); background: var(--color-bg); position: sticky; top: 0; z-index: 50; }
+    .logo { font-family: var(--font-serif); font-size: 2.2rem; color: var(--color-green); }
+    .nav { display: flex; gap: 1.8rem; font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600; align-items: center; color: var(--color-green); }
+    .nav a { transition: opacity 0.3s; opacity: 0.8; }
+    .nav a:hover, .nav a:focus-visible { opacity: 1; }
+    .cart-link { display: inline-flex; align-items: center; gap: 0.45rem; }
+    .cart-count { background: var(--color-green); color: #fff; padding: 2px 7px; border-radius: 999px; font-size: 0.65rem; }
+
+    .product-layout {
+      display: grid;
+      grid-template-columns: 1.15fr 1fr;
+      gap: 4.5rem;
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 3rem 5% 6rem;
+    }
+
+    /* Links: Carousel (Vierkant, groter) */
+    .carousel-col {
+      position: sticky;
+      top: 100px;
+      height: fit-content;
+      width: 100%;
+      max-width: none;
+      margin-left: auto;
+    }
+    
+    .breadcrumbs {
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-muted);
+      margin-bottom: 1.5rem;
+      font-weight: 500;
+    }
+    .breadcrumbs a:hover { color: var(--color-green); }
+
+    .carousel {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      overflow: hidden;
+      background: var(--color-surface);
+      border-radius: 2px;
+    }
+    
+    .carousel-track {
+      display: flex;
+      width: 300%;
+      height: 100%;
+      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .carousel-slide {
+      width: 33.3333%;
+      height: 100%;
+      flex-shrink: 0;
+    }
+    
+    .carousel-slide img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+    }
+
+    .carousel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255,255,255,0.9);
+      border: 1px solid var(--border-light);
+      border-radius: 50%;
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--color-green);
+      font-size: 1.2rem;
+      transition: all 0.3s;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+      z-index: 10;
+    }
+    .carousel-btn:hover { background: #fff; box-shadow: 0 4px 14px rgba(0,0,0,0.1); }
+    .carousel-btn.prev { left: 1rem; }
+    .carousel-btn.next { right: 1rem; }
+    
+    /* Sub-indicator dots */
+    .carousel-dots {
+      position: absolute;
+      bottom: 1.5rem;
+      left: 0; right: 0;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      z-index: 10;
+    }
+    .dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: rgba(0,0,0,0.25);
+      cursor: pointer;
+      transition: all 0.3s;
+      border: 2px solid transparent;
+    }
+    .dot.active { background: var(--color-green); box-shadow: 0 0 0 2px #fff; }
+
+    /* Rechts: Info */
+    .info-col {
+      padding-top: 1.5rem;
+      max-width: 520px;
+    }
+
+    /* Trustpilot */
+    .trust-link {
+      display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.75rem; color: var(--color-text); margin-bottom: 1.2rem;
+      padding: 0; transition: opacity 0.3s;
+      font-weight: 500;
+    }
+    .trust-link:hover { opacity: 0.8; }
+    .stars { color: #00b67a; font-size: 1rem; line-height: 1; letter-spacing: 0.05em; margin-right: 0.2rem; }
+
+    .title { font-family: var(--font-serif); font-size: clamp(2.4rem, 4vw, 3.2rem); line-height: 1.05; margin-bottom: 0.6rem; font-weight: 400; color: var(--color-green); }
+    .subtitle { font-size: 0.95rem; color: var(--color-text); margin-bottom: 2rem; line-height: 1.6; }
+
+    .benefits-list { display: grid; gap: 0.5rem; margin-bottom: 2.2rem; list-style: none; padding:0; }
+    .benefits-list li { position: relative; padding-left: 1.4rem; font-size: 0.88rem; color: var(--color-text); }
+    .benefits-list li::before { content: '✓'; position: absolute; left: 0; top: 0; color: var(--color-green); font-weight: bold; font-size: 0.9rem; }
+
+    .price-wrap { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; }
+    .price { font-size: 1.8rem; font-weight: 500; color: var(--color-green); }
+    .volume { font-size: 0.65rem; letter-spacing: 0.1em; border: 1px solid var(--border); padding: 0.25rem 0.6rem; border-radius: 4px; text-transform: uppercase; font-weight: 600; color: var(--color-muted); }
+
+    .buy-box { margin-bottom: 2.5rem; }
+    .qty-row { display: flex; gap: 1rem; margin-bottom: 1rem; align-items: center; }
+    .qty-select { display: flex; border: 1px solid var(--border); border-radius: 4px; overflow: hidden; width: fit-content; background: #fff; }
+    .qty-select button { background: transparent; border: none; color: var(--color-green); width: 44px; height: 44px; text-align: center; font-size: 1.2rem; cursor: pointer; transition: 0.2s; }
+    .qty-select button:hover { background: rgba(38,65,50,0.05); }
+    .qty-select input { background: transparent; border: none; color: var(--color-green); width: 50px; text-align: center; font-size: 1rem; font-family: var(--font-sans); font-weight: 500; -moz-appearance: textfield; }
+    .qty-select input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+    
+    .add-to-cart { width: 100%; background: var(--color-green); color: #fff; border: 1px solid var(--color-green); padding: 1.2rem; font-size: 0.85rem; font-weight: 600; font-family: var(--font-sans); text-transform: uppercase; letter-spacing: 0.08em; border-radius: 4px; cursor: pointer; transition: all 0.3s; }
+    .add-to-cart:hover { background: var(--color-green-hover); border-color: var(--color-green-hover); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(38,65,50,0.15); }
+    
+    .delivery-status { font-size: 0.72rem; color: #3b8c40; margin-top: 1rem; display: flex; align-items: center; gap: 0.5rem; letter-spacing: 0.04em; font-weight: 500; }
+    .delivery-status::before { content: ''; width: 6px; height: 6px; background: #4CAF50; border-radius: 50%; box-shadow: 0 0 6px rgba(76, 175, 80, 0.3); }
+
+    /* Accordeons */
+    .accordions { border-top: 1px solid var(--border); margin-bottom: 2rem; }
+    .acc-item { border-bottom: 1px solid var(--border); }
+    .acc-trigger { width: 100%; background: transparent; border: none; color: var(--color-green); padding: 1.4rem 0; display: flex; justify-content: space-between; align-items: center; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.08em; cursor: pointer; font-weight: 600; font-family: var(--font-sans); }
+    .acc-panel { display: none; padding-bottom: 1.5rem; font-size: 0.92rem; color: var(--color-text); line-height: 1.7; }
+    .acc-item.is-open .acc-panel { display: block; }
+    .acc-icon { width: 12px; height: 12px; position: relative; }
+    .acc-icon::before, .acc-icon::after { content: ''; position: absolute; background: currentColor; transition: transform 0.3s ease; }
+    .acc-icon::before { top: 5px; left: 0; width: 12px; height: 2px; }
+    .acc-icon::after { top: 0; left: 5px; width: 2px; height: 12px; }
+    .acc-item.is-open .acc-icon::after { transform: rotate(90deg); opacity: 0; }
+    
+    .acc-panel ul { padding-left: 1.2rem; margin-top: 0.5rem; }
+    .acc-panel li { margin-bottom: 0.4rem; list-style-type: disc; }
+
+    /* Related Products Section */
+    .related-section { border-top: 1px solid var(--border); padding-top: 2.5rem; display: none; }
+    .related-section.is-active { display: block; }
+    .related-heading { font-family: var(--font-serif); font-size: 2rem; color: var(--color-green); margin-bottom: 2rem; font-weight: 400; line-height: 1.2; }
+    .related-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 2.5rem; }
+    .related-card { display: flex; flex-direction: column; text-decoration: none; }
+    .related-img-wrap { width: 100%; aspect-ratio: 4/5; overflow: hidden; margin-bottom: 0.8rem; background: var(--color-surface); position: relative; }
+    .related-img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; display: block; }
+    .related-card:hover .related-img { transform: scale(1.03); }
+    .list-add-btn { position: absolute; bottom: 0.8rem; right: 0.8rem; width: 2.4rem; height: 2.4rem; border-radius: 50%; background: rgba(255,255,255,0.95); border: 1px solid var(--border-light); color: var(--color-green); font-size: 1.4rem; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); z-index: 5; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+    .list-add-btn:hover { background: var(--color-green); color: #fff; transform: scale(1.05); }
+    
+    .related-info { text-align: left; }
+    .related-info-link { text-decoration: none; display: block; }
+    .related-name { font-weight: 600; font-size: 0.95rem; color: var(--color-green); margin-bottom: 0.2rem; font-family: var(--font-sans); }
+    .related-price { font-size: 0.85rem; color: var(--color-muted); }
+    
+    .related-btn { display: inline-block; padding: 0.9rem; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--color-green); border: 1px solid var(--color-green); border-radius: 4px; font-weight: 600; transition: all 0.3s; width: 100%; text-align: center; }
+    .related-btn:hover { background: var(--color-green); color: #fff; }
+
+    @media (max-width: 960px) {
+      .product-layout { grid-template-columns: 1fr; gap: 2rem; padding-top: 1.5rem; }
+      .carousel-col { position: static; max-width: 100%; }
+      .info-col { max-width: 100%; padding-top: 0; }
+      .nav { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <header class="head">
+    <a href="index.html" class="logo">mallow.</a>
+    <nav class="nav">
+      <a href="shop.html">Shop</a>
+      <a href="onze-visie.html">Onze Visie</a>
+      <a href="insights.html">Insights</a>
+      <a href="cart.html" class="cart-link" aria-label="Winkelwagen">
+        <span>🛒</span>
+        <span class="cart-count js-cart-count">0</span>
+      </a>
+    </nav>
+  </header>
+
+  <main class="product-layout">
+    <!-- Links: Foto Carrousel -->
+    <div class="carousel-col">
+       <div class="breadcrumbs">
+           <a href="shop.html">Shop</a> / <span id="bc-name">Product</span>
+       </div>
+       <div class="carousel">
+          <div class="carousel-track" id="c-track">
+             <!-- Slides via JS (3 stuks) -->
+          </div>
+          <!-- Subtiele pijltjes -->
+          <button class="carousel-btn prev" id="c-prev" aria-label="Vorige foto">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 19l-7-7 7-7"/></svg>
+          </button>
+          <button class="carousel-btn next" id="c-next" aria-label="Volgende foto">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 5l7 7-7 7"/></svg>
+          </button>
+          <!-- Bolletjes -->
+          <div class="carousel-dots" id="c-dots">
+            <div class="dot active" data-index="0"></div>
+            <div class="dot" data-index="1"></div>
+            <div class="dot" data-index="2"></div>
+          </div>
+       </div>
+    </div>
+
+    <!-- Rechts: Product Info -->
+    <div class="info-col">
+      <a href="https://nl.trustpilot.com/review/mallow.nl" target="_blank" class="trust-link">
+        <span class="stars">★★★★★</span>
+        <span id="rating-text">4.9/5 (106 reviews)</span>
+      </a>
+
+      <h1 class="title" id="product-title">Product</h1>
+      <p class="subtitle" id="product-subtitle"></p>
+      
+      <ul class="benefits-list" id="product-benefits"></ul>
+
+      <div class="price-wrap">
+        <span class="price" id="product-price">€ --,--</span>
+        <span class="volume" id="product-volume">0 ML</span>
+      </div>
+
+      <div class="buy-box">
+        <label for="product-qty" style="display:block; font-size:0.7rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--color-muted); margin-bottom:0.6rem; font-weight:600;">Aantal</label>
+        <div class="qty-row">
+          <div class="qty-select">
+            <button id="qty-minus" type="button" aria-label="Minder">-</button>
+            <input id="product-qty" type="number" min="1" value="1">
+            <button id="qty-plus" type="button" aria-label="Meer">+</button>
+          </div>
+        </div>
+        <button id="add-to-cart" class="add-to-cart" type="button">In winkelmand</button>
+        <p class="delivery-status" id="stock-status">Voor 23:30 uur besteld, morgen in huis</p>
+      </div>
+
+      <!-- Accordeons -->
+      <div class="accordions" id="accordion">
+        <!-- Wordt via JS gevuld -->
+      </div>
+      
+      <!-- Related Products / Zie ook -->
+      <div class="related-section" id="related-container">
+          <h3 class="related-heading" id="related-heading">Bekijk onze andere...</h3>
+          <div class="related-grid" id="related-grid">
+              <!-- JS gefilled -->
+          </div>
+          <a href="shop.html" class="related-btn" id="related-btn">Terug naar de shop</a>
+      </div>
+    </div>
+  </main>
+
+  <script src="products.js"></script>
+  <script src="cart.js"></script>
+  <script>
+    (function () {
+      'use strict';
+
+      function formatEuro(value) {
+        return new Intl.NumberFormat('nl-NL', { style: 'currency', currency: 'EUR' }).format(value || 0);
+      }
+
+      function escapeHtml(input) {
+        return String(input || '')
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;')
+          .replace(/'/g, '&#39;');
+      }
+
+      function listHtml(items) {
+        var clean = Array.isArray(items) ? items.filter(Boolean) : [];
+        if (!clean.length) return '<p>-</p>';
+        return '<ul>' + clean.map(function(item) { return '<li>' + escapeHtml(item) + '</li>'; }).join('') + '</ul>';
+      }
+      
+      function buildTransparencyHTML(rows) {
+         if (!Array.isArray(rows) || rows.length === 0) return '<p>Geen gegevens.</p>';
+         var html = '<ul style="list-style:none; padding:0;">';
+         rows.forEach(function(r) {
+             html += '<li style="margin-bottom:0.8rem; border-bottom:1px solid var(--border-light); padding-bottom:0.6rem;">';
+             html += '<strong style="color:var(--color-green);">' + escapeHtml(r.ingredient) + '</strong><br>';
+             html += '<span style="font-size:0.8rem; color:var(--color-muted);">Herkomst: ' + escapeHtml(r.origin) + '</span><br>';
+             html += '<span style="font-size:0.8rem; color:var(--color-text);">' + escapeHtml(r.function) + '</span>';
+             html += '</li>';
+         });
+         html += '</ul>';
+         return html;
+      }
+
+      function initRelatedProducts(product) {
+          var container = document.getElementById('related-container');
+          var grid = document.getElementById('related-grid');
+          var heading = document.getElementById('related-heading');
+          var btn = document.getElementById('related-btn');
+          var catalog = window.MallowCatalog || {};
+          
+          if(!catalog.list || catalog.list.length < 2) return;
+          
+          var sameCategory = catalog.list.filter(function(p) { return p.id !== product.id && p.category === product.category && !p.comingSoon; });
+          var showProducts = [];
+          var isDiff = false;
+          
+          if (sameCategory.length >= 2) {
+              showProducts = sameCategory.slice(0, 2);
+          } else {
+              isDiff = true;
+              var others = catalog.list.filter(function(p) { return p.id !== product.id; });
+              showProducts = others.slice(0, 2);
+          }
+          
+          if(showProducts.length > 0) {
+              container.classList.add('is-active');
+              
+              var catName = product.category || 'producten';
+              if(isDiff) {
+                  heading.textContent = 'Zie ook';
+                  btn.textContent = 'Shop de hele collectie';
+                  btn.href = 'shop.html';
+              } else {
+                  heading.textContent = 'Bekijk onze andere ' + catName;
+                  btn.textContent = 'Bekijk alle ' + catName;
+                  btn.href = 'shop.html#' + catName;
+              }
+              
+              grid.innerHTML = showProducts.map(function(p) {
+                  return '<div class="related-card">' +
+                            '<div class="related-img-wrap">' +
+                                '<a href="/producten/' + encodeURIComponent(String(p.slug || p.id).toLowerCase()) + '" style="display:block;height:100%;"><img src="' + escapeHtml(p.image) + '" alt="' + escapeHtml(p.name) + '" class="related-img"></a>' +
+                                '<button class="list-add-btn js-add-related" type="button" aria-label="Voeg toe" data-id="' + escapeHtml(p.id) + '" data-name="' + escapeHtml(p.name) + '" data-price="' + p.price + '" data-image="' + escapeHtml(p.image) + '">+</button>' +
+                            '</div>' +
+                            '<div class="related-info">' +
+                                '<a href="/producten/' + encodeURIComponent(String(p.slug || p.id).toLowerCase()) + '" class="related-info-link">' +
+                                    '<div class="related-name">' + escapeHtml(p.name) + '</div>' +
+                                    '<div class="related-price">' + formatEuro(p.price) + '</div>' +
+                                '</a>' +
+                            '</div>' +
+                         '</div>';
+              }).join('');
+              
+              document.querySelectorAll('.js-add-related').forEach(function(btn) {
+                  btn.addEventListener('click', function(e) {
+                      e.preventDefault();
+                      if (window.MallowCart) {
+                          var pData = {
+                              id: this.getAttribute('data-id'),
+                              name: this.getAttribute('data-name'),
+                              price: Number(this.getAttribute('data-price')),
+                              image: this.getAttribute('data-image')
+                          };
+                          window.MallowCart.addItem(pData, 1);
+                          window.MallowCart.notify(pData.name + ' tijdelijk toegevoegd!');
+                          var self = this;
+                          self.innerHTML = '✓';
+                          self.style.background = 'var(--color-green)';
+                          self.style.color = '#fff';
+                          setTimeout(function() {
+                              self.innerHTML = '+';
+                              self.style.background = 'rgba(255,255,255,0.95)';
+                              self.style.color = 'var(--color-green)';
+                          }, 2000);
+                      }
+                  });
+              });
+          }
+      }
+
+      function buildAccordion(product) {
+        var sections = [
+          { title: 'Beschrijving', body: '<p>' + escapeHtml(product.description || '') + '</p>' }
+        ];
+
+        if (Array.isArray(product.benefits) && product.benefits.length) {
+          sections.push({ title: 'Voordelen in detail', body: listHtml(product.benefits) });
+        }
+        if (Array.isArray(product.transparencyRows) && product.transparencyRows.length) {
+          sections.push({ title: 'Ingrediënten & Herkomst', body: buildTransparencyHTML(product.transparencyRows) });
+        }
+        if (Array.isArray(product.usageSteps) && product.usageSteps.length) {
+          sections.push({ title: 'Gebruik', body: listHtml(product.usageSteps) });
+        }
+
+        if (product.faq && product.faq.length > 0) {
+          var faqHtml = product.faq.map(function(item) {
+            return '<strong style="display:block;margin-bottom:0.3rem;color:var(--color-green);">' + escapeHtml(item.q) + '</strong><span style="display:block;margin-bottom:1.2rem;color:var(--color-muted);">' + escapeHtml(item.a) + '</span>';
+          }).join('');
+          sections.push({ title: 'Veelgestelde Vragen', body: faqHtml });
+        }
+
+        var accordion = document.getElementById('accordion');
+        accordion.innerHTML = sections.map(function(sec, i) {
+          var openClass = (i === 0) ? ' is-open' : '';
+          return '<div class="acc-item' + openClass + '">' +
+                   '<button class="acc-trigger"><span>' + escapeHtml(sec.title) + '</span><span class="acc-icon"></span></button>' +
+                   '<div class="acc-panel">' + sec.body + '</div>' +
+                 '</div>';
+        }).join('');
+
+        accordion.querySelectorAll('.acc-trigger').forEach(function(btn) {
+          btn.addEventListener('click', function() {
+            var item = this.parentElement;
+            var isOp = item.classList.contains('is-open');
+            accordion.querySelectorAll('.acc-item').forEach(function(o) { o.classList.remove('is-open'); });
+            if(!isOp) item.classList.add('is-open');
+          });
+        });
+      }
+
+      // Carousel Logic
+      function initCarousel() {
+         var track = document.getElementById('c-track');
+         var prevBtn = document.getElementById('c-prev');
+         var nextBtn = document.getElementById('c-next');
+         var dots = Array.from(document.querySelectorAll('.dot'));
+         var currIndex = 0;
+         var total = 3;
+
+         function goTo(index) {
+             if(index < 0) index = total - 1;
+             if(index >= total) index = 0;
+             currIndex = index;
+             track.style.transform = 'translateX(-' + (currIndex * 33.3333) + '%)';
+             dots.forEach(function(d, i) { d.classList.toggle('active', i === currIndex); });
+         }
+
+         prevBtn.addEventListener('click', function() { goTo(currIndex - 1); });
+         nextBtn.addEventListener('click', function() { goTo(currIndex + 1); });
+         dots.forEach(function(d, i) {
+             d.addEventListener('click', function() { goTo(i); });
+         });
+      }
+
+      document.addEventListener('DOMContentLoaded', function () {
+        var params = new URLSearchParams(window.location.search);
+        var routeMatch = window.location.pathname.match(/\/producten\/([^/]+)\/?$/i);
+        var id = params.get('id') || (routeMatch ? decodeURIComponent(routeMatch[1]) : '');
+        var catalog = window.MallowCatalog;
+        var product = catalog ? catalog.find(id) : null;
+        
+        if (!product) {
+           window.location.replace('shop.html');
+           return;
+        }
+
+        document.title = product.name + ' | mallow.';
+        document.getElementById('product-title').textContent = product.name;
+        document.getElementById('bc-name').textContent = product.name;
+        document.getElementById('product-subtitle').textContent = product.subtitle || '';
+        document.getElementById('product-price').textContent = product.comingSoon ? 'Prijs volgt' : formatEuro(product.price);
+        document.getElementById('product-volume').textContent = product.volume || '50 ML';
+        document.getElementById('stock-status').textContent = product.stockLabel || 'Voor 23:30 uur besteld, morgen in huis';
+
+        // Rating
+        if(product.ratingValue) {
+           document.getElementById('rating-text').textContent = String(product.ratingValue).replace('.',',') + '/5 (' + (product.ratingCount || 102) + ' Echte Reviews)';
+        } else {
+           document.querySelector('.trust-link').hidden = true;
+        }
+        
+        // Benefits
+        var benefitsUl = document.getElementById('product-benefits');
+        (product.benefits || []).slice(0,3).forEach(function(b) {
+            var li = document.createElement('li');
+            li.textContent = b;
+            benefitsUl.appendChild(li);
+        });
+
+        // Genereer 3 slides
+        var track = document.getElementById('c-track');
+        track.innerHTML = '';
+        var baseImg = product.image || '';
+        for(var i=0; i<3; i++) {
+            var slide = document.createElement('div');
+            slide.className = 'carousel-slide';
+            var img = document.createElement('img');
+            img.src = baseImg;
+            img.loading = i === 0 ? 'eager' : 'lazy';
+            img.style.filter = i === 1 ? 'brightness(0.97)' : (i === 2 ? 'contrast(1.03)' : 'none');
+            slide.appendChild(img);
+            track.appendChild(slide);
+        }
+        
+        initCarousel();
+        buildAccordion(product);
+        initRelatedProducts(product);
+
+        var qtyInput = document.getElementById('product-qty');
+        document.getElementById('qty-minus').addEventListener('click', function() {
+            qtyInput.value = Math.max(1, parseInt(qtyInput.value) - 1);
+        });
+        document.getElementById('qty-plus').addEventListener('click', function() {
+            qtyInput.value = parseInt(qtyInput.value) + 1;
+        });
+
+        var btnAdd = document.getElementById('add-to-cart');
+        if (product.comingSoon) {
+            document.querySelector('label[for="product-qty"]').hidden = true;
+            document.querySelector('.qty-row').hidden = true;
+            btnAdd.disabled = true;
+            btnAdd.textContent = 'Binnenkort verkrijgbaar';
+        }
+        btnAdd.addEventListener('click', function() {
+            var qty = parseInt(qtyInput.value) || 1;
+            if (window.MallowCart) {
+                window.MallowCart.addItem({
+                    id: product.id, name: product.name, price: product.price, image: product.image
+                }, qty);
+                window.MallowCart.notify(product.name + ' (' + qty + 'x) toegevoegd!');
+                var oldText = btnAdd.textContent;
+                btnAdd.textContent = 'Toegevoegd!';
+                btnAdd.style.background = '#4CAF50';
+                btnAdd.style.borderColor = '#4CAF50';
+                setTimeout(function(){
+                    btnAdd.textContent = oldText;
+                    btnAdd.style.background = 'var(--color-green)';
+                    btnAdd.style.borderColor = 'var(--color-green)';
+                }, 2000);
+            }
+        });
+
+      });
+    })();
+  </script>
+</body>
+</html>

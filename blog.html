@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insights | mallow.</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-bg-light: #f5f2e9;
+            --color-bg-alt: #ebe6d8;
+            --color-canopy-green: #264132;
+            --color-canopy-green-hover: #1F342A;
+            --color-burnt-orange: #264132;
+            --color-gold-hover: #1F342A;
+            --color-green-wash: #DFE7DF;
+            --color-text-main: #4a453e;
+            --color-text-muted: #837b70;
+            --font-serif: "Cormorant Garamond", serif;
+            --font-sans: "Montserrat", sans-serif;
+            --ease-smooth: cubic-bezier(0.215, 0.61, 0.355, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            color: var(--color-text-main);
+            background: linear-gradient(180deg, var(--color-bg-light) 0%, #e9eee6 100%);
+            line-height: 1.6;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .page-header {
+            position: sticky;
+            top: 0;
+            z-index: 30;
+            background: rgba(245, 242, 233, 0.95);
+            border-bottom: 1px solid rgba(74, 69, 62, 0.12);
+            backdrop-filter: blur(8px);
+            padding: 1.3rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: var(--font-serif);
+            font-size: 2rem;
+            letter-spacing: 0.02em;
+        }
+
+        .main-nav {
+            display: flex;
+            gap: 1.6rem;
+            align-items: center;
+            font-size: 0.76rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        .main-nav a {
+            position: relative;
+            padding-bottom: 0.2rem;
+        }
+
+        .main-nav a::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 2px;
+            background: currentColor;
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.3s var(--ease-smooth);
+        }
+
+        .main-nav a:hover::after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+        .cart-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.42rem;
+            padding-bottom: 0;
+        }
+
+        .cart-link::after {
+            display: none;
+        }
+
+        .cart-count {
+            min-width: 1.2rem;
+            height: 1.2rem;
+            border-radius: 999px;
+            background: var(--color-canopy-green);
+            color: #fff;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 0.25rem;
+            font-size: 0.62rem;
+            font-weight: 600;
+            letter-spacing: 0;
+            text-transform: none;
+        }
+
+        .blog-main {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 3rem 5% 4.5rem;
+        }
+
+        .blog-hero {
+            margin-bottom: 2.4rem;
+        }
+
+        .blog-kicker {
+            font-size: 0.72rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--color-canopy-green);
+            font-weight: 600;
+            margin-bottom: 0.35rem;
+        }
+
+        .blog-title {
+            font-family: var(--font-serif);
+            color: var(--color-canopy-green);
+            font-size: clamp(2.3rem, 6vw, 4.4rem);
+            line-height: 0.95;
+            margin-bottom: 0.8rem;
+        }
+
+        .blog-intro {
+            max-width: 58ch;
+            font-size: 0.95rem;
+            color: var(--color-text-muted);
+        }
+
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 1.1rem;
+            margin-bottom: 1.6rem;
+        }
+
+        .blog-card {
+            display: block;
+            border: 1px solid rgba(38, 65, 50, 0.14);
+            background: rgba(255, 255, 255, 0.74);
+            overflow: hidden;
+        }
+
+        .blog-card img {
+            width: 100%;
+            aspect-ratio: 4 / 3;
+            object-fit: cover;
+        }
+
+        .blog-card-body {
+            padding: 0.9rem;
+        }
+
+        .blog-tag {
+            display: inline-block;
+            font-size: 0.64rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--color-canopy-green);
+            margin-bottom: 0.35rem;
+            font-weight: 600;
+        }
+
+        .blog-card h2 {
+            font-family: var(--font-serif);
+            color: var(--color-canopy-green);
+            font-size: 1.3rem;
+            line-height: 1.1;
+            margin-bottom: 0.35rem;
+        }
+
+        .blog-card p {
+            font-size: 0.88rem;
+            color: var(--color-text-main);
+        }
+
+        .blog-note {
+            border: 1px solid rgba(38, 65, 50, 0.14);
+            background: rgba(255, 255, 255, 0.68);
+            padding: 1rem;
+            font-size: 0.86rem;
+            color: var(--color-text-main);
+        }
+
+        @media (max-width: 1020px) {
+            .blog-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 760px) {
+            .main-nav {
+                display: none;
+            }
+
+            .blog-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="assets/footer.css">
+</head>
+<body>
+    <header class="page-header">
+        <a href="index.html" class="logo">mallow.</a>
+        <nav class="main-nav">
+            <a href="shop.html">Shop</a>
+            <a href="onze-visie.html">Onze Visie</a>
+            <a href="insights.html" class="is-active">Insights</a>
+            <a href="cart.html" class="cart-link" aria-label="Winkelwagen">
+                <span>&#128722;</span>
+                <span class="cart-count js-cart-count">0</span>
+            </a>
+        </nav>
+    </header>
+
+    <main class="blog-main">
+        <section class="blog-hero">
+            <p class="blog-kicker">Insights</p>
+            <h1 class="blog-title">Onze insights staan nu live</h1>
+            <p class="blog-intro">Deze oude blogpagina is vervangen door een rustig insights-overzicht met drie nieuwe artikelen. Je vindt daar eenvoudige, tekstgerichte pagina's in dezelfde stijl als je voorbeeld.</p>
+        </section>
+
+        <section class="blog-grid" aria-label="Voorbeeldartikelen">
+            <a class="blog-card" href="insights-huidverzorging.html">
+                <img src="https://images.unsplash.com/photo-1522338242992-e1a54906a8da?auto=format&fit=crop&w=1200&q=80" alt="Ingredienten op tafel">
+                <div class="blog-card-body">
+                    <span class="blog-tag">Educatie</span>
+                    <h2>Welke stoffen in gewone huidverzorging kunnen je huid onrustig maken?</h2>
+                    <p>Een rustige uitleg over geurstoffen, drukke routines en waarom minder vaak beter voelt.</p>
+                </div>
+            </a>
+            <a class="blog-card" href="insights-rundervet.html">
+                <img src="https://images.unsplash.com/photo-1505576399279-565b52d4ac71?auto=format&fit=crop&w=1200&q=80" alt="Ambachtelijke zeep in productie">
+                <div class="blog-card-body">
+                    <span class="blog-tag">Ingredienten</span>
+                    <h2>Waarom kiezen sommige mensen voor rundervet op de huid?</h2>
+                    <p>Over eenvoud, rijke balsems en het verschil tussen een trend en een rustige routine.</p>
+                </div>
+            </a>
+            <a class="blog-card" href="insights-eczeem.html">
+                <img src="https://images.unsplash.com/photo-1505751172876-fa1923c5c528?auto=format&fit=crop&w=1200&q=80" alt="Persoon met gezonde huid">
+                <div class="blog-card-body">
+                    <span class="blog-tag">Eczeem</span>
+                    <h2>Een rustigere huid bij eczeem: drie zachte gewoontes</h2>
+                    <p>Drie eenvoudige gewoontes die helpen om wrijving, droogte en onrust te verlagen.</p>
+                </div>
+            </a>
+        </section>
+
+        <section class="blog-note">
+            Liever direct naar het nieuwe overzicht? Open <a href="insights.html">insights.html</a> voor alle drie artikelen op een pagina.
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="site-footer-inner">
+            <div class="site-footer-top">
+                <div class="site-footer-brand">
+                    <a href="index.html" class="site-footer-logo">mallow.</a>
+                    <p class="site-footer-tagline">Eerlijke verzorging en voeding uit lokale bron, gemaakt voor een rustige huid en een sterk lichaam.</p>
+                </div>
+                <div class="site-footer-social">
+                    <a href="https://instagram.com/mallow" target="_blank" rel="noopener noreferrer" aria-label="Volg Mallow op Instagram">Instagram</a>
+                </div>
+            </div>
+            <div class="site-footer-trust" aria-label="Vertrouwenssignalen">
+                <p class="site-footer-trust-item">Veilig betalen met Stripe</p>
+                <p class="site-footer-trust-item">Gratis verzending vanaf EUR 50</p>
+                <p class="site-footer-trust-item">Lokaal geproduceerd in Nederland</p>
+            </div>
+            <div class="site-footer-grid">
+                <section class="site-footer-col" aria-label="Navigatie">
+                    <h2>Navigatie</h2>
+                    <div class="site-footer-links">
+                        <a href="index.html">Home</a>
+                        <a href="shop.html">Winkel</a>
+                        <a href="shop.html">Producten</a>
+                        <a href="cart.html">Winkelwagen</a>
+                        <a href="onze-visie.html">Onze Visie</a>
+                        <a href="insights.html">Insights</a>
+                    </div>
+                </section>
+                <section class="site-footer-col" aria-label="Klantenservice">
+                    <h2>Klantenservice</h2>
+                    <div class="site-footer-links">
+                        <a href="mailto:hello@mallow.nl">Contact</a>
+                        <a href="insights.html">Alle insights</a>
+                        <a href="verzending.html">Verzending</a>
+                        <a href="retouren.html">Retouren</a>
+                    </div>
+                </section>
+                <section class="site-footer-col" aria-label="Juridisch">
+                    <h2>Juridisch</h2>
+                    <div class="site-footer-links">
+                        <a href="privacy.html">Privacybeleid</a>
+                        <a href="voorwaarden.html">Algemene voorwaarden</a>
+                        <a href="retouren.html">Retourbeleid</a>
+                        <a href="verzending.html">Verzendbeleid</a>
+                    </div>
+                </section>
+                <section class="site-footer-col" aria-label="Contactgegevens">
+                    <h2>Contact</h2>
+                    <div class="site-footer-contact">
+                        <p>E-mail: <a href="mailto:hello@mallow.nl">hello@mallow.nl</a></p>
+                        <p>Telefoon: <a href="tel:+31612345678">+31 6 12 34 56 78</a></p>
+                        <p>Boerderijweg 12, 7241 AA Lochem, Nederland</p>
+                    </div>
+                </section>
+            </div>
+            <div class="site-footer-bottom">
+                <p class="site-footer-copy">&copy; 2026 mallow. Alle rechten voorbehouden.</p>
+                <div class="site-footer-meta">
+                    <a href="privacy.html">Privacy</a>
+                    <a href="voorwaarden.html">Voorwaarden</a>
+                    <a href="verzending.html">Verzending</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="cart.js"></script>
+</body>
+</html>

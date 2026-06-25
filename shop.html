@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop | Mallow.</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-bg-light: #F5F2E9;
+            --color-bg-alt: #EBE6D8;
+            --color-canopy-green: #264132;
+            --color-canopy-green-hover: #1F342A;
+            --color-burnt-orange: #264132;
+            --color-gold-hover: #1F342A;
+            --color-green-wash: #DFE7DF;
+            --color-text-main: #4A453E;
+            --color-text-muted: #837B70;
+            --font-serif: 'Cormorant Garamond', serif;
+            --font-sans: 'Montserrat', sans-serif;
+            --ease-smooth: cubic-bezier(0.215, 0.61, 0.355, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            color: var(--color-text-main);
+            background: var(--color-bg-light);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        h1, h2, h3 {
+            color: var(--color-canopy-green);
+            font-family: var(--font-serif);
+            font-weight: 400;
+        }
+
+        img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .shop-header {
+            position: sticky;
+            top: 0;
+            z-index: 20;
+            background: rgba(245, 242, 233, 0.95);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid rgba(74, 69, 62, 0.1);
+            padding: 1.4rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: var(--font-serif);
+            font-size: 2rem;
+            letter-spacing: 0.02em;
+        }
+
+        .shop-nav {
+            display: flex;
+            gap: 2rem;
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+            font-weight: 600;
+        }
+
+        .shop-nav a {
+            position: relative;
+            padding-bottom: 0.25rem;
+        }
+
+        .shop-nav a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 2px;
+            background: currentColor;
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.35s var(--ease-smooth);
+        }
+
+        .shop-nav a:hover::after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+        .shop-nav .cart-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            padding-bottom: 0;
+        }
+
+        .shop-nav .cart-link::after {
+            display: none;
+        }
+
+        .cart-glyph {
+            font-size: 1rem;
+            line-height: 1;
+        }
+
+        .cart-count {
+            min-width: 1.2rem;
+            height: 1.2rem;
+            border-radius: 999px;
+            background: var(--color-canopy-green);
+            color: #fff;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 0.25rem;
+            font-size: 0.62rem;
+            font-weight: 600;
+            letter-spacing: 0;
+            text-transform: none;
+        }
+
+        .shop-main {
+            padding: 4.5rem 5% 6rem;
+        }
+
+        .shop-heading {
+            max-width: 1280px;
+            margin: 0 auto 2.5rem;
+            display: flex;
+            justify-content: space-between;
+            gap: 1.5rem;
+            align-items: flex-end;
+        }
+
+        .shop-title {
+            font-size: clamp(2.2rem, 5vw, 4rem);
+            line-height: 1.05;
+        }
+
+        .shop-subtitle {
+            max-width: 540px;
+            font-size: 0.95rem;
+            color: var(--color-text-muted);
+        }
+
+        .filter-row {
+            max-width: 1280px;
+            margin: 0 auto 2.4rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .filter-btn {
+            border: none;
+            color: var(--color-text-muted);
+            background: none;
+            padding: 0 0 0.35rem;
+            font-family: "Neue Haas Grotesk Display Pro", "Neue Haas Grotesk Text Pro", "Neue Haas Grotesk", "Helvetica Neue", Helvetica, Arial, var(--font-sans);
+            font-size: 0.82rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            cursor: pointer;
+            transition: color 0.25s ease;
+            position: relative;
+        }
+
+        .filter-btn::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 2px;
+            background: currentColor;
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.35s var(--ease-smooth);
+        }
+
+        .filter-btn.active,
+        .filter-btn:hover,
+        .filter-btn:focus-visible {
+            color: var(--color-canopy-green);
+        }
+
+.filter-btn:hover::after,
+.filter-btn:focus-visible::after {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+
+        .collection {
+            max-width: 1280px;
+            margin: 0 auto 5rem;
+            scroll-margin-top: 7.5rem;
+        }
+
+        .collection-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(74, 69, 62, 0.12);
+            padding-bottom: 0.85rem;
+        }
+
+        .collection-title {
+            font-size: clamp(1.8rem, 3.8vw, 2.8rem);
+            line-height: 1.1;
+        }
+
+        .collection-note {
+            font-size: 0.75rem;
+            color: var(--color-text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 600;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 1.4rem;
+        }
+
+        @media (min-width: 1380px) {
+            .grid:not(.single) {
+                grid-template-columns: repeat(4, minmax(0, 1fr));
+            }
+        }
+
+        .grid.single {
+            grid-template-columns: minmax(0, 420px);
+        }
+
+        .shop-card {
+            display: flex;
+            flex-direction: column;
+            min-height: 100%;
+            scroll-margin-top: 7rem;
+            cursor: pointer;
+        }
+
+        .card-image-wrap {
+            position: relative;
+            background: linear-gradient(180deg, rgba(235, 230, 216, 0.82) 0%, rgba(223, 231, 223, 0.95) 100%);
+            aspect-ratio: 4 / 5;
+            overflow: hidden;
+            border-radius: 16px;
+        }
+
+        .card-image-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.7s var(--ease-smooth);
+        }
+
+        .shop-card:hover .card-image-wrap img,
+        .shop-card:focus-within .card-image-wrap img {
+            transform: scale(1.03);
+        }
+
+        .card-badge {
+            position: absolute;
+            top: 0.62rem;
+            left: 0.62rem;
+            z-index: 2;
+            background: rgba(255, 255, 255, 0.92);
+            color: var(--color-text-main);
+            border: 1px solid rgba(74, 69, 62, 0.18);
+            border-radius: 999px;
+            font-size: 0.56rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            padding: 0.24rem 0.5rem;
+        }
+
+        .add-btn {
+            position: absolute;
+            right: 0.62rem;
+            bottom: 0.62rem;
+            width: 26px;
+            height: 26px;
+            border-radius: 999px;
+            border: 1px solid rgba(38, 65, 50, 0.42);
+            background: transparent;
+            color: var(--color-canopy-green);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-sans);
+            font-size: 0.95rem;
+            font-weight: 500;
+            line-height: 1;
+            cursor: pointer;
+            transition: transform 0.25s ease, background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+            z-index: 3;
+        }
+
+        .add-btn:hover {
+            transform: translateY(-1px);
+            background: var(--color-canopy-green);
+            border-color: var(--color-canopy-green);
+            color: var(--color-bg-light);
+        }
+
+        .add-btn:focus-visible {
+            outline: 2px solid rgba(38, 65, 50, 0.42);
+            outline-offset: 2px;
+        }
+
+        .card-content {
+            padding: 0.95rem 0 0;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .card-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 0.68rem;
+            color: var(--color-text-muted);
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            margin-bottom: 0.3rem;
+        }
+
+        .card-meta span:last-child {
+            text-align: right;
+        }
+
+        .card-title {
+            font-size: 1.03rem;
+            line-height: 1.35;
+            margin-bottom: 0.22rem;
+            color: var(--color-text-main);
+            font-family: var(--font-sans);
+            font-weight: 500;
+        }
+
+        .card-subtitle {
+            color: var(--color-text-muted);
+            font-size: 0.84rem;
+            line-height: 1.52;
+            margin-bottom: 0.68rem;
+        }
+
+        .price {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--color-canopy-green);
+        }
+
+        @media (max-width: 1040px) {
+            .grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 760px) {
+            .shop-nav {
+                display: none;
+            }
+
+            .shop-main {
+                padding-top: 2.8rem;
+            }
+
+            .shop-heading {
+                flex-direction: column;
+                align-items: flex-start;
+                margin-bottom: 1.8rem;
+            }
+
+            .grid,
+            .grid.single {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="assets/footer.css">
+</head>
+<body>
+    <header class="shop-header">
+        <a href="index.html" class="logo">Mallow.</a>
+        <nav class="shop-nav">
+            <a href="shop.html">Shop</a>
+            <a href="onze-visie.html">Onze Visie</a>
+            <a href="insights.html">Insights</a>
+            <a href="cart.html" class="cart-link" aria-label="Winkelwagen">
+                <span class="cart-glyph">&#128722;</span>
+                <span class="cart-count js-cart-count">0</span>
+            </a>
+        </nav>
+    </header>
+
+    <main class="shop-main">
+        <div class="shop-heading">
+            <h1 class="shop-title">Shop Collectie</h1>
+            <p class="shop-subtitle"></p>
+        </div>
+
+        <div class="filter-row">
+            <button class="filter-btn active" data-filter="all" type="button">Alles</button>
+            <button class="filter-btn" data-filter="cremes" type="button">Cr&egrave;mes</button>
+            <button class="filter-btn" data-filter="zeepjes" type="button">Zeepjes</button>
+            <button class="filter-btn" data-filter="voeding" type="button">Voeding</button>
+            <button class="filter-btn" data-filter="overig" type="button">Overig</button>
+        </div>
+
+        <div id="shop-collections"></div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="site-footer-inner">
+            <div class="site-footer-top">
+                <div class="site-footer-brand">
+                    <a href="index.html" class="site-footer-logo">mallow.</a>
+                    <p class="site-footer-tagline">Eerlijke verzorging en voeding uit lokale bron, gemaakt voor een rustige huid en een sterk lichaam.</p>
+                </div>
+                <div class="site-footer-social">
+                    <a href="https://instagram.com/mallow" target="_blank" rel="noopener noreferrer" aria-label="Volg Mallow op Instagram">Instagram</a>
+                </div>
+            </div>
+            <div class="site-footer-trust" aria-label="Vertrouwenssignalen">
+                <p class="site-footer-trust-item">Veilig betalen met Stripe</p>
+                <p class="site-footer-trust-item">Gratis verzending vanaf €50</p>
+                <p class="site-footer-trust-item">Lokaal geproduceerd in Nederland</p>
+            </div>
+            <div class="site-footer-grid">
+                <section class="site-footer-col" aria-label="Navigatie">
+                    <h2>Navigatie</h2>
+                    <div class="site-footer-links">
+                        <a href="index.html">Home</a>
+                        <a href="shop.html">Winkel</a>
+                        <a href="shop.html">Producten</a>
+                        <a href="cart.html">Winkelwagen</a>
+                        <a href="onze-visie.html">Onze Visie</a>
+                        <a href="insights.html">Insights</a>
+                    </div>
+                </section>
+                <section class="site-footer-col" aria-label="Klantenservice">
+                    <h2>Klantenservice</h2>
+                    <div class="site-footer-links">
+                        <a href="mailto:hello@mallow.nl">Contact</a>
+                        <a href="insights.html">Alle insights</a>
+                        <a href="verzending.html">Verzending</a>
+                        <a href="retouren.html">Retouren</a>
+                    </div>
+                </section>
+                <section class="site-footer-col" aria-label="Juridisch">
+                    <h2>Juridisch</h2>
+                    <div class="site-footer-links">
+                        <a href="privacy.html">Privacybeleid</a>
+                        <a href="voorwaarden.html">Algemene voorwaarden</a>
+                        <a href="retouren.html">Retourbeleid</a>
+                        <a href="verzending.html">Verzendbeleid</a>
+                    </div>
+                </section>
+                <section class="site-footer-col" aria-label="Contactgegevens">
+                    <h2>Contact</h2>
+                    <div class="site-footer-contact">
+                        <p>E-mail: <a href="mailto:hello@mallow.nl">hello@mallow.nl</a></p>
+                        <p>Telefoon: <a href="tel:+31612345678">+31 6 12 34 56 78</a></p>
+                        <p>Boerderijweg 12, 7241 AA Lochem, Nederland</p>
+                    </div>
+                </section>
+            </div>
+            <div class="site-footer-bottom">
+                <p class="site-footer-copy">&copy; 2026 mallow. Alle rechten voorbehouden.</p>
+                <div class="site-footer-meta">
+                    <a href="privacy.html">Privacy</a>
+                    <a href="voorwaarden.html">Voorwaarden</a>
+                    <a href="verzending.html">Verzending</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="products.js"></script>
+    <script src="cart.js"></script>
+    <script>
+        (function () {
+            'use strict';
+
+            var filterButtons = document.querySelectorAll('.filter-btn');
+            var collectionsRoot = document.getElementById('shop-collections');
+            var catalog = (window.MallowCatalog && Array.isArray(window.MallowCatalog.list))
+                ? window.MallowCatalog.list
+                : [];
+            var categories = (window.MallowCatalog && window.MallowCatalog.categories)
+                ? window.MallowCatalog.categories
+                : {};
+
+            function escapeHtml(input) {
+                return String(input || '')
+                    .replace(/&/g, '&amp;')
+                    .replace(/</g, '&lt;')
+                    .replace(/>/g, '&gt;')
+                    .replace(/"/g, '&quot;')
+                    .replace(/'/g, '&#39;');
+            }
+
+            function formatEuro(value) {
+                return new Intl.NumberFormat('nl-NL', {
+                    style: 'currency',
+                    currency: 'EUR'
+                }).format(Number(value) || 0);
+            }
+
+            function formatMetaRight(product) {
+                var rating = Number(product && product.ratingValue);
+                if (Number.isFinite(rating) && rating > 0) {
+                    return rating.toFixed(1).replace('.', ',');
+                }
+                return String((product && product.badge) || '');
+            }
+
+            function cardMarkup(product) {
+                return '' +
+                    '<article class="shop-card" data-product-id="' + escapeHtml(product.id) + '" role="link" tabindex="0">' +
+                        '<div class="card-image-wrap">' +
+                            (product.badge ? '<span class="card-badge">' + escapeHtml(product.badge) + '</span>' : '') +
+                            '<img src="' + escapeHtml(product.image || '') + '" alt="' + escapeHtml(product.name || 'Product') + '">' +
+                            (product.comingSoon ? '' : '<button type="button" class="add-btn js-add-to-cart" aria-label="Voeg ' + escapeHtml(product.name || 'product') + ' toe aan winkelwagen">+</button>') +
+                        '</div>' +
+                        '<div class="card-content">' +
+                            '<div class="card-meta"><span>' + escapeHtml(product.volume || '') + '</span><span>' + escapeHtml(formatMetaRight(product)) + '</span></div>' +
+                            '<h3 class="card-title">' + escapeHtml(product.name || 'Product') + '</h3>' +
+                            '<p class="card-subtitle">' + escapeHtml(product.subtitle || '') + '</p>' +
+                            '<p class="price">' + escapeHtml(product.comingSoon ? 'Binnenkort' : formatEuro(product.price)) + '</p>' +
+                        '</div>' +
+                    '</article>';
+            }
+
+            function renderCollections(filter) {
+                if (!collectionsRoot) {
+                    return;
+                }
+
+                var order = ['cremes', 'zeepjes', 'voeding', 'overig'];
+                var html = '';
+
+                order.forEach(function (categoryId) {
+                    if (filter !== 'all' && filter !== categoryId) {
+                        return;
+                    }
+
+                    var categoryProducts = catalog.filter(function (product) {
+                        return product && product.category === categoryId;
+                    });
+
+                    if (!categoryProducts.length) {
+                        return;
+                    }
+
+                    var meta = categories[categoryId] || {};
+                    html += '' +
+                        '<section class="collection" id="' + escapeHtml(categoryId) + '" data-group="' + escapeHtml(categoryId) + '">' +
+                            '<div class="collection-head">' +
+                                '<h2 class="collection-title">' + escapeHtml(meta.label || categoryId) + '</h2>' +
+                                '<span class="collection-note">' + escapeHtml(meta.note || (categoryProducts.length + ' producten')) + '</span>' +
+                            '</div>' +
+                            '<div class="grid' + (categoryProducts.length === 1 ? ' single' : '') + '">' +
+                                categoryProducts.map(cardMarkup).join('') +
+                            '</div>' +
+                        '</section>';
+                });
+
+                collectionsRoot.innerHTML = html;
+            }
+
+            function isKnownFilter(filter) {
+                return filter === 'all' || filter === 'cremes' || filter === 'zeepjes' || filter === 'voeding' || filter === 'overig';
+            }
+
+            function scrollToCollection(filter) {
+                var targetId = filter === 'all' ? 'shop-collections' : filter;
+                var target = document.getElementById(targetId);
+                if (!target) {
+                    return;
+                }
+
+                var prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+                window.requestAnimationFrame(function () {
+                    target.scrollIntoView({
+                        behavior: prefersReducedMotion ? 'auto' : 'smooth',
+                        block: 'start'
+                    });
+                });
+            }
+
+            function applyFilter(filter, options) {
+                var settings = options || {};
+                var selected = isKnownFilter(filter) ? filter : 'all';
+                filterButtons.forEach(function (btn) {
+                    btn.classList.toggle('active', btn.getAttribute('data-filter') === selected);
+                });
+                renderCollections(selected);
+
+                if (settings.updateHash) {
+                    if (selected === 'all') {
+                        history.replaceState(null, '', 'shop.html');
+                    } else {
+                        history.replaceState(null, '', 'shop.html#' + selected);
+                    }
+                }
+
+                if (settings.scrollIntoView) {
+                    scrollToCollection(selected);
+                }
+            }
+
+            function cardToCartItem(card) {
+                var id = card.getAttribute('data-product-id');
+                if (!id || !window.MallowCatalog || typeof window.MallowCatalog.find !== 'function') {
+                    return null;
+                }
+
+                var product = window.MallowCatalog.find(id);
+                if (!product || typeof window.MallowCatalog.toCartItem !== 'function') {
+                    return null;
+                }
+
+                return window.MallowCatalog.toCartItem(product);
+            }
+
+            function openProductPage(card) {
+                var id = card.getAttribute('data-product-id');
+                if (!id) {
+                    return;
+                }
+                window.location.href = '/producten/' + encodeURIComponent(String(id).toLowerCase());
+            }
+
+            filterButtons.forEach(function (button) {
+                button.addEventListener('click', function () {
+                    var selected = button.getAttribute('data-filter') || 'all';
+                    applyFilter(selected, {
+                        updateHash: true,
+                        scrollIntoView: true
+                    });
+                });
+            });
+
+            document.addEventListener('click', function (event) {
+                var addButton = event.target.closest('.js-add-to-cart');
+                if (addButton) {
+                    event.preventDefault();
+                    event.stopPropagation();
+
+                    var addCard = addButton.closest('.shop-card');
+                    if (!addCard || !window.MallowCart) {
+                        return;
+                    }
+
+                    var item = cardToCartItem(addCard);
+                    if (!item) {
+                        return;
+                    }
+
+                    window.MallowCart.addItem(item, 1);
+                    window.MallowCart.notify(item.name + ' toegevoegd aan winkelwagen.');
+                    return;
+                }
+
+                var card = event.target.closest('.shop-card[data-product-id]');
+                if (!card) {
+                    return;
+                }
+
+                if (event.target.closest('button, a, .js-add-to-cart')) {
+                    return;
+                }
+
+                openProductPage(card);
+            });
+
+            document.addEventListener('keydown', function (event) {
+                if (event.key !== 'Enter' && event.key !== ' ') {
+                    return;
+                }
+
+                var card = event.target.closest('.shop-card[data-product-id]');
+                if (!card) {
+                    return;
+                }
+
+                if (event.target.closest('button, a, .js-add-to-cart')) {
+                    return;
+                }
+
+                event.preventDefault();
+                openProductPage(card);
+            });
+
+            var hashFilter = String(location.hash || '').replace('#', '').trim().toLowerCase();
+            var defaultFilterButton = document.querySelector('.filter-btn.active') || filterButtons[0];
+            var defaultFilter = defaultFilterButton ? (defaultFilterButton.getAttribute('data-filter') || 'all') : 'all';
+            applyFilter(isKnownFilter(hashFilter) ? hashFilter : defaultFilter, {
+                updateHash: false,
+                scrollIntoView: false
+            });
+        })();
+    </script>
+</body>
+</html>

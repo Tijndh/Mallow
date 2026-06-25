@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Algemene voorwaarden | mallow.</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-bg-light: #f5f2e9;
+            --color-canopy-green: #264132;
+            --color-canopy-green-hover: #1F342A;
+            --color-burnt-orange: #264132;
+            --color-gold-hover: #1F342A;
+            --color-green-wash: #DFE7DF;
+            --color-text-main: #4a453e;
+            --color-text-muted: #837b70;
+            --font-serif: "Cormorant Garamond", serif;
+            --font-sans: "Montserrat", sans-serif;
+            --ease-smooth: cubic-bezier(0.215, 0.61, 0.355, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            color: var(--color-text-main);
+            background: var(--color-bg-light);
+            line-height: 1.6;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .page-header {
+            position: sticky;
+            top: 0;
+            z-index: 30;
+            background: rgba(245, 242, 233, 0.95);
+            border-bottom: 1px solid rgba(74, 69, 62, 0.12);
+            backdrop-filter: blur(8px);
+            padding: 1.3rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: var(--font-serif);
+            font-size: 2rem;
+            letter-spacing: 0.02em;
+        }
+
+        .main-nav {
+            display: flex;
+            gap: 1.6rem;
+            align-items: center;
+            font-size: 0.76rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        .main-nav a {
+            position: relative;
+            padding-bottom: 0.2rem;
+        }
+
+        .main-nav a::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 2px;
+            background: currentColor;
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.3s var(--ease-smooth);
+        }
+
+        .main-nav a:hover::after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+        .cart-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.42rem;
+            padding-bottom: 0;
+        }
+
+        .cart-link::after {
+            display: none;
+        }
+
+        .cart-count {
+            min-width: 1.2rem;
+            height: 1.2rem;
+            border-radius: 999px;
+            background: var(--color-canopy-green);
+            color: #fff;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 0.25rem;
+            font-size: 0.62rem;
+            font-weight: 600;
+            letter-spacing: 0;
+            text-transform: none;
+        }
+
+        .legal-main {
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 3rem 5% 4.5rem;
+        }
+
+        .legal-kicker {
+            font-size: 0.72rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--color-canopy-green);
+            font-weight: 600;
+            margin-bottom: 0.35rem;
+        }
+
+        .legal-title {
+            font-family: var(--font-serif);
+            color: var(--color-canopy-green);
+            font-size: clamp(2.2rem, 6vw, 4rem);
+            line-height: 0.95;
+            margin-bottom: 0.6rem;
+        }
+
+        .legal-note {
+            color: var(--color-text-muted);
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+        }
+
+        .legal-card {
+            border: 1px solid rgba(38, 65, 50, 0.14);
+            background: #fff;
+            padding: 1rem;
+            margin-bottom: 0.85rem;
+        }
+
+        .legal-card h2 {
+            font-family: var(--font-serif);
+            color: var(--color-canopy-green);
+            font-size: 1.45rem;
+            margin-bottom: 0.35rem;
+        }
+
+        .legal-card p {
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 760px) {
+            .main-nav {
+                display: none;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="assets/footer.css">
+</head>
+<body>
+    <header class="page-header">
+        <a href="index.html" class="logo">mallow.</a>
+        <nav class="main-nav">
+            <a href="shop.html">Shop</a>
+            <a href="onze-visie.html">Onze Visie</a>
+            <a href="insights.html">Insights</a>
+            <a href="cart.html" class="cart-link" aria-label="Winkelwagen">
+                <span>&#128722;</span>
+                <span class="cart-count js-cart-count">0</span>
+            </a>
+        </nav>
+    </header>
+
+    <main class="legal-main">
+        <p class="legal-kicker">Juridisch</p>
+        <h1 class="legal-title">Algemene voorwaarden</h1>
+        <p class="legal-note">Placeholderversie. Vervang deze tekst later door je definitieve juridische inhoud.</p>
+
+        <section class="legal-card">
+            <h2>Bestelling en overeenkomst</h2>
+            <p>Een bestelling is definitief zodra betaling is ontvangen en je een bevestiging hebt gekregen via e-mail.</p>
+        </section>
+
+        <section class="legal-card">
+            <h2>Prijzen en betaling</h2>
+            <p>Alle prijzen staan in euro en zijn inclusief btw, tenzij expliciet anders aangegeven. Betaling verloopt veilig via Stripe Checkout.</p>
+        </section>
+
+        <section class="legal-card">
+            <h2>Aansprakelijkheid en klachten</h2>
+            <p>Bij vragen of klachten kun je contact opnemen via <a href="mailto:hello@mallow.nl">hello@mallow.nl</a>. We reageren zo snel mogelijk met een passende oplossing.</p>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="site-footer-inner">
+            <div class="site-footer-top">
+                <div class="site-footer-brand">
+                    <a href="index.html" class="site-footer-logo">mallow.</a>
+                    <p class="site-footer-tagline">Eerlijke verzorging en voeding uit lokale bron, gemaakt voor een rustige huid en een sterk lichaam.</p>
+                </div>
+                <div class="site-footer-social">
+                    <a href="https://instagram.com/mallow" target="_blank" rel="noopener noreferrer" aria-label="Volg Mallow op Instagram">Instagram</a>
+                </div>
+            </div>
+            <div class="site-footer-trust" aria-label="Vertrouwenssignalen">
+                <p class="site-footer-trust-item">Veilig betalen met Stripe</p>
+                <p class="site-footer-trust-item">Gratis verzending vanaf €50</p>
+                <p class="site-footer-trust-item">Lokaal geproduceerd in Nederland</p>
+            </div>
+            <div class="site-footer-grid">
+                <section class="site-footer-col" aria-label="Navigatie">
+                    <h2>Navigatie</h2>
+                    <div class="site-footer-links">
+                        <a href="index.html">Home</a>
+                        <a href="shop.html">Winkel</a>
+                        <a href="shop.html">Producten</a>
+                        <a href="cart.html">Winkelwagen</a>
+                        <a href="onze-visie.html">Onze Visie</a>
+                        <a href="insights.html">Insights</a>
+                    </div>
+                </section>
+                <section class="site-footer-col" aria-label="Klantenservice">
+                    <h2>Klantenservice</h2>
+                    <div class="site-footer-links">
+                        <a href="mailto:hello@mallow.nl">Contact</a>
+                        <a href="insights.html">Alle insights</a>
+                        <a href="verzending.html">Verzending</a>
+                        <a href="retouren.html">Retouren</a>
+                    </div>
+                </section>
+                <section class="site-footer-col" aria-label="Juridisch">
+                    <h2>Juridisch</h2>
+                    <div class="site-footer-links">
+                        <a href="privacy.html">Privacybeleid</a>
+                        <a href="voorwaarden.html">Algemene voorwaarden</a>
+                        <a href="retouren.html">Retourbeleid</a>
+                        <a href="verzending.html">Verzendbeleid</a>
+                    </div>
+                </section>
+                <section class="site-footer-col" aria-label="Contactgegevens">
+                    <h2>Contact</h2>
+                    <div class="site-footer-contact">
+                        <p>E-mail: <a href="mailto:hello@mallow.nl">hello@mallow.nl</a></p>
+                        <p>Telefoon: <a href="tel:+31612345678">+31 6 12 34 56 78</a></p>
+                        <p>Boerderijweg 12, 7241 AA Lochem, Nederland</p>
+                    </div>
+                </section>
+            </div>
+            <div class="site-footer-bottom">
+                <p class="site-footer-copy">&copy; 2026 mallow. Alle rechten voorbehouden.</p>
+                <div class="site-footer-meta">
+                    <a href="privacy.html">Privacy</a>
+                    <a href="voorwaarden.html">Voorwaarden</a>
+                    <a href="verzending.html">Verzending</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="cart.js"></script>
+</body>
+</html>

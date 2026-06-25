@@ -1,0 +1,26 @@
+﻿services:
+  - type: web
+    name: mallow-site
+    runtime: node
+    plan: starter
+    buildCommand: npm ci && npm run preflight
+    startCommand: npm start
+    healthCheckPath: /api/health
+    autoDeploy: false
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: TRUST_PROXY
+        value: true
+      - key: PUBLIC_BASE_URL
+        sync: false
+      - key: STRIPE_SECRET_KEY
+        sync: false
+      - key: STRIPE_WEBHOOK_SECRET
+        sync: false
+      - key: STRIPE_ALLOWED_COUNTRIES
+        value: NL,BE,DE
+      - key: DATABASE_URL
+        sync: false
+      - key: DATABASE_SSL
+        value: require

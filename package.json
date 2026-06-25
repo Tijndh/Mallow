@@ -1,0 +1,26 @@
+{
+  "name": "mallow-site",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Static Mallow storefront with Stripe Checkout backend.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "db:migrate": "node scripts/migrate-db.js",
+    "check:server": "node --check server.js && node --check products.js && node --check lib/order-store.js && node --check lib/product-page.js && node --check scripts/migrate-db.js && node scripts/check-order-store.js",
+    "check:seo": "node --check lib/static-seo.js && node --check lib/product-page.js && node --check scripts/check-seo.js && node scripts/check-seo.js",
+    "check:prod-env": "node --check scripts/check-production-env.js && node scripts/check-production-env.js",
+    "check:live": "node --check scripts/check-live.js && node scripts/check-live.js",
+    "preflight": "node --check server.js && node --check products.js && node --check lib/order-store.js && node --check lib/product-page.js && node --check lib/static-seo.js && node --check scripts/migrate-db.js && node --check scripts/check-order-store.js && node scripts/check-order-store.js && node --check scripts/preflight.js && node scripts/preflight.js && npm run check:seo"
+  },
+  "engines": {
+    "node": ">=20 <26"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "pg": "^8.22.0",
+    "stripe": "^17.7.0"
+  }
+}

@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Onze Samenwerkingen | Lokale ingredienten en eerlijke herkomst | Mallow</title>
+    <meta name="description" content="Lees hoe Mallow kiest voor lokale ingredienten, herleidbare herkomst en eerlijke samenwerkingen met een boer, imker en makers uit de buurt.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/insights.css">
+    <link rel="stylesheet" href="assets/footer.css">
+    <style>
+        .partnerships-main {
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: 3rem 5% 4.8rem;
+        }
+
+        .partnerships-hero {
+            display: grid;
+            grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+            gap: 2rem;
+            align-items: end;
+            margin-bottom: 2.6rem;
+        }
+
+        .partnerships-hero-copy p {
+            max-width: 62ch;
+        }
+
+        .partnerships-hero-media {
+            background: rgba(255, 255, 255, 0.52);
+            border: 1px solid rgba(38, 65, 50, 0.14);
+            border-radius: 20px;
+            padding: 1.2rem;
+        }
+
+        .partnerships-hero-media img {
+            width: 100%;
+            border-radius: 16px;
+        }
+
+        .partnerships-hero-note {
+            margin-top: 0.9rem;
+            color: var(--color-text-muted);
+            font-size: 0.9rem;
+        }
+
+        .partnerships-band {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 1rem;
+            margin-bottom: 2.6rem;
+        }
+
+        .partnerships-band-card,
+        .partnership-card,
+        .faq-card,
+        .partnership-copy-block {
+            border: 1px solid rgba(38, 65, 50, 0.14);
+            background: rgba(255, 255, 255, 0.58);
+            border-radius: 18px;
+        }
+
+        .partnerships-band-card {
+            padding: 1.1rem;
+        }
+
+        .partnerships-band-card span,
+        .partnership-card span,
+        .faq-card span {
+            display: inline-block;
+            margin-bottom: 0.45rem;
+            font-size: 0.68rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--color-canopy-green);
+            font-weight: 600;
+        }
+
+        .partnerships-band-card h2,
+        .partnership-card h2,
+        .partnership-copy-block h2,
+        .faq-intro h2,
+        .partnership-cta h2 {
+            font-family: var(--font-serif);
+            color: var(--color-canopy-green);
+            font-weight: 400;
+            line-height: 1;
+        }
+
+        .partnerships-band-card h2 {
+            font-size: 1.5rem;
+            margin-bottom: 0.55rem;
+        }
+
+        .partnerships-band-card p,
+        .partnership-card p,
+        .partnership-copy-block p,
+        .faq-card p,
+        .faq-intro p,
+        .partnership-cta p {
+            font-size: 0.95rem;
+            color: var(--color-text-main);
+        }
+
+        .partnership-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 1rem;
+            margin-bottom: 2.6rem;
+        }
+
+        .partnership-card {
+            padding: 1.2rem;
+        }
+
+        .partnership-card h2 {
+            font-size: 1.8rem;
+            margin-bottom: 0.65rem;
+        }
+
+        .partnership-copy {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 1rem;
+            margin-bottom: 2.6rem;
+        }
+
+        .partnership-copy-block {
+            padding: 1.35rem;
+        }
+
+        .partnership-copy-block h2 {
+            font-size: 2rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .partnership-copy-block p + p {
+            margin-top: 0.9rem;
+        }
+
+        .faq-wrap {
+            display: grid;
+            grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+            gap: 1rem;
+            margin-bottom: 2.8rem;
+        }
+
+        .faq-intro {
+            padding: 1.35rem 1.15rem 1.35rem 0;
+        }
+
+        .faq-intro h2 {
+            font-size: 2.3rem;
+            margin-bottom: 0.7rem;
+        }
+
+        .faq-list {
+            display: grid;
+            gap: 0.9rem;
+        }
+
+        .faq-card {
+            padding: 1.05rem 1.1rem;
+        }
+
+        .faq-card h3 {
+            font-family: var(--font-serif);
+            color: var(--color-canopy-green);
+            font-weight: 400;
+            font-size: 1.45rem;
+            line-height: 1.05;
+            margin-bottom: 0.55rem;
+        }
+
+        .partnership-cta {
+            border-top: 1px solid rgba(38, 65, 50, 0.14);
+            padding-top: 1.6rem;
+        }
+
+        .partnership-cta h2 {
+            font-size: 2.4rem;
+            margin-bottom: 0.7rem;
+        }
+
+        .cta-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.85rem;
+            margin-top: 1rem;
+        }
+
+        .btn-subtle {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--color-canopy-green);
+            color: var(--color-canopy-green);
+            padding: 0.9rem 1.5rem;
+            font-size: 0.74rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            font-weight: 600;
+            transition: background-color 0.3s var(--ease-smooth), border-color 0.3s var(--ease-smooth), color 0.3s var(--ease-smooth);
+        }
+
+        .btn-subtle:hover,
+        .btn-subtle:focus-visible {
+            background: var(--color-green-wash);
+            border-color: var(--color-canopy-green);
+            color: var(--color-canopy-green);
+        }
+
+        @media (max-width: 980px) {
+            .partnerships-hero,
+            .partnership-copy,
+            .faq-wrap {
+                grid-template-columns: 1fr;
+            }
+
+            .partnerships-band,
+            .partnership-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .faq-intro {
+                padding-right: 0;
+            }
+        }
+
+        @media (max-width: 760px) {
+            .partnerships-main {
+                padding-top: 2.3rem;
+            }
+        }
+    </style>
+</head>
+<body class="insights-page">
+    <header class="page-header">
+        <a href="index.html" class="logo">mallow.</a>
+        <nav class="main-nav">
+            <a href="shop.html">Shop</a>
+            <a href="onze-visie.html">Onze Visie</a>
+            <a href="insights.html">Insights</a>
+            <a href="cart.html" class="cart-link" aria-label="Winkelwagen">
+                <span>&#128722;</span>
+                <span class="cart-count js-cart-count">0</span>
+            </a>
+        </nav>
+    </header>
+
+    <main class="partnerships-main">
+        <section class="partnerships-hero">
+            <div class="partnerships-hero-copy">
+                <p class="blog-kicker">Onze Samenwerkingen</p>
+                <h1 class="blog-title">Lokale ingredienten, eerlijke herkomst en korte lijnen.</h1>
+                <p class="blog-intro">Voor mensen die zoeken naar lokale huidverzorging, ambachtelijke producten uit Nederland en eerlijke ingredienten, is herkomst vaak net zo belangrijk als het eindproduct. Op deze pagina leggen we uit hoe Mallow kijkt naar lokale producten, herleidbare ingredienten en samenwerkingen met een boer, imker en makers uit de buurt.</p>
+            </div>
+            <figure class="partnerships-hero-media">
+                <img src="https://hetreestdal.nl/wp/wp-content/uploads/2016/10/Mooie-relatie-tussen-boer-en-zijn-vee2.jpg" alt="Samenwerking met een lokale boer voor ingredienten van Mallow">
+                <figcaption class="partnerships-hero-note">We kiezen liever voor duidelijke herkomst en kleine productie dan voor anonieme massa.</figcaption>
+            </figure>
+        </section>
+
+        <section class="partnerships-band" aria-label="Kernpunten">
+            <article class="partnerships-band-card">
+                <span>Lokale producten</span>
+                <h2>Ingredienten uit de buurt</h2>
+                <p>Waar mogelijk kiezen we voor lokale ingredienten uit Nederland of uit onze directe omgeving, zodat herkomst en kwaliteit helder blijven.</p>
+            </article>
+            <article class="partnerships-band-card">
+                <span>Herleidbare herkomst</span>
+                <h2>Korte keten</h2>
+                <p>We willen weten waar iets vandaan komt, wie het maakt en hoe ermee wordt omgegaan. Dat past bij eerlijke huidverzorging en voeding.</p>
+            </article>
+            <article class="partnerships-band-card">
+                <span>Ambachtelijk</span>
+                <h2>Kleine batches</h2>
+                <p>Mallow werkt liever met aandacht, kleine oplages en lokale makers dan met grootschalige, anonieme productie.</p>
+            </article>
+        </section>
+
+        <section class="partnership-grid" aria-label="Soorten samenwerkingen">
+            <article class="partnership-card">
+                <span>Boer</span>
+                <h2>Lokale boer</h2>
+                <p>Voor ingredienten zoals tallow kijken we het liefst naar een boer uit de buurt. Dat helpt ons om lokale huidverzorging te koppelen aan duidelijke herkomst en een kortere keten.</p>
+            </article>
+            <article class="partnership-card">
+                <span>Imker</span>
+                <h2>Honing dichtbij</h2>
+                <p>Ook lokale honing past bij die visie. Een imker uit de buurt sluit aan bij onze voorkeur voor pure ingredienten, kleine schaal en transparante samenwerking.</p>
+            </article>
+            <article class="partnership-card">
+                <span>Makers</span>
+                <h2>Ambacht en aandacht</h2>
+                <p>We werken graag met kleine makers die net als wij kiezen voor kwaliteit, eenvoudige ingredienten en producten die met zorg worden samengesteld.</p>
+            </article>
+        </section>
+
+        <section class="partnership-copy" aria-label="Waarom lokale samenwerkingen">
+            <article class="partnership-copy-block">
+                <h2>Waarom lokale ingredienten voor ons belangrijk zijn</h2>
+                <p>Lokale producten zeggen niet automatisch alles over kwaliteit, maar ze maken het wel veel makkelijker om herkomst serieus te nemen. Voor Mallow hoort eerlijke huidverzorging samen te gaan met ingredienten die we zoveel mogelijk kunnen herleiden. Daarom zoeken we liever naar korte lijnen, lokale samenwerking en een productieproces dat dichtbij voelt.</p>
+                <p>Dat zie je terug in de manier waarop we denken over tallow, honing, ambachtelijke zeep, cremes en voeding van binnenuit. We willen producten maken die niet alleen goed aanvoelen, maar ook passen bij een rustigere en eerlijkere manier van leven.</p>
+            </article>
+            <article class="partnership-copy-block">
+                <h2>Waar we op letten bij een samenwerking</h2>
+                <p>We kijken niet alleen naar het ingredient zelf, maar ook naar de mensen erachter. Kunnen we uitleggen waar iets vandaan komt? Past de manier van werken bij onze waarden? Is de kwaliteit constant genoeg om er met vertrouwen een product omheen te bouwen? Dat zijn voor ons belangrijke vragen.</p>
+                <p>Juist voor mensen die zoeken op termen als lokale huidverzorging, Nederlandse tallow producten, ambachtelijke zeep of natuurlijke ingredienten, is die combinatie van kwaliteit en herkomst relevant. Een mooi verhaal zonder duidelijke basis is voor ons niet genoeg.</p>
+            </article>
+        </section>
+
+        <section class="faq-wrap" aria-label="Veelgestelde vragen over lokale ingredienten">
+            <div class="faq-intro">
+                <p class="blog-kicker">Veelgestelde vragen</p>
+                <h2>Duidelijke antwoorden over herkomst, samenwerking en lokale producten.</h2>
+                <p>Deze vragen sluiten aan op hoe mensen vaak zoeken naar lokale ingredienten, eerlijke huidverzorging en ambachtelijke producten uit Nederland.</p>
+            </div>
+            <div class="faq-list">
+                <article class="faq-card">
+                    <span>Vraag 1</span>
+                    <h3>Wat bedoelt Mallow met lokale ingredienten?</h3>
+                    <p>Daarmee bedoelen we ingredienten die waar mogelijk uit Nederland of uit onze directe omgeving komen, met een herkomst die we kunnen uitleggen en verantwoorden.</p>
+                </article>
+                <article class="faq-card">
+                    <span>Vraag 2</span>
+                    <h3>Waarom zijn lokale producten interessant voor huidverzorging?</h3>
+                    <p>Voor veel mensen geven lokale producten meer vertrouwen, omdat de keten korter is en de herkomst duidelijker. Dat maakt het makkelijker om bewust te kiezen.</p>
+                </article>
+                <article class="faq-card">
+                    <span>Vraag 3</span>
+                    <h3>Werkt Mallow met een boer en imker uit de buurt?</h3>
+                    <p>Ja, dat is precies het soort samenwerking dat bij onze visie past: dichtbij, eerlijk en met aandacht voor kwaliteit, kleine schaal en relatie.</p>
+                </article>
+                <article class="faq-card">
+                    <span>Vraag 4</span>
+                    <h3>Is deze pagina bedoeld als overzicht van jullie visie op herkomst?</h3>
+                    <p>Ja. Deze pagina legt uit hoe wij naar lokale ingredienten en samenwerkingen kijken. Voor het bredere verhaal achter Mallow kun je ook onze visiepagina lezen.</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="partnership-cta">
+            <p class="blog-kicker">Verder lezen</p>
+            <h2>Meer context bekijken?</h2>
+            <p>Lees ons volledige verhaal of ga door naar de shop om te zien hoe die visie terugkomt in onze producten.</p>
+            <div class="cta-actions">
+                <a href="onze-visie.html" class="btn-subtle">Ons verhaal</a>
+                <a href="shop.html" class="btn-subtle">Bekijk de shop</a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="site-footer-inner">
+            <div class="site-footer-top">
+                <div class="site-footer-brand">
+                    <a href="index.html" class="site-footer-logo">mallow.</a>
+                    <p class="site-footer-tagline">Eerlijke verzorging en voeding uit lokale bron, gemaakt voor een rustige huid en een sterk lichaam.</p>
+                </div>
+                <div class="site-footer-social">
+                    <a href="https://instagram.com/mallow" target="_blank" rel="noopener noreferrer" aria-label="Volg Mallow op Instagram">Instagram</a>
+                </div>
+            </div>
+            <div class="site-footer-trust" aria-label="Vertrouwenssignalen">
+                <p class="site-footer-trust-item">Veilig betalen met Stripe</p>
+                <p class="site-footer-trust-item">Gratis verzending vanaf EUR 50</p>
+                <p class="site-footer-trust-item">Lokaal geproduceerd in Nederland</p>
+            </div>
+            <div class="site-footer-grid">
+                <section class="site-footer-col" aria-label="Navigatie">
+                    <h2>Navigatie</h2>
+                    <div class="site-footer-links">
+                        <a href="index.html">Home</a>
+                        <a href="shop.html">Winkel</a>
+                        <a href="shop.html">Producten</a>
+                        <a href="cart.html">Winkelwagen</a>
+                        <a href="onze-visie.html">Onze Visie</a>
+                        <a href="insights.html">Insights</a>
+                    </div>
+                </section>
+                <section class="site-footer-col" aria-label="Klantenservice">
+                    <h2>Klantenservice</h2>
+                    <div class="site-footer-links">
+                        <a href="mailto:hello@mallow.nl">Contact</a>
+                        <a href="insights.html">Alle insights</a>
+                        <a href="verzending.html">Verzending</a>
+                        <a href="retouren.html">Retouren</a>
+                    </div>
+                </section>
+                <section class="site-footer-col" aria-label="Juridisch">
+                    <h2>Juridisch</h2>
+                    <div class="site-footer-links">
+                        <a href="privacy.html">Privacybeleid</a>
+                        <a href="voorwaarden.html">Algemene voorwaarden</a>
+                        <a href="retouren.html">Retourbeleid</a>
+                        <a href="verzending.html">Verzendbeleid</a>
+                    </div>
+                </section>
+                <section class="site-footer-col" aria-label="Contactgegevens">
+                    <h2>Contact</h2>
+                    <div class="site-footer-contact">
+                        <p>E-mail: <a href="mailto:hello@mallow.nl">hello@mallow.nl</a></p>
+                        <p>Telefoon: <a href="tel:+31612345678">+31 6 12 34 56 78</a></p>
+                        <p>Boerderijweg 12, 7241 AA Lochem, Nederland</p>
+                    </div>
+                </section>
+            </div>
+            <div class="site-footer-bottom">
+                <p class="site-footer-copy">&copy; 2026 mallow. Alle rechten voorbehouden.</p>
+                <div class="site-footer-meta">
+                    <a href="privacy.html">Privacy</a>
+                    <a href="voorwaarden.html">Voorwaarden</a>
+                    <a href="verzending.html">Verzending</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="cart.js"></script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-labelledby="title desc">
+  <title id="title">Mallow Stripe badge</title>
+  <desc id="desc">Minimal round Mallow badge in brand green with a cream M monogram.</desc>
+  <circle cx="128" cy="128" r="120" fill="#264132"/>
+  <path
+    fill="#F5F2E9"
+    d="M68 178V78h21l39 55 39-55h21v100h-21v-65l-29 41h-20l-29-41v65H68Z"
+  />
+</svg>

@@ -1,0 +1,4748 @@
+<!DOCTYPE html>
+<html lang="nl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mallow | Zacht en Puur</title>
+
+    <!-- Google Fonts: Blijft elegant, maar door de nieuwe kleuren voelt het veel aardser -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+
+    <style>
+        /* --- HET NIEUWE AUTHENTIEKE KLEURENPALET --- */
+        :root {
+            --color-bg-light: #FBF9F4;
+            /* Lichter en schoner wit-beige als basis */
+            --color-bg-alt: #EEE5D7;
+            /* Warm beige lager op de pagina */
+            --color-green-soft: #E9EEE6;
+            --color-green-wash: #DFE7DF;
+            --color-surface-soft: #EBE4D8;
+            --color-card-lift: rgba(255, 252, 247, 0.76);
+            --color-home-page-bg:
+                radial-gradient(136% 54% at 50% -8%, rgba(255, 255, 255, 0.72) 0%, rgba(255, 255, 255, 0) 68%),
+                radial-gradient(96% 38% at 14% 24%, rgba(255, 255, 255, 0.24) 0%, rgba(255, 255, 255, 0) 72%),
+                radial-gradient(118% 44% at 84% 88%, rgba(238, 231, 220, 0.16) 0%, rgba(238, 231, 220, 0) 74%),
+                linear-gradient(180deg, #fffdf9 0%, #fcfaf5 18%, #f8f4ec 44%, #f3eee5 72%, #efe8dd 100%),
+                repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.024) 0 1px, rgba(255, 255, 255, 0) 1px 10px),
+                repeating-linear-gradient(180deg, rgba(124, 110, 89, 0.01) 0 1px, rgba(124, 110, 89, 0) 1px 14px);
+
+            --color-canopy-green: #264132;
+            /* Canopy Groen: diep, rijk, bosrijk */
+            --color-canopy-green-hover: #1F342A;
+            --color-burnt-orange: #264132;
+            --color-gold-hover: #1F342A;
+            --announcement-height: 2.15rem;
+            --radius-soft-card: 20px;
+            --radius-soft-button: 18px;
+
+            --color-text-main: #4A453E;
+            /* Donker warm-bruin ipv hard zwart/grijs voor leesteksten */
+            --color-text-muted: #837B70;
+
+            --font-serif: 'Cormorant Garamond', serif;
+            --font-sans: 'Montserrat', sans-serif;
+            --ease-smooth: cubic-bezier(0.215, 0.61, 0.355, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            color: var(--color-text-main);
+            background-color: var(--color-bg-light);
+            /* Licht beige basis */
+            background-image: var(--color-home-page-bg);
+            background-repeat: no-repeat, no-repeat, no-repeat, no-repeat, repeat, repeat;
+            background-size: 100% 100%, 100% 100%, 100% 100%, 100% 100%, 220px 220px, 240px 240px;
+            background-position: center top, center top, center bottom, center top, center top, center top;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Alle headings standaard Canopy Groen */
+        h1,
+        h2,
+        h3,
+        h4 {
+            color: var(--color-canopy-green);
+            font-family: var(--font-serif);
+            font-weight: 400;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* --- Navigatie --- */
+        .top-announcement {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: var(--announcement-height);
+            padding: 0 5%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(38, 65, 50, 0.96);
+            color: var(--color-bg-light);
+            font-family: var(--font-sans);
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            text-align: center;
+            z-index: 40;
+            transition: transform 0.24s ease, opacity 0.24s ease, visibility 0.24s ease;
+        }
+
+        body:not(.is-at-top) .top-announcement {
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-100%);
+            pointer-events: none;
+        }
+
+        .home-header {
+            position: fixed;
+            top: var(--announcement-height);
+            left: 0;
+            width: 100%;
+            padding: 1.4rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 30;
+            color: #fff;
+            background: transparent;
+            border-bottom: 1px solid transparent;
+            backdrop-filter: none;
+            box-shadow: none;
+            transition: top 0.24s ease, background-color 0.28s ease, color 0.28s ease, border-color 0.28s ease, backdrop-filter 0.28s ease, box-shadow 0.28s ease;
+        }
+
+        body:not(.is-at-top) .home-header {
+            top: 0;
+        }
+
+        .home-header.is-scrolled {
+            color: var(--color-canopy-green);
+            background: rgba(245, 242, 233, 0.95);
+            backdrop-filter: blur(8px);
+            border-bottom-color: rgba(74, 69, 62, 0.1);
+            box-shadow: none;
+        }
+
+
+        .logo {
+            font-family: var(--font-serif);
+            font-size: 2rem;
+            font-weight: 500;
+            letter-spacing: 0.02em;
+        }
+
+        .home-header .logo {
+            color: inherit;
+            display: inline-block;
+        }
+
+        .home-header a.logo {
+            cursor: pointer;
+        }
+
+        .home-header a.logo:focus-visible {
+            outline: 2px solid rgba(245, 242, 233, 0.72);
+            outline-offset: 4px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            font-size: 0.78rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+        }
+
+        .nav-links a {
+            position: relative;
+            padding-bottom: 0.25rem;
+            transition: color 0.4s ease;
+        }
+
+        /* Accent: Burnt orange hover op navigatie */
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 2px;
+            background: currentColor;
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.4s var(--ease-smooth);
+        }
+
+        .home-header:not(.is-scrolled) .nav-links a:hover {
+            color: var(--color-bg-light);
+        }
+
+        .home-header.is-scrolled .nav-links a:hover {
+            color: inherit;
+        }
+
+        .nav-links a:hover::after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+        .nav-links .cart-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            padding-bottom: 0;
+        }
+
+        .nav-links .cart-link::after {
+            display: none;
+        }
+
+        .cart-glyph {
+            font-size: 1rem;
+            line-height: 1;
+        }
+
+        .cart-count {
+            min-width: 1.2rem;
+            height: 1.2rem;
+            border-radius: 999px;
+            background: var(--color-canopy-green);
+            color: #fff;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 0.25rem;
+            font-size: 0.62rem;
+            font-weight: 600;
+            letter-spacing: 0;
+            text-transform: none;
+        }
+
+
+        /* --- Categorie Showcase --- */
+        .category-showcase {
+            padding: 3rem 2% 2rem;
+            background: transparent;
+        }
+
+        .soap-showcase {
+            padding: 3rem 2% 2rem;
+            background: transparent;
+        }
+
+        .soap-showcase .showcase-container {
+            max-width: 1700px;
+        }
+
+        .soap-showcase .soap-eyebrow,
+        .soap-showcase .soap-grid-title,
+        .soap-showcase .sc-name,
+        .soap-showcase .sc-price,
+        .soap-showcase .showcase-link {
+            color: var(--color-canopy-green);
+        }
+
+        .soap-showcase .sc-volume,
+        .soap-showcase .sc-desc,
+        .soap-showcase .sc-rating-num {
+            color: rgba(74, 69, 62, 0.65);
+        }
+
+        .soap-showcase .showcase-arrow[disabled] {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .soap-showcase .js-soap-shine-title .soap-letter {
+            color: var(--color-canopy-green);
+        }
+
+        .showcase-container {
+            max-width: 1700px;
+            margin: 0 auto;
+        }
+
+        .showcase-title {
+            font-family: 'DM Mono', monospace, Arial, sans-serif;
+            font-size: 0.8rem;
+            color: var(--color-text-main);
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .showcase-grid {
+            display: grid;
+            grid-auto-flow: column;
+            grid-auto-columns: calc((100% - (1.5rem * 3)) / 4);
+            gap: 1.5rem;
+            overflow-x: auto;
+            overscroll-behavior-inline: contain;
+            scroll-snap-type: inline proximity;
+            scroll-padding-inline: 0;
+            scrollbar-width: none;
+            scroll-behavior: smooth;
+            padding-bottom: 1.5rem;
+        }
+
+        .showcase-grid::-webkit-scrollbar {
+            display: none;
+        }
+
+        .showcase-scroll-shell {
+            position: relative;
+        }
+
+        .showcase-actions {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 0.35rem;
+            padding-right: 0.3rem;
+        }
+
+        .showcase-link {
+            font-size: 0.72rem;
+        }
+
+        .showcase-arrow {
+            position: absolute;
+            top: 34%;
+            z-index: 3;
+            width: 2.35rem;
+            height: 2.35rem;
+            border: 1px solid rgba(38, 65, 50, 0.14);
+            border-radius: 999px;
+            background: rgba(245, 242, 233, 0.92);
+            color: var(--color-canopy-green);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.25s ease, border-color 0.25s ease, opacity 0.25s ease, transform 0.25s ease;
+            backdrop-filter: blur(6px);
+        }
+
+        .showcase-arrow:hover,
+        .showcase-arrow:focus-visible {
+            background: rgba(255, 255, 255, 0.98);
+            border-color: rgba(38, 65, 50, 0.24);
+            transform: translateY(-1px);
+        }
+
+        .showcase-arrow[disabled] {
+            opacity: 0.28;
+            cursor: default;
+            pointer-events: none;
+            transform: none;
+        }
+
+        .showcase-arrow--prev {
+            left: -0.55rem;
+        }
+
+        .showcase-arrow--next {
+            right: -0.55rem;
+        }
+
+        .showcase-item {
+            scroll-snap-align: start;
+            scroll-snap-stop: always;
+        }
+
+        .showcase-item .product-img-container {
+            border-radius: 0 !important;
+            background: #f6f5f3 !important;
+        }
+
+        .showcase-item .product-info {
+            margin-top: 0.65rem !important;
+        }
+
+        .showcase-item .p-title {
+            font-family: 'DM Mono', monospace, Arial, sans-serif;
+            font-size: 0.72rem !important;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            margin-bottom: 0.2rem !important;
+            color: var(--color-canopy-green) !important;
+        }
+
+        .showcase-item .product-tag--highlight {
+            font-family: var(--font-sans);
+            font-size: 0.57rem;
+            text-transform: uppercase;
+            letter-spacing: 0.09em;
+            border-radius: 0;
+            padding: 0.18rem 0.45rem;
+        }
+
+        /* Showcase card info */
+        .sc-info {
+            margin-top: 0.75rem !important;
+            padding: 0;
+        }
+
+        .sc-meta-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.3rem;
+        }
+
+        .sc-volume {
+            font-family: var(--font-sans);
+            font-size: 0.62rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: rgba(74, 69, 62, 0.55);
+        }
+
+        .sc-stars {
+            font-size: 0.68rem;
+            color: #c8a84b;
+            letter-spacing: 0.03em;
+        }
+
+        .sc-rating-num {
+            font-family: var(--font-sans);
+            font-size: 0.60rem;
+            font-weight: 600;
+            color: rgba(74, 69, 62, 0.55);
+            letter-spacing: 0;
+        }
+
+        .sc-name {
+            font-family: var(--font-serif);
+            font-size: 1.45rem;
+            font-weight: 400;
+            color: var(--color-canopy-green);
+            letter-spacing: -0.015em;
+            margin: 0.1rem 0 0.18rem;
+            line-height: 1.15;
+        }
+
+        .sc-desc {
+            font-family: var(--font-sans);
+            font-size: 0.72rem;
+            color: rgba(74, 69, 62, 0.65);
+            margin: 0 0 0.4rem;
+            line-height: 1.4;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .sc-price {
+            font-family: var(--font-sans);
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: var(--color-canopy-green);
+            margin: 0;
+            letter-spacing: -0.01em;
+        }
+
+        @media (max-width: 1024px) {
+            .showcase-grid {
+                grid-auto-columns: calc((100% - (1.5rem * 2)) / 3.2);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .showcase-grid {
+                grid-auto-columns: calc((100% - 1.5rem) / 2.2);
+            }
+
+            .showcase-actions {
+                justify-content: flex-start;
+                padding-right: 0;
+            }
+
+            .showcase-arrow {
+                top: 31%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .showcase-grid {
+                grid-auto-columns: calc((100% - 1.5rem) / 1.35);
+            }
+
+            .showcase-arrow {
+                width: 2.1rem;
+                height: 2.1rem;
+                top: 29%;
+            }
+        }
+
+        .showcase-grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .showcase-grid-3 {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .showcase-grid-3 {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+        }
+
+        /* --- Hero Sectie --- */
+        .hero {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #fff;
+            overflow: hidden;
+        }
+
+        .hero-video-wrap {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+            z-index: 1;
+            background: #4A453E;
+        }
+
+        .hero-video {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            pointer-events: none;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: transparent;
+            /* Subtiele groene overlay ipv puur zwart */
+            z-index: 2;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 3;
+            max-width: 900px;
+            padding: 0 2rem;
+            margin-top: 4rem;
+        }
+
+        /* Hero eyebrow in het merk-groen */
+        .hero-eyebrow {
+            font-family: var(--font-sans);
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            margin-bottom: 2rem;
+            display: block;
+            color: var(--color-canopy-green);
+        }
+
+        .hero-title {
+            font-size: 4.5rem;
+            color: var(--color-bg-light);
+            /* Licht beige tekst op hero */
+            line-height: 1.1;
+            margin-bottom: 3.5rem;
+        }
+
+        .hero-title i {
+            font-style: italic;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 1.35rem;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Hero primary: dezelfde rustige outlined familie als de editorial CTA's */
+        .btn-solid {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--color-canopy-green);
+            color: var(--color-bg-light);
+            padding: 0.9rem 1.5rem;
+            font-family: var(--font-sans);
+            font-size: 0.74rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            transition: transform 0.35s var(--ease-smooth), background-color 0.35s var(--ease-smooth), border-color 0.35s var(--ease-smooth), color 0.35s var(--ease-smooth);
+            border: 1px solid var(--color-canopy-green);
+            border-radius: var(--radius-soft-button);
+        }
+
+        .btn-solid:hover,
+        .btn-solid:focus-visible {
+            transform: translateY(-1px);
+            background-color: var(--color-green-wash);
+            border-color: var(--color-canopy-green);
+            color: var(--color-canopy-green);
+        }
+
+        .btn-text {
+            color: var(--color-bg-light);
+            font-family: var(--font-sans);
+            font-size: 0.8rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            position: relative;
+            padding-bottom: 0.4rem;
+            transition: color 0.35s ease;
+        }
+
+        .btn-text::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 2px;
+            background: currentColor;
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.4s var(--ease-smooth);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            font-size: 0.78rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+        }
+
+        .nav-links a {
+            position: relative;
+            padding-bottom: 0.25rem;
+            transition: color 0.4s ease;
+        }
+
+        /* Accent: Burnt orange hover op navigatie */
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 2px;
+            background: currentColor;
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.4s var(--ease-smooth);
+        }
+
+        .home-header:not(.is-scrolled) .nav-links a:hover {
+            color: var(--color-bg-light);
+        }
+
+        .home-header.is-scrolled .nav-links a:hover {
+            color: inherit;
+        }
+
+        .nav-links a:hover::after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+        .nav-links .cart-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            padding-bottom: 0;
+        }
+
+        .nav-links .cart-link::after {
+            display: none;
+        }
+
+        .cart-glyph {
+            font-size: 1rem;
+            line-height: 1;
+        }
+
+        .cart-count {
+            min-width: 1.2rem;
+            height: 1.2rem;
+            border-radius: 999px;
+            background: var(--color-canopy-green);
+            color: #fff;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 0.25rem;
+            font-size: 0.62rem;
+            font-weight: 600;
+            letter-spacing: 0;
+            text-transform: none;
+        }
+
+        /* --- Hero Sectie --- */
+        .hero {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #fff;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 3;
+            max-width: 900px;
+            padding: 0 2rem;
+            margin-top: 4rem;
+        }
+
+        .hero-eyebrow {
+            font-family: var(--font-sans);
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            margin-bottom: 2rem;
+            display: block;
+            color: var(--color-canopy-green);
+        }
+
+        .hero-title {
+            font-size: 4.5rem;
+            color: var(--color-bg-light);
+            line-height: 1.1;
+            margin-bottom: 1.6rem;
+        }
+
+        .hero-title i {
+            font-style: italic;
+        }
+
+        .hero-subtitle {
+            max-width: 38rem;
+            margin: 0 auto 2.4rem;
+            font-family: var(--font-sans);
+            font-size: 1rem;
+            line-height: 1.8;
+            color: rgba(251, 249, 244, 0.9);
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 1.35rem;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .btn-solid {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--color-canopy-green);
+            color: var(--color-bg-light);
+            padding: 0.9rem 1.5rem;
+            font-family: var(--font-sans);
+            font-size: 0.74rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            transition: transform 0.35s var(--ease-smooth), background-color 0.35s var(--ease-smooth), border-color 0.35s var(--ease-smooth), color 0.35s var(--ease-smooth);
+            border: 1px solid var(--color-canopy-green);
+            border-radius: var(--radius-soft-button);
+        }
+
+        .btn-solid:hover,
+        .btn-solid:focus-visible {
+            transform: translateY(-1px);
+            background-color: var(--color-green-wash);
+            border-color: var(--color-canopy-green);
+            color: var(--color-canopy-green);
+        }
+
+        .btn-text {
+            color: var(--color-bg-light);
+            font-family: var(--font-sans);
+            font-size: 0.8rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            position: relative;
+            padding-bottom: 0.4rem;
+            transition: color 0.35s ease;
+        }
+
+        .btn-text::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 2px;
+            background: currentColor;
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.4s var(--ease-smooth);
+        }
+
+        .btn-text:hover,
+        .btn-text:focus-visible {
+            color: var(--color-bg-light);
+        }
+
+        .hero-media-wrap {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+            z-index: 1;
+            background: #4A453E;
+        }
+
+        .hero-media {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            pointer-events: none;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: transparent;
+            z-index: 2;
+        }
+
+        /* --- Trust / USP Balk --- */
+        .usp-bar {
+            background-color: var(--color-surface-soft);
+            border-bottom: 1px solid rgba(74, 69, 62, 0.08);
+            padding: 0.95rem 0;
+            overflow: hidden;
+        }
+
+        .usp-marquee {
+            overflow: hidden;
+        }
+
+        .usp-container {
+            display: none;
+        }
+
+        .usp-track {
+            display: flex;
+            align-items: center;
+            width: max-content;
+            animation: usp-marquee 52s linear infinite;
+            will-change: transform;
+        }
+
+        .usp-group {
+            flex-shrink: 0;
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 0;
+            padding-right: clamp(6rem, 14vw, 12rem);
+        }
+
+        .usp-group::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            right: calc(clamp(6rem, 14vw, 12rem) / 2);
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: rgba(38, 65, 50, 0.22);
+            transform: translate(50%, -50%);
+        }
+
+        .usp-item {
+            position: relative;
+            font-family: var(--font-sans);
+            font-size: 0.72rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--color-canopy-green);
+            display: inline-flex;
+            align-items: center;
+            white-space: nowrap;
+        }
+
+        .usp-item:not(:last-child) {
+            padding-right: clamp(6rem, 14vw, 12rem);
+        }
+
+        .usp-item:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            right: calc(clamp(6rem, 14vw, 12rem) / 2);
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: rgba(38, 65, 50, 0.22);
+            transform: translate(50%, -50%);
+        }
+
+        .usp-divider {
+            display: none;
+        }
+
+        @keyframes usp-marquee {
+            from {
+                transform: translateX(0);
+            }
+
+            to {
+                transform: translateX(-50%);
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .usp-track {
+                animation: none;
+            }
+        }
+
+        .product-tag--highlight {
+            background: var(--color-canopy-green) !important;
+            color: var(--color-bg-light) !important;
+            border-color: var(--color-canopy-green) !important;
+        }
+
+        /* --- Product Filter Sectie (Elvou Style) --- */
+        .section-products {
+            padding: 6rem 5%;
+            background: transparent;
+        }
+
+        /* De Tabs/Filters bovenin */
+        .product-filters {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 2.4rem;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .filter-btn {
+            font-family: "Neue Haas Grotesk Display Pro", "Neue Haas Grotesk Text Pro", "Neue Haas Grotesk", "Helvetica Neue", Helvetica, Arial, var(--font-sans);
+            font-size: 0.82rem;
+            font-weight: 500;
+            color: var(--color-text-muted);
+            cursor: pointer;
+            background: none;
+            border: none;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            transition: color 0.25s ease;
+            padding: 0 0 0.35rem;
+            position: relative;
+        }
+
+        .filter-btn::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 2px;
+            background: currentColor;
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.35s var(--ease-smooth);
+        }
+
+        .filter-btn.active {
+            color: var(--color-canopy-green);
+        }
+
+        .filter-btn:hover,
+        .filter-btn:focus-visible {
+            color: var(--color-canopy-green);
+        }
+
+        .filter-btn:hover::after,
+        .filter-btn:focus-visible::after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+        /* De Grid Layout */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 1.4rem;
+        }
+
+        @media (min-width: 1380px) {
+            .product-grid {
+                grid-template-columns: repeat(4, minmax(0, 1fr));
+            }
+        }
+
+        .product-card {
+            display: flex;
+            flex-direction: column;
+            min-height: 100%;
+            cursor: pointer;
+        }
+
+        .product-card.is-hidden {
+            display: none;
+        }
+
+        .product-img-container {
+            position: relative;
+            aspect-ratio: 4 / 5;
+            border-radius: var(--radius-soft-card);
+            overflow: hidden;
+            margin-bottom: 0.95rem;
+            background: var(--color-surface-soft);
+        }
+
+        .product-img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.7s var(--ease-smooth);
+        }
+
+        .product-link {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+
+        .product-card:hover .product-img-container img,
+        .product-card:focus-within .product-img-container img {
+            transform: scale(1.03);
+        }
+
+        .product-tag {
+            position: absolute;
+            top: 0.62rem;
+            left: 0.62rem;
+            z-index: 2;
+            background: rgba(255, 255, 255, 0.92);
+            color: var(--color-text-main);
+            border: 1px solid rgba(74, 69, 62, 0.18);
+            border-radius: 999px;
+            font-size: 0.56rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            padding: 0.24rem 0.5rem;
+        }
+
+        /* De ronde plus-knop rechtsonder de foto */
+        .add-btn {
+            position: absolute;
+            bottom: 0.62rem;
+            right: 0.62rem;
+            height: 34px;
+            min-width: 34px;
+            background: rgba(255, 252, 247, 0.95);
+            backdrop-filter: blur(4px);
+            border-radius: 999px;
+            border: 1px solid rgba(38, 65, 50, 0.15);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.5s var(--ease-smooth);
+            color: var(--color-canopy-green);
+            font-family: var(--font-sans);
+            font-size: 1.1rem;
+            font-weight: 400;
+            line-height: 1;
+            z-index: 3;
+            box-shadow: 0 4px 10px rgba(18, 29, 23, 0.06);
+            padding: 0;
+            box-sizing: border-box;
+            overflow: hidden;
+        }
+
+        .add-btn::after {
+            content: 'VOEG TOE';
+            font-size: 0.65rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            max-width: 0;
+            opacity: 0;
+            white-space: nowrap;
+            transition: all 0.5s var(--ease-smooth);
+        }
+
+        .product-card:hover .add-btn,
+        .soap-product-card:hover .add-btn {
+            background: rgba(255, 255, 255, 1);
+            box-shadow: 0 6px 14px rgba(38, 65, 50, 0.1);
+        }
+
+        .product-card .add-btn:hover,
+        .soap-product-card .add-btn:hover,
+        .add-btn:hover {
+            transform: translateY(-1px);
+            background: var(--color-canopy-green);
+            border-color: var(--color-canopy-green);
+            color: var(--color-bg-light);
+            box-shadow: 0 6px 14px rgba(38, 65, 50, 0.15);
+            padding-left: 0.45rem;
+        }
+
+        .product-card .add-btn:hover::after,
+        .soap-product-card .add-btn:hover::after,
+        .add-btn:hover::after {
+            max-width: 90px;
+            opacity: 1;
+            margin-left: 0.35rem;
+            padding-right: 0.70rem;
+        }
+
+        .product-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Product Info */
+        .p-meta-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 0.68rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--color-text-muted);
+            margin-bottom: 0.3rem;
+        }
+
+        .p-meta-top span:last-child {
+            text-align: right;
+        }
+
+        .p-title {
+            font-family: var(--font-sans);
+            font-size: 1.03rem;
+            font-weight: 500;
+            color: var(--color-canopy-green);
+            line-height: 1.35;
+            margin-bottom: 0.22rem;
+        }
+
+        .p-subtitle {
+            font-size: 0.84rem;
+            line-height: 1.52;
+            color: var(--color-text-muted);
+            margin-bottom: 0.68rem;
+        }
+
+        .p-price {
+            font-family: var(--font-sans);
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: var(--color-canopy-green);
+        }
+
+        .section-products--home-shop {
+            padding: 4.75rem 5% 2.85rem;
+        }
+
+        .section-products--home-shop .product-filters {
+            max-width: 1300px;
+            margin: 0 auto 1.65rem;
+            gap: 1.15rem 1.7rem;
+            flex-wrap: wrap;
+        }
+
+        .section-products--home-shop .filter-btn {
+            font-family: var(--font-sans);
+            font-size: clamp(1rem, 1.22vw, 1.14rem);
+            font-weight: 500;
+            letter-spacing: 0;
+            text-transform: none;
+            color: var(--color-text-main);
+            padding-bottom: 0;
+            transition: color 0.22s ease;
+        }
+
+        .section-products--home-shop .filter-btn::after {
+            display: none;
+        }
+
+        .section-products--home-shop .filter-btn:hover,
+        .section-products--home-shop .filter-btn:focus-visible,
+        .section-products--home-shop .filter-btn.active {
+            color: var(--color-canopy-green);
+        }
+
+        .home-products-inner {
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        .home-product-grid {
+            gap: 1.45rem;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            align-items: start;
+        }
+
+        .home-product-grid[data-columns="3"] {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+
+        .section-products--home-shop .product-card {
+            transition: transform 0.35s var(--ease-smooth), opacity 0.25s ease;
+        }
+
+        .section-products--home-shop .product-card[data-product-id]:hover,
+        .section-products--home-shop .product-card[data-product-id]:focus-within {
+            transform: translateY(-2px);
+        }
+
+        .section-products--home-shop .product-img-container {
+            margin-bottom: 1.02rem;
+            background: linear-gradient(180deg, rgba(235, 230, 216, 0.82) 0%, rgba(223, 231, 223, 0.95) 100%);
+        }
+
+        .product-card--teaser {
+            cursor: default;
+        }
+
+        .product-img-container--teaser {
+            position: relative;
+            border: 1px solid rgba(74, 69, 62, 0.08);
+            overflow: hidden;
+        }
+
+        .product-img-container--teaser::before,
+        .product-img-container--teaser::after {
+            content: '';
+            position: absolute;
+            border-radius: 999px;
+            background: rgba(38, 65, 50, 0.08);
+        }
+
+        .product-img-container--teaser::before {
+            width: 72%;
+            height: 72%;
+            left: -12%;
+            bottom: -18%;
+        }
+
+        .product-img-container--teaser::after {
+            width: 46%;
+            height: 46%;
+            right: -8%;
+            top: 12%;
+        }
+
+        .product-teaser-art {
+            position: absolute;
+            inset: 1rem;
+            border-radius: calc(var(--radius-soft-card) - 8px);
+            border: 1px dashed rgba(38, 65, 50, 0.18);
+            background:
+                linear-gradient(135deg, rgba(255, 255, 255, 0.56), rgba(255, 255, 255, 0.12)),
+                repeating-linear-gradient(135deg,
+                    rgba(38, 65, 50, 0.045) 0,
+                    rgba(38, 65, 50, 0.045) 18px,
+                    rgba(255, 255, 255, 0.05) 18px,
+                    rgba(255, 255, 255, 0.05) 36px);
+        }
+
+        .product-info--teaser .p-meta-top {
+            justify-content: flex-start;
+        }
+
+        .product-info--teaser .p-subtitle {
+            margin-bottom: 0;
+            max-width: 28ch;
+        }
+
+        @media (max-width: 1100px) {
+
+            .home-product-grid,
+            .home-product-grid[data-columns="3"] {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 760px) {
+            .section-products--home-shop {
+                padding: 4rem 5% 2.3rem;
+            }
+
+            .section-products--home-shop .product-filters {
+                gap: 0.95rem 1.05rem;
+                margin-bottom: 1.3rem;
+            }
+
+            .section-products--home-shop .filter-btn {
+                font-size: 0.98rem;
+            }
+
+            .home-product-grid,
+            .home-product-grid[data-columns="3"] {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+
+            .section-products--home-shop .product-card,
+            .section-products--home-shop .product-img-container img {
+                transition: none;
+            }
+        }
+
+        /* --- Uitgelicht Sectie (Editorial, compacter en rustiger) --- */
+        .featured-section {
+            padding: 5.1rem 5% 4.6rem;
+            background: transparent;
+        }
+
+        .featured-container {
+            max-width: 1180px;
+            margin: 0 auto;
+        }
+
+        .featured-layout {
+            display: grid;
+            grid-template-columns: minmax(0, 1.05fr) minmax(320px, 0.85fr);
+            gap: 2.4rem;
+            align-items: center;
+        }
+
+        .featured-products {
+            position: relative;
+            width: min(100%, 628px);
+            min-height: 476px;
+            padding: 0.55rem 0.8rem 0.55rem 0.45rem;
+            background: transparent;
+            overflow: hidden;
+            z-index: 2;
+            isolation: isolate;
+        }
+
+        .featured-card {
+            display: grid;
+            grid-template-columns: minmax(92px, 104px) minmax(0, 1fr);
+            align-items: center;
+            gap: 0.82rem;
+            position: absolute;
+            top: 50%;
+            left: 0.35rem;
+            width: min(100%, 548px);
+            min-height: 0;
+            height: auto;
+            padding: 0.62rem 3.05rem 0.62rem 0.62rem;
+            background: linear-gradient(180deg, rgba(255, 253, 248, 0.985), rgba(247, 241, 232, 0.972));
+            border: 1px solid rgba(38, 65, 50, 0.085);
+            border-radius: 20px;
+            overflow: hidden;
+            transform: var(--featured-card-transform, translate3d(0, -50%, 0) scale(1));
+            transform-origin: center center;
+            opacity: var(--featured-card-opacity, 1);
+            filter: var(--featured-card-filter, none);
+            transition: transform 0.8s cubic-bezier(0.22, 0.88, 0.24, 1), opacity 0.56s ease, filter 0.56s ease, box-shadow 0.42s var(--ease-smooth), border-color 0.42s var(--ease-smooth);
+            will-change: transform, opacity, filter;
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.58);
+        }
+
+        .featured-card:hover,
+        .featured-card:focus-visible {
+            transform: var(--featured-card-transform, translate3d(0, -50%, 0) scale(1));
+            border-color: rgba(38, 65, 50, 0.18);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.58), 0 20px 34px rgba(18, 29, 23, 0.09);
+        }
+
+        .featured-card--front {
+            position: absolute;
+            --featured-card-transform: translate3d(0, -50%, 0) scale(1) rotate(0deg);
+            --featured-card-opacity: 1;
+            --featured-card-filter: none;
+            z-index: 3;
+            border-color: rgba(38, 65, 50, 0.14);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.64), 0 28px 44px rgba(18, 29, 23, 0.115), 0 8px 18px rgba(18, 29, 23, 0.05);
+        }
+
+        .featured-card--back-top {
+            --featured-card-transform: translate3d(-30px, -150%, 0) scale(0.962);
+            --featured-card-opacity: 0.76;
+            --featured-card-filter: blur(0.08px);
+            z-index: 1;
+            border-color: rgba(38, 65, 50, 0.07);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.46), 0 8px 15px rgba(18, 29, 23, 0.028);
+        }
+
+        .featured-card--back-bottom {
+            --featured-card-transform: translate3d(34px, 48%, 0) scale(0.964);
+            --featured-card-opacity: 0.78;
+            --featured-card-filter: blur(0.08px);
+            z-index: 2;
+            border-color: rgba(38, 65, 50, 0.07);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.48), 0 9px 16px rgba(18, 29, 23, 0.03);
+        }
+
+        .featured-card .product-img-container {
+            margin-bottom: 0;
+            aspect-ratio: 1 / 1;
+            min-height: 92px;
+            border-radius: 18px;
+            background: rgba(235, 228, 217, 0.72);
+            border: 1px solid rgba(38, 65, 50, 0.06);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.42);
+        }
+
+        .featured-card .product-info {
+            min-width: 0;
+            padding-right: 0.65rem;
+        }
+
+        .featured-card .p-meta-top {
+            margin-bottom: 0.22rem;
+            font-size: 0.64rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: rgba(74, 69, 62, 0.66);
+        }
+
+        .featured-card .p-title {
+            font-size: 1.04rem;
+            margin-bottom: 0.18rem;
+            letter-spacing: -0.015em;
+            color: var(--color-canopy-green);
+        }
+
+        .featured-card .p-subtitle {
+            max-width: none;
+            margin-bottom: 0.34rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            color: rgba(74, 69, 62, 0.76);
+        }
+
+        .featured-card .p-price {
+            margin-bottom: 0;
+            color: var(--color-canopy-green);
+            letter-spacing: -0.02em;
+        }
+
+        .featured-card .product-img-container>.add-btn {
+            display: none;
+        }
+
+        .featured-card>.add-btn {
+            position: absolute;
+            bottom: 0.62rem;
+            right: 0.62rem;
+            font-size: 0.98rem;
+            background: rgba(255, 252, 247, 0.94);
+            border-color: rgba(38, 65, 50, 0.18);
+            color: var(--color-canopy-green);
+            box-shadow: 0 6px 14px rgba(18, 29, 23, 0.08);
+        }
+
+        .featured-card>.add-btn:hover,
+        .featured-card>.add-btn:focus-visible {
+            background: var(--color-canopy-green);
+            color: var(--color-bg-light);
+            border-color: var(--color-canopy-green);
+            box-shadow: 0 10px 16px rgba(18, 29, 23, 0.12);
+        }
+
+        .featured-copy {
+            max-width: 500px;
+            justify-self: end;
+        }
+
+        .featured-eyebrow {
+            font-family: var(--font-sans);
+            font-size: 0.72rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            font-weight: 600;
+            color: var(--color-canopy-green);
+            margin-bottom: 0.7rem;
+            display: inline-flex;
+            align-items: center;
+            min-height: 1em;
+        }
+
+        .featured-eyebrow.is-typing-ready {
+            opacity: 0;
+            transform: translateY(8px);
+        }
+
+        .featured-eyebrow.is-typing,
+        .featured-eyebrow.is-typed {
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity 0.24s ease, transform 0.24s ease;
+        }
+
+        .featured-eyebrow.is-typing::after,
+        .featured-eyebrow.is-typed::after {
+            content: '';
+            display: inline-block;
+            width: 1px;
+            height: 0.92em;
+            margin-left: 0.24rem;
+            background: currentColor;
+            opacity: 0.78;
+        }
+
+        .featured-eyebrow.is-typing::after {
+            animation: featuredTypeCaret 0.5s steps(1) infinite;
+        }
+
+        .featured-eyebrow.is-typed::after {
+            animation: featuredTypeCaretDone 2.2s steps(1) 1;
+            animation-fill-mode: forwards;
+            opacity: 0.78;
+        }
+
+        @keyframes featuredTypeCaret {
+
+            0%,
+            49% {
+                opacity: 0.78;
+            }
+
+            50%,
+            100% {
+                opacity: 0;
+            }
+        }
+
+        @keyframes featuredTypeCaretDone {
+
+            0%,
+            28% {
+                opacity: 0.78;
+            }
+
+            29%,
+            56% {
+                opacity: 0;
+            }
+
+            57%,
+            78% {
+                opacity: 0.78;
+            }
+
+            79%,
+            100% {
+                opacity: 0;
+            }
+        }
+
+        .featured-title {
+            font-family: var(--font-serif);
+            font-size: clamp(2rem, 4.2vw, 3.5rem);
+            font-weight: 400;
+            line-height: 0.98;
+            color: var(--color-canopy-green);
+            margin-bottom: 0.95rem;
+        }
+
+        .featured-copy p {
+            font-size: 0.98rem;
+            color: var(--color-text-main);
+            margin-bottom: 0.95rem;
+        }
+
+        .featured-copy p:last-of-type {
+            margin-bottom: 1.2rem;
+        }
+
+        .featured-link {
+            display: inline-flex;
+            font-family: var(--font-sans);
+            font-size: 0.74rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--color-canopy-green);
+            position: relative;
+            padding-bottom: 0.35rem;
+            transition: color 0.35s ease;
+        }
+
+        .featured-link::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 2px;
+            background: currentColor;
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.4s var(--ease-smooth);
+        }
+
+        .featured-link:hover {
+            color: var(--color-canopy-green);
+        }
+
+        .featured-link:hover::after,
+        .featured-link:focus-visible::after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+        .featured-testimonial-section {
+            padding: 0.4rem 5% 5rem;
+            background: transparent;
+        }
+
+        .featured-testimonial-card {
+            max-width: 1180px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: minmax(240px, 320px) minmax(0, 1fr);
+            gap: clamp(2rem, 4vw, 4rem);
+            align-items: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(38, 65, 50, 0.1);
+        }
+
+        .featured-testimonial-media {
+            border-radius: 22px;
+            overflow: hidden;
+            aspect-ratio: 4 / 5;
+            background: rgba(223, 231, 223, 0.7);
+            box-shadow: 0 18px 34px rgba(18, 29, 23, 0.06);
+        }
+
+        .featured-testimonial-media img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 22%;
+        }
+
+        .featured-testimonial-copy {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 0 0 0 clamp(1.25rem, 2.4vw, 2.1rem);
+            border-left: 1px solid rgba(38, 65, 50, 0.1);
+        }
+
+        .featured-testimonial-kicker {
+            font-family: var(--font-sans);
+            font-size: 0.72rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            font-weight: 600;
+            color: var(--color-canopy-green);
+            margin-bottom: 0.9rem;
+        }
+
+        .featured-testimonial-quote {
+            position: relative;
+            margin: 0 0 1.1rem;
+            max-width: 32ch;
+            font-family: var(--font-serif);
+            font-size: clamp(1.85rem, 3vw, 2.45rem);
+            line-height: 1.02;
+            color: var(--color-canopy-green);
+        }
+
+        .featured-testimonial-quote::before {
+            content: '"';
+            position: absolute;
+            left: -0.42rem;
+            top: -0.58rem;
+            font-size: 4rem;
+            line-height: 1;
+            color: rgba(38, 65, 50, 0.12);
+        }
+
+        .featured-testimonial-text {
+            max-width: 56ch;
+            font-size: 0.96rem;
+            line-height: 1.82;
+            color: rgba(74, 69, 62, 0.84);
+            margin-bottom: 0.9rem;
+        }
+
+        .featured-testimonial-author {
+            font-family: var(--font-sans);
+            font-size: 0.72rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+            color: rgba(38, 65, 50, 0.74);
+        }
+
+        .featured-testimonial-product {
+            display: grid;
+            grid-template-columns: 110px minmax(0, 1fr);
+            gap: 0.95rem;
+            align-items: center;
+            width: min(100%, 420px);
+            margin-top: 1.25rem;
+            padding: 0.75rem;
+            border-radius: 20px;
+            background: linear-gradient(180deg, rgba(255, 252, 247, 0.92), rgba(243, 237, 228, 0.92));
+            border: 1px solid rgba(38, 65, 50, 0.1);
+        }
+
+        .featured-testimonial-product-media {
+            margin-bottom: 0;
+            aspect-ratio: 1 / 1;
+            min-height: 110px;
+            border-radius: 16px;
+        }
+
+        .featured-testimonial-product-info {
+            min-width: 0;
+        }
+
+        .featured-testimonial-product-info .p-meta-top {
+            margin-bottom: 0.28rem;
+        }
+
+        .featured-testimonial-product-info .p-title {
+            margin-bottom: 0.16rem;
+        }
+
+        .featured-testimonial-product-info .p-subtitle {
+            margin-bottom: 0.55rem;
+            max-width: 26ch;
+        }
+
+        .featured-testimonial-product-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.85rem;
+        }
+
+        .featured-testimonial-add-btn {
+            position: static;
+            right: auto;
+            bottom: auto;
+            flex-shrink: 0;
+        }
+
+        /* --- Insights Sectie (Elvou Style) --- */
+        .insights-section {
+            background: transparent;
+            padding: 8rem 5%;
+            scroll-margin-top: 7rem;
+        }
+
+        .insights-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            max-width: 1300px;
+            margin: 0 auto 3rem;
+        }
+
+        .insights-header .section-title {
+            font-size: 3.5rem;
+            margin-bottom: 0;
+            text-align: left;
+        }
+
+        .view-all-link {
+            font-family: var(--font-sans);
+            font-size: 0.8rem;
+            font-weight: 500;
+            text-transform: none;
+            /* Elvou stijl is vaak minder 'shouty' */
+            color: var(--color-canopy-green);
+            position: relative;
+            padding-bottom: 0.35rem;
+            transition: color 0.35s ease;
+        }
+
+        .view-all-link::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 2px;
+            background: currentColor;
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.4s var(--ease-smooth);
+        }
+
+        .view-all-link:hover {
+            color: var(--color-canopy-green);
+        }
+
+        .view-all-link:hover::after,
+        .view-all-link:focus-visible::after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+        .insights-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            /* Iets strakker op elkaar */
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        .insight-card {
+            position: relative;
+            display: block;
+            border-radius: var(--radius-soft-card);
+            /* Mooie afgeronde hoeken zoals in de video */
+            overflow: hidden;
+            aspect-ratio: 4 / 5;
+            /* Verticale focus */
+            cursor: pointer;
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .insight-image-wrapper {
+            width: 100%;
+            height: 100%;
+            margin-bottom: 0;
+            /* Geen marge meer nodig */
+        }
+
+        .insight-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 1s var(--ease-smooth);
+        }
+
+        /* Gradient overlay voor leesbaarheid van de tekst */
+        .insight-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 50%;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0) 100%);
+            z-index: 1;
+        }
+
+        .insight-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 2rem;
+            z-index: 2;
+            color: #fff;
+            /* Altijd wit op de donkere overlay */
+        }
+
+        .insight-tag {
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #fff;
+            /* Tag ook wit in deze stijl */
+            margin-bottom: 0.5rem;
+            opacity: 0.9;
+        }
+
+        .insight-title {
+            font-size: 1.6rem;
+            margin-bottom: 0;
+            line-height: 1.2;
+            color: #fff;
+            /* Titel wit over de foto */
+            font-family: var(--font-sans);
+            /* Iets moderner dan serif voor deze grid */
+            font-weight: 500;
+        }
+
+        .insight-card:hover .insight-img {
+            transform: scale(1.05);
+        }
+
+        /* Verberg de 'Lees artikel' link want de hele kaart is nu de link */
+        .insight-link {
+            display: none;
+        }
+
+        /* --- Reviews Marquee --- */
+        .reviews-marquee-section {
+            padding: 2.8rem 5% 4rem;
+            background: transparent;
+            border-top: none;
+            border-bottom: 1px solid rgba(38, 65, 50, 0.09);
+        }
+
+        .reviews-marquee-inner {
+            max-width: 1020px;
+            margin: 0 auto;
+        }
+
+        .reviews-marquee-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            gap: 1rem;
+            margin-bottom: 0.95rem;
+        }
+
+        .reviews-kicker {
+            font-family: var(--font-sans);
+            font-size: 0.7rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            font-weight: 600;
+            color: var(--color-canopy-green);
+            margin-bottom: 0.25rem;
+        }
+
+        .reviews-title {
+            font-size: clamp(1.7rem, 3.2vw, 2.7rem);
+            line-height: 1.1;
+            color: var(--color-canopy-green);
+        }
+
+        .reviews-hint {
+            font-family: var(--font-sans);
+            font-size: 0.7rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--color-text-muted);
+            white-space: nowrap;
+        }
+
+        .reviews-marquee {
+            overflow: hidden;
+            position: relative;
+            mask-image: linear-gradient(to right, transparent 0, black 6%, black 94%, transparent 100%);
+        }
+
+        .reviews-track {
+            display: flex;
+            align-items: stretch;
+            gap: 0.85rem;
+            width: max-content;
+            animation: reviewsScroll 56s linear infinite;
+            will-change: transform;
+        }
+
+        .reviews-marquee:hover .reviews-track,
+        .reviews-marquee:focus-within .reviews-track {
+            animation-play-state: paused;
+        }
+
+        .review-card {
+            flex: 0 0 clamp(250px, 30vw, 330px);
+            background: var(--color-card-lift);
+            border: 1px solid rgba(38, 65, 50, 0.16);
+            padding: 1rem 1rem 0.9rem;
+            border-radius: var(--radius-soft-card);
+        }
+
+        .review-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .review-author {
+            font-family: var(--font-sans);
+            font-size: 0.82rem;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            color: var(--color-canopy-green);
+        }
+
+        .review-rating {
+            font-family: var(--font-sans);
+            font-size: 0.78rem;
+            color: var(--color-canopy-green);
+            letter-spacing: 0.04em;
+        }
+
+        .review-rating .star-empty {
+            opacity: 0.35;
+        }
+
+        .review-text {
+            font-size: 0.95rem;
+            line-height: 1.55;
+            color: var(--color-text-main);
+            margin-bottom: 0.65rem;
+            min-height: 4.7em;
+        }
+
+        .review-source {
+            font-family: var(--font-sans);
+            font-size: 0.7rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--color-text-muted);
+        }
+
+        @keyframes reviewsScroll {
+            from {
+                transform: translateX(0);
+            }
+
+            to {
+                transform: translateX(-50%);
+            }
+        }
+
+        /* --- Zeepjes (Italic.com Editorial Layout met nieuwe kleuren) --- */
+        .soap-editorial-section {
+            padding: 6.8rem 5%;
+            background: transparent;
+        }
+
+        .soap-editorial-container {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            max-width: 960px;
+            margin: 0 auto;
+        }
+
+        .soap-editorial-image {
+            width: 40%;
+            flex-shrink: 0;
+            background-color: var(--color-surface-soft);
+            border-radius: var(--radius-soft-card);
+            overflow: hidden;
+        }
+
+        .soap-editorial-image img {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 4 / 5;
+            object-fit: cover;
+            display: block;
+        }
+
+        .soap-editorial-content {
+            width: 52%;
+            display: flex;
+            flex-direction: column;
+            padding-top: 1.4rem;
+        }
+
+        .soap-editorial-text {
+            margin-bottom: 2.8rem;
+            max-width: 550px;
+        }
+
+        .soap-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            min-height: 1em;
+            margin-bottom: 0.7rem;
+            font-family: var(--font-sans);
+            font-size: 0.72rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            font-weight: 600;
+            color: var(--color-canopy-green);
+        }
+
+        .soap-editorial-text h2 {
+            font-size: 2.85rem;
+            margin-bottom: 1.15rem;
+        }
+
+        .js-soap-shine-title .soap-letter {
+            display: inline-block;
+            color: var(--color-canopy-green);
+            opacity: 0.96;
+            transform: translate3d(0, 0, 0);
+        }
+
+        .js-soap-shine-title .soap-letter-space {
+            display: inline-block;
+            width: 0.42em;
+        }
+
+        .js-soap-shine-title.is-shine-active .soap-letter {
+            animation: soapLetterShine 0.86s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+            animation-delay: calc(var(--letter-index, 0) * 0.042s);
+        }
+
+        @keyframes soapLetterShine {
+            0% {
+                color: var(--color-canopy-green);
+                opacity: 0.96;
+                text-shadow: none;
+                transform: translate3d(0, 0.5px, 0);
+            }
+
+            30% {
+                color: #e3ebe2;
+                opacity: 1;
+                text-shadow: 0 0 0.35px rgba(255, 255, 255, 0.095), 0 0 0.7px rgba(255, 255, 255, 0.02);
+                transform: translate3d(0, 0, 0);
+            }
+
+            42% {
+                color: #dfe7de;
+                opacity: 1;
+                text-shadow: 0 0 0.16px rgba(255, 255, 255, 0.03);
+            }
+
+            100% {
+                color: var(--color-canopy-green);
+                opacity: 1;
+                text-shadow: none;
+                transform: translate3d(0, 0, 0);
+            }
+        }
+
+        .soap-editorial-text p {
+            font-size: 0.98rem;
+            line-height: 1.72;
+            margin-bottom: 1.55rem;
+        }
+
+        /* Linkaccent blijft nu volledig in het groene merkpalet */
+        .soap-editorial-text .shop-link {
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--color-canopy-green);
+            position: relative;
+            padding-bottom: 0.35rem;
+            transition: color 0.35s ease;
+        }
+
+        .soap-editorial-text .shop-link::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 2px;
+            background: currentColor;
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.4s var(--ease-smooth);
+        }
+
+        .soap-editorial-text .shop-link span {
+            color: currentColor;
+        }
+
+        .soap-editorial-text .shop-link:hover {
+            color: var(--color-canopy-green);
+        }
+
+        .soap-editorial-text .shop-link:hover::after,
+        .soap-editorial-text .shop-link:focus-visible::after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+        .soap-editorial-products {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .soap-product-card {
+            width: 50%;
+            display: block;
+            cursor: pointer;
+        }
+
+        .soap-product-img {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 4 / 5;
+            background-color: var(--color-surface-soft);
+            margin-bottom: 1.2rem;
+            border-radius: var(--radius-soft-card);
+            overflow: hidden;
+        }
+
+        .soap-product-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 1.5s var(--ease-smooth);
+        }
+
+        .soap-product-card:hover .soap-product-img img {
+            transform: scale(1.04);
+        }
+
+        /* Badge sluit nu aan op de hoofdkleur */
+        .soap-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--color-canopy-green);
+            color: #fff;
+            font-size: 0.6rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            padding: 5px 10px;
+            z-index: 2;
+        }
+
+        .soap-product-info {
+            text-align: left;
+        }
+
+        .soap-product-info h3 {
+            font-size: 1.4rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .soap-product-info p {
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        /* --- Boer & Bottenbouillon Sectie --- */
+        .origin-section {
+            background: transparent;
+            padding: 6.75rem 6%;
+        }
+
+        .origin-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6vw;
+            align-items: center;
+            max-width: 1080px;
+            margin: 0 auto;
+        }
+
+        .origin-story {
+            padding-right: 2rem;
+        }
+
+        .origin-story h2 {
+            font-size: 3.5rem;
+            margin-bottom: 2rem;
+            line-height: 1.1;
+        }
+
+        .origin-title {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.18em 0.28em;
+        }
+
+        .origin-title-word {
+            display: inline-block;
+            opacity: 0;
+            transform: translate3d(0, 4px, 0) scale(0.998);
+            filter: blur(0.08px);
+            transition: opacity 1s ease, transform 1.5s cubic-bezier(0.22, 0.61, 0.36, 1), filter 1.2s cubic-bezier(0.22, 0.61, 0.36, 1);
+            will-change: transform, opacity, filter;
+        }
+
+        .origin-title.is-word-revealed .origin-title-word {
+            opacity: 1;
+            transform: translate3d(0, 0, 0) scale(1);
+            filter: blur(0);
+        }
+
+        .origin-title.is-word-revealed .origin-title-word:nth-child(1) {
+            transition-delay: 0s;
+        }
+
+        .origin-title.is-word-revealed .origin-title-word:nth-child(2) {
+            transition-delay: 0.55s;
+        }
+
+        .origin-title.is-word-revealed .origin-title-word:nth-child(3) {
+            transition-delay: 1.1s;
+        }
+
+        .origin-story p {
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .origin-caption {
+            margin-top: 1rem;
+            max-width: 31rem;
+            color: var(--color-text-main);
+            font-family: var(--font-serif);
+            font-size: 1.2rem;
+            font-style: italic;
+            line-height: 1.58;
+        }
+
+        .origin-caption-copy {
+            display: block;
+        }
+
+        .origin-actions {
+            display: flex;
+            gap: 0.9rem;
+            margin-top: 1.2rem;
+        }
+
+        .btn-subtle {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--color-canopy-green);
+            color: var(--color-canopy-green);
+            padding: 0.9rem 1.5rem;
+            font-size: 0.74rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            font-weight: 600;
+            transition: background-color 0.3s var(--ease-smooth), border-color 0.3s var(--ease-smooth), color 0.3s var(--ease-smooth);
+        }
+
+        .btn-subtle:hover,
+        .btn-subtle:focus-visible {
+            background: var(--color-green-wash);
+            border-color: var(--color-canopy-green);
+            color: var(--color-canopy-green);
+        }
+
+        .origin-story-button {
+            padding: 0.82rem 1.28rem;
+            font-size: 0.71rem;
+        }
+
+        .origin-inline-link {
+            display: inline-flex;
+            align-items: center;
+            margin-top: 0.55rem;
+            color: var(--color-canopy-green);
+            font-size: 0.96rem;
+            font-weight: 600;
+            font-style: normal;
+            position: relative;
+            padding-bottom: 0.14rem;
+        }
+
+        .origin-inline-link::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 2px;
+            background: currentColor;
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.35s var(--ease-smooth);
+        }
+
+        .origin-inline-link:hover::after,
+        .origin-inline-link:focus-visible::after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+        .origin-images {
+            position: relative;
+        }
+
+        .origin-img-main {
+            width: 100%;
+            display: block;
+            aspect-ratio: auto;
+            height: auto;
+            border-radius: var(--radius-soft-card);
+        }
+
+        .origin-product {
+            display: none !important;
+        }
+
+        .origin-section {
+            background:
+                radial-gradient(72% 90% at 100% 0%, rgba(255, 255, 255, 0.065) 0%, rgba(255, 255, 255, 0) 58%),
+                radial-gradient(55% 80% at 0% 100%, rgba(242, 223, 170, 0.045) 0%, rgba(242, 223, 170, 0) 64%),
+                var(--color-canopy-green);
+            color: rgba(247, 241, 231, 0.8);
+            padding: 7rem 6%;
+        }
+
+        .origin-section .origin-container {
+            grid-template-columns: minmax(0, 1.08fr) minmax(320px, 0.92fr);
+            gap: clamp(3.5rem, 7vw, 7rem);
+            max-width: 1280px;
+        }
+
+        .origin-section .origin-story {
+            order: 2;
+            padding: 0 0 0 clamp(0rem, 2vw, 2rem);
+        }
+
+        .origin-section .origin-images {
+            order: 1;
+        }
+
+        .origin-section .origin-title,
+        .origin-section .origin-caption,
+        .origin-section .origin-inline-link {
+            color: #f7f1e7;
+        }
+
+        .origin-section .origin-story p {
+            color: rgba(247, 241, 231, 0.78);
+        }
+
+        .origin-section .origin-img-main {
+            aspect-ratio: 4 / 3;
+            object-fit: cover;
+            border-radius: 0;
+        }
+
+        .origin-section .origin-story-button {
+            border-color: rgba(247, 241, 231, 0.72);
+            color: #f7f1e7;
+        }
+
+        .origin-section .origin-story-button:hover,
+        .origin-section .origin-story-button:focus-visible {
+            background: #f7f1e7;
+            border-color: #f7f1e7;
+            color: var(--color-canopy-green);
+        }
+
+        @media (max-width: 900px) {
+            .origin-section .origin-container {
+                grid-template-columns: 1fr;
+            }
+
+            .origin-section .origin-story {
+                order: 1;
+                padding-left: 0;
+            }
+
+            .origin-section .origin-images {
+                order: 2;
+            }
+        }
+
+        .soap-grid-section {
+            padding: 4.9rem 5% 4.2rem;
+            background: transparent;
+        }
+
+        .soap-grid-inner {
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        .soap-grid-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            gap: 1.2rem;
+            margin-bottom: 1.7rem;
+        }
+
+        .soap-grid-copy {
+            max-width: 41rem;
+        }
+
+        .soap-grid-kicker {
+            font-family: var(--font-sans);
+            font-size: 0.72rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            font-weight: 600;
+            color: var(--color-canopy-green);
+            margin-bottom: 0.7rem;
+        }
+
+        .soap-grid-title {
+            font-size: clamp(2rem, 4vw, 3rem);
+            line-height: 1.02;
+            margin-bottom: 0.75rem;
+        }
+
+        .soap-grid-text {
+            font-size: 0.98rem;
+            line-height: 1.72;
+            color: var(--color-text-main);
+        }
+
+        .soap-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 1.5rem;
+        }
+
+        .soap-grid-card {
+            cursor: pointer;
+        }
+
+        .soap-grid-card .product-img-container {
+            border-radius: 0 !important;
+            background: #f6f5f3 !important;
+            margin-bottom: 0.95rem;
+        }
+
+        .soap-grid-card .sc-info {
+            margin-top: 0.75rem !important;
+        }
+
+        /* --- Responsive Design --- */
+        @media (max-width: 1040px) {
+            .product-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 640px) {
+            .product-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 900px) {
+            .featured-layout {
+                grid-template-columns: 1fr;
+                gap: 1.8rem;
+            }
+
+            .featured-copy {
+                order: 1;
+            }
+
+            .featured-products {
+                order: 2;
+                min-height: 438px;
+                max-width: 586px;
+                margin: 0 auto;
+                padding: 0.55rem 0.55rem 0.55rem 0.2rem;
+            }
+
+            .featured-copy {
+                justify-self: start;
+                max-width: 100%;
+            }
+
+            .featured-title {
+                font-size: 2.35rem;
+            }
+
+            .featured-testimonial-card {
+                grid-template-columns: 1fr;
+                gap: 1.4rem;
+                padding-top: 1.6rem;
+            }
+
+            .featured-testimonial-media {
+                max-width: 420px;
+                width: 100%;
+                margin: 0 auto;
+            }
+
+            .featured-testimonial-copy {
+                padding: 1.35rem 0 0.2rem;
+                border-left: none;
+                border-top: 1px solid rgba(38, 65, 50, 0.1);
+            }
+
+            .featured-testimonial-product {
+                width: min(100%, 440px);
+            }
+
+            .featured-testimonial-quote {
+                max-width: none;
+            }
+
+            .reviews-marquee-head {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .reviews-hint {
+                white-space: normal;
+            }
+
+            .review-card {
+                flex-basis: 240px;
+            }
+
+            .insights-grid,
+            .origin-container {
+                grid-template-columns: 1fr;
+                gap: 4rem;
+            }
+
+            .soap-editorial-container {
+                flex-direction: column;
+                gap: 3rem;
+            }
+
+            .soap-editorial-image,
+            .soap-editorial-content {
+                width: 100%;
+            }
+
+            .soap-editorial-products {
+                flex-direction: column;
+            }
+
+            .soap-product-card {
+                width: 100%;
+            }
+
+            .hero-title {
+                font-size: 3.2rem;
+            }
+
+            .hero-subtitle {
+                max-width: 30rem;
+                font-size: 0.95rem;
+            }
+
+            .hero-actions {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+
+            .origin-caption {
+                max-width: none;
+                margin-top: 0.85rem;
+                font-size: 1.08rem;
+            }
+
+            .soap-grid-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .soap-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .origin-actions {
+                flex-wrap: wrap;
+            }
+
+            .origin-img-main {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 760px) {
+            .nav-links {
+                display: none;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .featured-section {
+                padding: 4rem 5% 3.7rem;
+            }
+
+            .featured-testimonial-section {
+                padding: 0.3rem 5% 4rem;
+            }
+
+            .featured-testimonial-card {
+                gap: 1.15rem;
+                padding-top: 1.35rem;
+            }
+
+            .featured-testimonial-media {
+                max-width: none;
+                border-radius: 18px;
+            }
+
+            .featured-testimonial-quote {
+                font-size: 1.9rem;
+            }
+
+            .featured-testimonial-text {
+                font-size: 0.94rem;
+            }
+
+            .soap-grid-section {
+                padding: 4rem 5% 3.7rem;
+            }
+
+            .soap-grid {
+                grid-template-columns: 1fr;
+                gap: 1.25rem;
+            }
+
+            .soap-grid-title {
+                font-size: 2.2rem;
+            }
+
+            .featured-testimonial-product {
+                grid-template-columns: 94px minmax(0, 1fr);
+                gap: 0.8rem;
+                padding: 0.68rem;
+            }
+
+            .featured-testimonial-product-media {
+                min-height: 94px;
+            }
+
+            .featured-testimonial-product-footer {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .featured-products {
+                min-height: 278px;
+                max-width: 100%;
+                padding: 0.5rem 3rem 0.5rem 0;
+            }
+
+            .featured-card {
+                grid-template-columns: 90px minmax(0, 1fr);
+                gap: 0.72rem;
+                padding: 0.62rem 2.9rem 0.62rem 0.62rem;
+                width: min(100%, 338px);
+            }
+
+            .featured-card .product-img-container {
+                min-height: 88px;
+            }
+
+            .featured-card .p-subtitle {
+                max-width: none;
+            }
+
+            .featured-card--front {
+                --featured-card-transform: translate3d(0, -50%, 0) scale(1);
+            }
+
+            .featured-card--back-top {
+                opacity: 0;
+                pointer-events: none;
+            }
+
+            .featured-card--back-bottom {
+                --featured-card-transform: translate3d(10px, 10%, 0) scale(0.98);
+                --featured-card-opacity: 0.8;
+                --featured-card-filter: blur(0.08px);
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+
+            .js-soap-shine-title .soap-letter,
+            .js-soap-shine-title.is-shine-active .soap-letter {
+                animation: none;
+                color: var(--color-canopy-green);
+                opacity: 1;
+                text-shadow: none;
+                transform: none;
+            }
+        }
+
+        /* --- Beekeeper / Honey Full-Width Banner --- */
+        .banner-honey {
+            position: relative;
+            width: 100%;
+            height: clamp(500px, 75vh, 800px);
+            overflow: hidden;
+            background-color: var(--color-surface-soft);
+        }
+
+        .banner-honey-img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 1;
+        }
+
+        .banner-honey-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(38, 65, 50, 0.6) 0%, rgba(38, 65, 50, 0) 60%);
+            z-index: 2;
+        }
+
+        .banner-honey-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 4rem 5%;
+            z-index: 3;
+            color: #fff;
+        }
+
+        .banner-honey-title {
+            font-family: var(--font-serif);
+            color: #fff8ed;
+            font-size: clamp(3rem, 6vw, 4.5rem);
+            font-style: italic;
+            font-weight: 300;
+            margin-bottom: 0.5rem;
+            line-height: 1.05;
+        }
+
+        .banner-honey-subtitle {
+            font-family: var(--font-sans);
+            font-size: clamp(1rem, 1.5vw, 1.15rem);
+            font-weight: 400;
+            margin-bottom: 1.8rem;
+            max-width: 600px;
+            color: rgba(255, 255, 255, 0.95);
+        }
+
+        .banner-honey-link {
+            display: inline-flex;
+            align-items: center;
+            font-family: var(--font-sans);
+            font-size: 0.82rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: #fff;
+            padding-bottom: 4px;
+            position: relative;
+        }
+
+        .banner-honey-link::before {
+            content: "↳";
+            margin-right: 0.5rem;
+            font-size: 1.25em;
+            line-height: 1;
+            font-weight: 400;
+        }
+
+        .banner-honey-link::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 1.5px;
+            background: currentColor;
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.4s var(--ease-smooth);
+        }
+
+        .banner-honey-link:hover::after,
+        .banner-honey-link:focus-visible::after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+        .banner-honey-link.is-scroll-highlight::after {
+            animation: banner-link-highlight 1.3s var(--ease-smooth) 1;
+        }
+
+        @keyframes banner-link-highlight {
+            0% {
+                transform: scaleX(0);
+                transform-origin: left;
+            }
+            45%, 65% {
+                transform: scaleX(1);
+                transform-origin: left;
+            }
+            66% {
+                transform-origin: right;
+            }
+            100% {
+                transform: scaleX(0);
+                transform-origin: right;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .banner-honey-link.is-scroll-highlight::after {
+                animation: none;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="assets/footer.css">
+</head>
+
+<body id="top" class="is-at-top">
+
+    <!-- Header / Navigatie -->
+    <header class="home-header">
+        <a href="#top" class="logo js-scroll-top" aria-label="Scroll terug naar boven">Mallow.</a>
+        <nav class="nav-links">
+            <a href="shop.html">Shop</a>
+            <a href="onze-visie.html">Onze Visie</a>
+            <a href="insights.html">Insights</a>
+            <a href="cart.html" class="cart-link" aria-label="Winkelwagen">
+                <span class="cart-glyph">&#128722;</span>
+                <span class="cart-count js-cart-count">0</span>
+            </a>
+        </nav>
+    </header>
+
+    <div class="top-announcement">Gratis verzending vanaf &euro;50</div>
+
+    <!-- Hero Sectie -->
+    <section class="hero">
+        <div class="hero-media-wrap">
+            <img class="hero-media"
+                src="hero%20foto%20vervanger.png"
+                alt="Natuurlijke huidverzorging van Mallow">
+        </div>
+        <div class="hero-overlay"></div>
+
+        <div class="hero-content">
+            <span class="hero-eyebrow">Dagelijkse huidverzorging</span>
+            <h1 class="hero-title">Je dagelijkse huidproducten,<br>zonder troep.</h1>
+            <p class="hero-subtitle">Voor mensen die genoeg hebben van grote bedrijven met giftige producten. Wij zetten
+                een stap terug naar de basis.</p>
+            <div class="hero-actions">
+                <a href="shop.html" class="btn-solid">Shop de basics</a>
+                <a href="onze-visie.html" class="btn-text">Lees ons verhaal</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trust / USP Balk -->
+    <div class="usp-bar">
+        <div class="usp-marquee" aria-label="Belangrijke claims">
+            <div class="usp-track">
+                <div class="usp-group">
+                    <span class="usp-item">100% natuurlijk</span>
+                    <span class="usp-divider" aria-hidden="true"></span>
+                    <span class="usp-item">Handgemaakt</span>
+                    <span class="usp-divider" aria-hidden="true"></span>
+                    <span class="usp-item">Lokale ingredienten</span>
+                </div>
+                <div class="usp-group" aria-hidden="true">
+                    <span class="usp-item">100% natuurlijk</span>
+                    <span class="usp-divider" aria-hidden="true"></span>
+                    <span class="usp-item">Handgemaakt</span>
+                    <span class="usp-divider" aria-hidden="true"></span>
+                    <span class="usp-item">Lokale ingredienten</span>
+                </div>
+                <div class="usp-group" aria-hidden="true">
+                    <span class="usp-item">100% natuurlijk</span>
+                    <span class="usp-divider" aria-hidden="true"></span>
+                    <span class="usp-item">Handgemaakt</span>
+                    <span class="usp-divider" aria-hidden="true"></span>
+                    <span class="usp-item">Lokale ingredienten</span>
+                </div>
+                <div class="usp-group" aria-hidden="true">
+                    <span class="usp-item">100% natuurlijk</span>
+                    <span class="usp-divider" aria-hidden="true"></span>
+                    <span class="usp-item">Handgemaakt</span>
+                    <span class="usp-divider" aria-hidden="true"></span>
+                    <span class="usp-item">Lokale ingredienten</span>
+                </div>
+            </div>
+        </div>
+        <div class="usp-container">
+            <span class="usp-item"><span class="usp-icon">&#10003;</span> Handgemaakt in NL</span>
+            <span class="usp-item"><span class="usp-icon">&#10003;</span> 100% Natuurlijk</span>
+            <span class="usp-item"><span class="usp-icon">&#10003;</span> Gratis verzending v.a. €50</span>
+        </div>
+    </div>
+
+
+    <!-- Onze Cremes -->
+    <section class="category-showcase">
+        <div class="showcase-container">
+            <div class="showcase-scroll-shell">
+                <button class="showcase-arrow showcase-arrow--prev js-showcase-prev" type="button"
+                    aria-label="Vorige creme">&#8592;</button>
+                <div class="showcase-grid js-showcase-grid">
+
+                    <div class="showcase-item product-card" data-product-id="mallow-day">
+                        <div class="product-img-container"
+                            style="aspect-ratio: 4/5; overflow: hidden; position: relative;">
+                            <span class="product-tag product-tag--highlight"
+                                style="top: 0.8rem; left: 0.8rem;">Bestseller</span>
+                            <a href="/producten/mallow-day" class="product-link"
+                                style="display:block;height:100%;">
+                                <img src="https://lokagrootvoorst.nl/wp-content/uploads/2025/12/Honingbalsem-768x1024.jpg"
+                                    alt="Mallow Day" style="width:100%;height:100%;object-fit:cover;">
+                            </a>
+                            <button class="add-btn js-add-home-cart" type="button"
+                                aria-label="Voeg Mallow Day toe">+</button>
+                        </div>
+                        <div class="product-info sc-info">
+                            <div class="sc-meta-row">
+                                <span class="sc-volume">50 ML</span>
+                                <span class="sc-stars">&#9733;&#9733;&#9733;&#9733;&#9733; <span
+                                        class="sc-rating-num">4.8</span></span>
+                            </div>
+                            <h3 class="sc-name">Mallow Day</h3>
+                            <p class="sc-desc">Dagelijkse bescherming voor de droge huid.</p>
+                            <p class="sc-price">&euro;22,95</p>
+                        </div>
+                    </div>
+
+                    <div class="showcase-item product-card" data-product-id="mallow-night">
+                        <div class="product-img-container"
+                            style="aspect-ratio: 4/5; overflow: hidden; position: relative;">
+                            <a href="/producten/mallow-night" class="product-link"
+                                style="display:block;height:100%;">
+                                <img src="https://lokagrootvoorst.nl/wp-content/uploads/2025/12/Castorbalsem-768x1024.jpg"
+                                    alt="Mallow Night" style="width:100%;height:100%;object-fit:cover;">
+                            </a>
+                            <button class="add-btn js-add-home-cart" type="button"
+                                aria-label="Voeg Mallow Night toe">+</button>
+                        </div>
+                        <div class="product-info sc-info">
+                            <div class="sc-meta-row">
+                                <span class="sc-volume">50 ML</span>
+                                <span class="sc-stars">&#9733;&#9733;&#9733;&#9733;&#9733; <span
+                                        class="sc-rating-num">4.9</span></span>
+                            </div>
+                            <h3 class="sc-name">Mallow Night</h3>
+                            <p class="sc-desc">Herstellende nachtcr&egrave;me voor diepe voeding.</p>
+                            <p class="sc-price">&euro;22,95</p>
+                        </div>
+                    </div>
+
+                    <div class="showcase-item product-card" data-product-id="mallow-rescue">
+                        <div class="product-img-container"
+                            style="aspect-ratio: 4/5; overflow: hidden; position: relative;">
+                            <a href="/producten/mallow-rescue" class="product-link"
+                                style="display:block;height:100%;">
+                                <img src="https://lokagrootvoorst.nl/wp-content/uploads/2025/12/zonnebloembalsem-768x1024.jpg"
+                                    alt="Mallow Rescue" style="width:100%;height:100%;object-fit:cover;">
+                            </a>
+                            <button class="add-btn js-add-home-cart" type="button"
+                                aria-label="Voeg Mallow Rescue toe">+</button>
+                        </div>
+                        <div class="product-info sc-info">
+                            <div class="sc-meta-row">
+                                <span class="sc-volume">50 ML</span>
+                                <span class="sc-stars">&#9733;&#9733;&#9733;&#9733;&#9733; <span
+                                        class="sc-rating-num">4.9</span></span>
+                            </div>
+                            <h3 class="sc-name">Mallow Rescue</h3>
+                            <p class="sc-desc">Intensieve verzorging voor geirriteerde huid.</p>
+                            <p class="sc-price">&euro;24,95</p>
+                        </div>
+                    </div>
+
+                    <div class="showcase-item product-card" data-product-id="mallow-calm">
+                        <div class="product-img-container"
+                            style="aspect-ratio: 4/5; overflow: hidden; position: relative;">
+                            <span class="product-tag" style="top: 0.8rem; left: 0.8rem;">In de review</span>
+                            <a href="/producten/mallow-calm" class="product-link"
+                                style="display:block;height:100%;">
+                                <img src="https://lokagrootvoorst.nl/wp-content/uploads/2025/12/Honingbalsem-768x1024.jpg"
+                                    alt="Vlierbloesemcreme"
+                                    style="width:100%;height:100%;object-fit:cover; filter: hue-rotate(8deg) saturate(0.92);">
+                            </a>
+                            <button class="add-btn js-add-home-cart" type="button"
+                                aria-label="Voeg Vlierbloesemcreme toe">+</button>
+                        </div>
+                        <div class="product-info sc-info">
+                            <div class="sc-meta-row">
+                                <span class="sc-volume">50 ML</span>
+                                <span class="sc-stars">&#9733;&#9733;&#9733;&#9733;&#9733; <span
+                                        class="sc-rating-num">4.8</span></span>
+                            </div>
+                            <h3 class="sc-name">Vlierbloesemcreme</h3>
+                            <p class="sc-desc">Zachte creme voor een gevoelige huid die snel behoefte heeft aan rust.
+                            </p>
+                            <p class="sc-price">&euro;23,95</p>
+                        </div>
+                    </div>
+
+                    <div class="showcase-item product-card" data-product-id="mallow-body">
+                        <div class="product-img-container"
+                            style="aspect-ratio: 4/5; overflow: hidden; position: relative;">
+                            <a href="/producten/mallow-night" class="product-link"
+                                style="display:block;height:100%;">
+                                <img src="https://lokagrootvoorst.nl/wp-content/uploads/2025/12/Castorbalsem-768x1024.jpg"
+                                    alt="Mallow Full Body Boter"
+                                    style="width:100%;height:100%;object-fit:cover; filter: hue-rotate(-20deg);">
+                            </a>
+                            <button class="add-btn js-add-home-cart" type="button"
+                                aria-label="Voeg Mallow Full Body Boter toe">+</button>
+                        </div>
+                        <div class="product-info sc-info">
+                            <div class="sc-meta-row">
+                                <span class="sc-volume">150 ML</span>
+                                <span class="sc-stars">&#9733;&#9733;&#9733;&#9733;&#9733; <span
+                                        class="sc-rating-num">4.8</span></span>
+                            </div>
+                            <h3 class="sc-name">Mallow Full Body Boter</h3>
+                            <p class="sc-desc">Rijke lichaamsboter voor zacht en gevoede huid.</p>
+                            <p class="sc-price">&euro;29,95</p>
+                        </div>
+                    </div>
+
+                </div>
+                <button class="showcase-arrow showcase-arrow--next js-showcase-next" type="button"
+                    aria-label="Volgende creme">&#8594;</button>
+            </div>
+            <div class="showcase-actions">
+                <a href="shop.html" class="featured-link showcase-link">Bekijk al onze producten</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Honing / Bijenwas Banner -->
+    <section class="banner-honey">
+        <!-- Lokale foto weergave in plaats van de niet-werkende link -->
+        <img class="banner-honey-img" src="FOTO%20honing%20balsem%20banner%20concept.png" alt="Honingbalsem van Mallow">
+        <div class="banner-honey-overlay"></div>
+        <div class="banner-honey-content">
+            <h2 class="banner-honey-title">huidzorg die je<br>lichaam herkent</h2>
+            <p class="banner-honey-subtitle">Producten gevuld met pure ingrediënten<br>die ons lichaam al eeuwen voeden.</p>
+            <a href="shop.html" class="banner-honey-link">Shop de collectie</a>
+        </div>
+    </section>
+
+    <!-- Onze Zepen -->
+    <section class="category-showcase soap-showcase">
+        <div class="showcase-container">
+
+            <div class="showcase-scroll-shell">
+                <button class="showcase-arrow showcase-arrow--prev js-soap-showcase-prev" type="button"
+                    aria-label="Vorige zeep">&#8592;</button>
+                <div class="showcase-grid js-soap-showcase-grid">
+                    <div class="showcase-item product-card" data-product-id="zuiverende-zeep">
+                        <div class="product-img-container" style="aspect-ratio: 4/5; overflow: hidden; position: relative;">
+                            <span class="product-tag product-tag--highlight"
+                                style="top: 0.8rem; left: 0.8rem;">BEST-SELLER</span>
+                            <a href="/producten/zuiverende-zeep" class="product-link"
+                                style="display:block;height:100%;">
+                                <img src="https://images.unsplash.com/photo-1600857544200-b2f666a9a2ec?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                                    alt="Zuiverende Zeep" style="width:100%;height:100%;object-fit:cover;">
+                            </a>
+                            <button class="add-btn js-add-home-cart" type="button"
+                                aria-label="Voeg Zuiverende Zeep toe">+</button>
+                        </div>
+                        <div class="product-info sc-info">
+                            <div class="sc-meta-row">
+                                <span class="sc-volume">120 G</span>
+                                <span class="sc-stars">&#9733;&#9733;&#9733;&#9733;&#9733; <span
+                                        class="sc-rating-num">4.9</span></span>
+                            </div>
+                            <h3 class="sc-name">Zuiverende Zeep</h3>
+                            <p class="sc-desc">Milde reiniging met rijk schuim voor dagelijks gebruik.</p>
+                            <p class="sc-price">&euro;10,95</p>
+                        </div>
+                    </div>
+
+                    <div class="showcase-item product-card" data-product-id="Havermout-zeep">
+                        <div class="product-img-container" style="aspect-ratio: 4/5; overflow: hidden; position: relative;">
+                            <a href="/producten/havermout-zeep" class="product-link"
+                                style="display:block;height:100%;">
+                                <img src="havermout%20zeep.png"
+                                    alt="Verzachtende Zeep" style="width:100%;height:100%;object-fit:cover;">
+                            </a>
+                            <button class="add-btn js-add-home-cart" type="button"
+                                aria-label="Voeg Havermout Zeep toe">+</button>
+                        </div>
+                        <div class="product-info sc-info">
+                            <div class="sc-meta-row">
+                                <span class="sc-volume">120 G</span>
+                                <span class="sc-stars">&#9733;&#9733;&#9733;&#9733;&#9733; <span
+                                        class="sc-rating-num">4.8</span></span>
+                            </div>
+                            <h3 class="sc-name">Havermout Zeep</h3>
+                            <p class="sc-desc">Zachte verzorging doordrenkt met kalmerende kruiden.</p>
+                            <p class="sc-price">&euro;11,95</p>
+                        </div>
+                    </div>
+
+                    <div class="showcase-item product-card" data-product-id="honing-zeep">
+                        <div class="product-img-container" style="aspect-ratio: 4/5; overflow: hidden; position: relative;">
+                            <a href="/producten/honing-zeep" class="product-link"
+                                style="display:block;height:100%;">
+                                <img src="honing%20zeep.png" alt="Herstellende Zeep"
+                                    style="width:100%;height:100%;object-fit:cover;">
+                            </a>
+                            <button class="add-btn js-add-home-cart" type="button"
+                                aria-label="Voeg Honing Zeep toe">+</button>
+                        </div>
+                        <div class="product-info sc-info">
+                            <div class="sc-meta-row">
+                                <span class="sc-volume">120 G</span>
+                                <span class="sc-stars">&#9733;&#9733;&#9733;&#9733;&#9733; <span
+                                        class="sc-rating-num">4.8</span></span>
+                            </div>
+                            <h3 class="sc-name">Honing Zeep</h3>
+                            <p class="sc-desc">Verzorgende reiniging met lokale honing.</p>
+                            <p class="sc-price">&euro;11,95</p>
+                        </div>
+                    </div>
+
+                    <div class="showcase-item product-card" data-product-id="citroenmelisse-zeep">
+                        <div class="product-img-container" style="aspect-ratio: 4/5; overflow: hidden; position: relative;">
+                            <span class="product-tag product-tag--highlight"
+                                style="top: 0.8rem; left: 0.8rem;">SEIZOENSSPECIAL</span>
+                            <a href="/producten/citroenmelisse-zeep" class="product-link"
+                                style="display:block;height:100%;">
+                                <img src="citroenmelisse%20zeep.png" alt="Citroenmelisse Zeep"
+                                    style="width:100%;height:100%;object-fit:cover;">
+                            </a>
+                        </div>
+                        <div class="product-info sc-info">
+                            <div class="sc-meta-row">
+                                <span class="sc-volume">SEIZOENSSPECIAL</span>
+                            </div>
+                            <h3 class="sc-name">Citroenmelisse Zeep</h3>
+                            <p class="sc-desc">Tijdelijke zeep met citroenmelisse. Details volgen binnenkort.</p>
+                            <p class="sc-price">Binnenkort</p>
+                        </div>
+                    </div>                </div>
+                <button class="showcase-arrow showcase-arrow--next js-soap-showcase-next" type="button"
+                    aria-label="Volgende zeep">&#8594;</button>
+            </div>
+            <div class="showcase-actions">
+                <a href="shop.html#zeepjes" class="featured-link showcase-link">Bekijk alle zepen</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lokaal. Eerlijk. Puur. -->
+    <section class="origin-section" id="onze-visie">
+        <div class="origin-container">
+            <div class="origin-story">
+                <h2 class="origin-title js-origin-title"><span class="origin-title-word">Lokaal.</span> <span
+                        class="origin-title-word">Eerlijk.</span> <span class="origin-title-word">Puur.</span></h2>
+                <p>Bij Mallow willen we dat je rustig kunt zien wie we zijn en waar we voor staan. Geen anoniem merk met
+                    mooie woorden, maar een familiegedreven verhaal dat draait om aandacht, herkomst en producten die
+                    dicht bij de oorsprong blijven.</p>
+                <p>We kiezen bewust voor ingredienten en relaties die we willen kunnen herleiden. Van de mensen om ons
+                    heen tot de manier waarop iets wordt gemaakt: het moet eerlijk voelen, eenvoudig blijven en passen
+                    bij hoe wij zelf willen leven.</p>
+                <div class="origin-actions">
+                    <a href="onze-visie.html" class="btn-subtle origin-story-button">Ons verhaal</a>
+                </div>
+            </div>
+
+            <div class="origin-images">
+                <img src="https://hetreestdal.nl/wp/wp-content/uploads/2016/10/Mooie-relatie-tussen-boer-en-zijn-vee2.jpg"
+                    alt="Onze oprichters en de boer" class="origin-img-main">
+
+                <a href="/producten/premium-bottenbouillon" class="origin-product">
+                    <img src="https://www.clovermeadowsbeef.com/wp-content/uploads/2022/11/beef-bone-broth.png"
+                        alt="Premium Bottenbouillon">
+                    <h3 class="product-title" style="font-size:1.6rem;">Premium Bottenbouillon</h3>
+                    <p class="product-price">€7,50</p>
+                </a>
+                <p class="origin-caption"><span class="origin-caption-copy">Benieuwd waar onze ingredienten vandaan
+                        komen?</span><a href="onze-samenwerkingen.html" class="origin-inline-link">Bekijk hier onze
+                        samenwerkingen</a></p>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Bestsellers -->
+    <section class="featured-section" hidden>
+        <div class="featured-container">
+            <div class="featured-layout">
+                <div class="featured-products"></div>
+                <div class="featured-copy">
+                    <p class="featured-eyebrow">Bestsellers</p>
+                    <h2 class="featured-title">De basis van natuurlijke self-care</h2>
+                    <p>3 essentials voor de perfecte avondroutine. Reinigende zeep, een zachte voedende
+                        gezichtscr&egrave;me en een pure kaars die je tot rust laat komen aan het einde van een
+                        vermoeiende dag.</p>
+                    <p>Ook samen verkrijgbaar met 15% korting.</p>
+                    <a href="shop.html" class="featured-link">Naar de shop</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Uitgelicht -->
+    <section class="featured-section" hidden>
+        <div class="featured-container">
+            <div class="featured-layout">
+                <div class="featured-products">
+                    <div class="product-card featured-card featured-card--front" data-product-id="mallow-day"
+                        data-category="cremes">
+                        <div class="product-img-container">
+                            <span class="product-tag">Onze Favoriet</span>
+                            <a class="product-link" href="/producten/mallow-day">
+                                <img src="https://lokagrootvoorst.nl/wp-content/uploads/2025/12/Honingbalsem-768x1024.jpg"
+                                    alt="Mallow Day">
+                            </a>
+                            <button class="add-btn js-add-home-cart" type="button"
+                                aria-label="Voeg Mallow Day toe aan winkelwagen">+</button>
+                        </div>
+                        <div class="product-info">
+                            <div class="p-meta-top">
+                                <span>50 ML</span>
+                                <span>4,8</span>
+                            </div>
+                            <h3 class="p-title">Mallow Day</h3>
+                            <p class="p-subtitle">Zachte, voedende balsem voor dagelijkse verzorging.</p>
+                            <p class="p-price">â‚¬22,95</p>
+                        </div>
+                        <button class="add-btn js-add-home-cart" type="button"
+                            aria-label="Voeg Mallow Day toe aan winkelwagen">+</button>
+                        <button class="add-btn js-add-home-cart" type="button"
+                            aria-label="Voeg Mallow Day toe aan winkelwagen">+</button>
+                    </div>
+
+                    <div class="product-card featured-card featured-card--rear-left"
+                        data-product-id="premium-bottenbouillon" data-category="voeding">
+                        <div class="product-img-container">
+                            <a class="product-link" href="/producten/premium-bottenbouillon">
+                                <img src="https://www.clovermeadowsbeef.com/wp-content/uploads/2022/11/beef-bone-broth.png"
+                                    alt="Premium Bottenbouillon">
+                            </a>
+                            <button class="add-btn js-add-home-cart" type="button"
+                                aria-label="Voeg Premium Bottenbouillon toe aan winkelwagen">+</button>
+                        </div>
+                        <div class="product-info">
+                            <div class="p-meta-top">
+                                <span>500 ML</span>
+                                <span>GRASS-FED</span>
+                            </div>
+                            <h3 class="p-title">Premium Bottenbouillon</h3>
+                            <p class="p-subtitle">Onze favoriet voor herstel en voeding van binnenuit.</p>
+                            <p class="p-price">â‚¬7,50</p>
+                        </div>
+                        <button class="add-btn js-add-home-cart" type="button"
+                            aria-label="Voeg Premium Bottenbouillon toe aan winkelwagen">+</button>
+                        <button class="add-btn js-add-home-cart" type="button"
+                            aria-label="Voeg Premium Bottenbouillon toe aan winkelwagen">+</button>
+                    </div>
+                    <div class="product-card featured-card featured-card--rear-right" data-product-id="zuiverende-zeep"
+                        data-category="zeepjes">
+                        <div class="product-img-container">
+                            <span class="product-tag">Schuimt zacht</span>
+                            <a class="product-link" href="/producten/zuiverende-zeep">
+                                <img src="https://images.unsplash.com/photo-1600857544200-b2f666a9a2ec?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                                    alt="Zuiverende Zeep">
+                            </a>
+                            <button class="add-btn js-add-home-cart" type="button"
+                                aria-label="Voeg Zuiverende Zeep toe aan winkelwagen">+</button>
+                        </div>
+                        <div class="product-info">
+                            <div class="p-meta-top">
+                                <span>120 G</span>
+                                <span>4,9</span>
+                            </div>
+                            <h3 class="p-title">Zuiverende Zeep</h3>
+                            <p class="p-subtitle">Milde reiniging met rijk schuim voor dagelijks gebruik.</p>
+                            <p class="p-price">â‚¬10,95</p>
+                        </div>
+                    </div>
+                    <div class="product-card featured-card featured-card--rear-right" data-product-id="zuiverende-zeep"
+                        data-category="zeepjes">
+                        <div class="product-img-container">
+                            <span class="product-tag">Schuimt zacht</span>
+                            <a class="product-link" href="/producten/zuiverende-zeep">
+                                <img src="https://images.unsplash.com/photo-1600857544200-b2f666a9a2ec?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                                    alt="Zuiverende Zeep">
+                            </a>
+                            <button class="add-btn js-add-home-cart" type="button"
+                                aria-label="Voeg Zuiverende Zeep toe aan winkelwagen">+</button>
+                        </div>
+                        <div class="product-info">
+                            <div class="p-meta-top">
+                                <span>120 G</span>
+                                <span>4,9</span>
+                            </div>
+                            <h3 class="p-title">Zuiverende Zeep</h3>
+                            <p class="p-subtitle">Milde reiniging met rijk schuim voor dagelijks gebruik.</p>
+                            <p class="p-price">â‚¬10,95</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="featured-copy">
+                    <p class="featured-eyebrow">Uitgelicht</p>
+                    <h2 class="featured-title">Verzorging van buiten, voeding van binnen.</h2>
+                    <p>We houden de selectie liever klein en helder. Producten die direct logisch voelen in je ritme,
+                        zonder ruis of overdaad.</p>
+                    <p>Deze drie laten die lijn goed zien: een balsem die dagelijks rust brengt op de huid, een zeep die
+                        zacht reinigt, en een bouillon die voedt vanuit de basis.</p>
+                    <a href="shop.html" class="featured-link">Naar de shop</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Uitgelicht -->
+    <section class="featured-section" hidden>
+        <div class="featured-container">
+            <div class="featured-layout">
+                <div class="featured-products">
+                    <div class="product-card featured-card featured-card--front" data-product-id="mallow-day"
+                        data-category="cremes">
+                        <div class="product-img-container">
+                            <span class="product-tag">Onze Favoriet</span>
+                            <a class="product-link" href="/producten/mallow-day">
+                                <img src="https://lokagrootvoorst.nl/wp-content/uploads/2025/12/Honingbalsem-768x1024.jpg"
+                                    alt="Mallow Day">
+                            </a>
+                            <button class="add-btn js-add-home-cart" type="button"
+                                aria-label="Voeg Mallow Day toe aan winkelwagen">+</button>
+                        </div>
+                        <div class="product-info">
+                            <div class="p-meta-top">
+                                <span>50 ML</span>
+                                <span>4,8</span>
+                            </div>
+                            <h3 class="p-title">Mallow Day</h3>
+                            <p class="p-subtitle">Zachte, voedende balsem voor dagelijkse verzorging.</p>
+                            <p class="p-price">€22,95</p>
+                        </div>
+                    </div>
+
+                    <div class="product-card featured-card featured-card--rear-left"
+                        data-product-id="premium-bottenbouillon" data-category="voeding">
+                        <div class="product-img-container">
+                            <a class="product-link" href="/producten/premium-bottenbouillon">
+                                <img src="https://www.clovermeadowsbeef.com/wp-content/uploads/2022/11/beef-bone-broth.png"
+                                    alt="Premium Bottenbouillon">
+                            </a>
+                            <button class="add-btn js-add-home-cart" type="button"
+                                aria-label="Voeg Premium Bottenbouillon toe aan winkelwagen">+</button>
+                        </div>
+                        <div class="product-info">
+                            <div class="p-meta-top">
+                                <span>500 ML</span>
+                                <span>GRASS-FED</span>
+                            </div>
+                            <h3 class="p-title">Premium Bottenbouillon</h3>
+                            <p class="p-subtitle">Onze favoriet voor herstel en voeding van binnenuit.</p>
+                            <p class="p-price">€7,50</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="featured-copy">
+                    <p class="featured-eyebrow">Uitgelicht</p>
+                    <h2 class="featured-title">De basis van natuurlijke self-care</h2>
+                    <p>3 essentials voor de perfecte avondroutine. Reinigende zeep, een zachte voedende gezichtscrème en
+                        een pure kaars die je tot rust laat komen aan het einde van een vermoeiende dag.</p>
+                    <p>Ook samen verkrijgbaar met 15% korting.</p>
+                    <a href="shop.html" class="featured-link">Naar de shop</a>
+                </div>
+            </div>
+        </div>
+    </section><!-- Google Reviews -->
+    <section class="reviews-marquee-section" id="reviews" hidden>
+        <div class="reviews-marquee-inner">
+            <div class="reviews-marquee-head">
+                <div>
+                    <p class="reviews-kicker">Reviews</p>
+                    <h2 class="reviews-title">Wat klanten op Google zeggen</h2>
+                </div>
+                <p class="reviews-hint">Beweeg met je muis over een review om te pauzeren.</p>
+            </div>
+            <div class="reviews-marquee js-reviews-marquee">
+                <div class="reviews-track js-reviews-track"></div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Insights -->
+    <section class="insights-section" id="insights">
+        <div class="insights-header">
+            <h2 class="section-title">Insights</h2>
+            <a href="insights.html" class="view-all-link">Bekijk alle insights &#8627;</a>
+        </div>
+
+        <div class="insights-grid">
+            <a class="insight-card" href="insights-huidverzorging.html">
+                <div class="insight-image-wrapper">
+                    <img src="https://thepowergroup.com/wp-content/uploads/2019/09/The-Power-Group-Skincare-Laura-Mercier.jpg"
+                        alt="Huidverzorging producten" class="insight-img">
+                </div>
+                <div class="insight-content">
+                    <span class="insight-tag">Educatie</span>
+                    <h3 class="insight-title">Welke stoffen in gewone huidverzorging kunnen je huid onrustig maken?</h3>
+                </div>
+            </a>
+
+            <a class="insight-card" href="insights-rundervet.html">
+                <div class="insight-image-wrapper">
+                    <img src="https://thefoodfarm.com.au/cdn/shop/files/FullSizeRender_1200x.jpg?v=1715871865"
+                        alt="Rijke huidbalsem" class="insight-img">
+                </div>
+                <div class="insight-content">
+                    <span class="insight-tag">Ingredienten</span>
+                    <h3 class="insight-title">Waarom kiezen sommige mensen voor rundervet op de huid?</h3>
+                </div>
+            </a>
+
+            <a class="insight-card" href="insights-eczeem.html">
+                <div class="insight-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1500595046743-cd271d694d30?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                        alt="Boerderij" class="insight-img">
+                </div>
+                <div class="insight-content">
+                    <span class="insight-tag">Eczeem</span>
+                    <h3 class="insight-title">Een rustigere huid bij eczeem: drie zachte gewoontes</h3>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <footer class="site-footer">
+        <div class="site-footer-inner">
+            <div class="site-footer-top">
+                <div class="site-footer-brand">
+                    <a href="index.html" class="site-footer-logo">mallow.</a>
+                    <p class="site-footer-tagline">Eerlijke verzorging en voeding uit lokale bron, gemaakt voor een
+                        rustige huid en een sterk lichaam.</p>
+                </div>
+                <div class="site-footer-social">
+                    <a href="https://instagram.com/mallow" target="_blank" rel="noopener noreferrer"
+                        aria-label="Volg Mallow op Instagram">Instagram</a>
+                </div>
+            </div>
+            <div class="site-footer-trust" aria-label="Vertrouwenssignalen">
+                <p class="site-footer-trust-item">Veilig betalen met Stripe</p>
+                <p class="site-footer-trust-item">Gratis verzending vanaf €50</p>
+                <p class="site-footer-trust-item">Lokaal geproduceerd in Nederland</p>
+            </div>
+            <div class="site-footer-grid">
+                <section class="site-footer-col" aria-label="Navigatie">
+                    <h2>Navigatie</h2>
+                    <div class="site-footer-links">
+                        <a href="index.html">Home</a>
+                        <a href="shop.html">Winkel</a>
+                        <a href="shop.html">Producten</a>
+                        <a href="cart.html">Winkelwagen</a>
+                        <a href="onze-visie.html">Onze Visie</a>
+                        <a href="insights.html">Insights</a>
+                    </div>
+                </section>
+                <section class="site-footer-col" aria-label="Klantenservice">
+                    <h2>Klantenservice</h2>
+                    <div class="site-footer-links">
+                        <a href="mailto:hello@mallow.nl">Contact</a>
+                        <a href="insights.html">Alle insights</a>
+                        <a href="verzending.html">Verzending</a>
+                        <a href="retouren.html">Retouren</a>
+                    </div>
+                </section>
+                <section class="site-footer-col" aria-label="Juridisch">
+                    <h2>Juridisch</h2>
+                    <div class="site-footer-links">
+                        <a href="privacy.html">Privacybeleid</a>
+                        <a href="voorwaarden.html">Algemene voorwaarden</a>
+                        <a href="retouren.html">Retourbeleid</a>
+                        <a href="verzending.html">Verzendbeleid</a>
+                    </div>
+                </section>
+                <section class="site-footer-col" aria-label="Contactgegevens">
+                    <h2>Contact</h2>
+                    <div class="site-footer-contact">
+                        <p>E-mail: <a href="mailto:hello@mallow.nl">hello@mallow.nl</a></p>
+                        <p>Telefoon: <a href="tel:+31612345678">+31 6 12 34 56 78</a></p>
+                        <p>Boerderijweg 12, 7241 AA Lochem, Nederland</p>
+                    </div>
+                </section>
+            </div>
+            <div class="site-footer-bottom">
+                <p class="site-footer-copy">&copy; 2026 mallow. Alle rechten voorbehouden.</p>
+                <div class="site-footer-meta">
+                    <a href="privacy.html">Privacy</a>
+                    <a href="voorwaarden.html">Voorwaarden</a>
+                    <a href="verzending.html">Verzending</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="products.js"></script>
+    <script src="cart.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var productList = (window.MallowCatalog && Array.isArray(window.MallowCatalog.list))
+                ? window.MallowCatalog.list
+                : Object.keys(window.MallowProducts || {}).map(function (key) {
+                    return window.MallowProducts[key];
+                });
+            var homeProductsSection = document.querySelector('.section-products--home-shop');
+            var homeProductGrid = document.getElementById('home-product-grid');
+            var productFilterButtons = homeProductsSection ? homeProductsSection.querySelectorAll('.filter-btn') : [];
+            var showcaseGrid = document.querySelector('.js-showcase-grid');
+            var showcasePrevButton = document.querySelector('.js-showcase-prev');
+            var showcaseNextButton = document.querySelector('.js-showcase-next');
+            var topAnnouncement = document.querySelector('.top-announcement');
+            var scrollTopLink = document.querySelector('.js-scroll-top');
+
+            function syncTopAnnouncementState() {
+                document.body.classList.toggle('is-at-top', window.scrollY <= 4);
+            }
+
+            if (topAnnouncement) {
+                window.addEventListener('scroll', syncTopAnnouncementState, { passive: true });
+                syncTopAnnouncementState();
+            }
+
+            if (scrollTopLink) {
+                scrollTopLink.addEventListener('click', function (event) {
+                    event.preventDefault();
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                });
+            }
+
+            function getShowcaseStep() {
+                if (!showcaseGrid) {
+                    return 0;
+                }
+
+                var firstItem = showcaseGrid.querySelector('.showcase-item');
+                if (!firstItem) {
+                    return showcaseGrid.clientWidth;
+                }
+
+                var gridStyles = window.getComputedStyle(showcaseGrid);
+                var gap = parseFloat(gridStyles.columnGap || gridStyles.gap || '0') || 0;
+                return firstItem.getBoundingClientRect().width + gap;
+            }
+
+            function updateShowcaseControls() {
+                if (!showcaseGrid || !showcasePrevButton || !showcaseNextButton) {
+                    return;
+                }
+
+                var maxScrollLeft = Math.max(0, showcaseGrid.scrollWidth - showcaseGrid.clientWidth);
+                var currentScrollLeft = showcaseGrid.scrollLeft;
+                showcasePrevButton.disabled = currentScrollLeft <= 4;
+                showcaseNextButton.disabled = currentScrollLeft >= maxScrollLeft - 4;
+            }
+
+            var showcaseWheelAccumulator = 0;
+            var showcaseWheelResetTimer = null;
+
+            function resetShowcaseWheelAccumulator() {
+                showcaseWheelAccumulator = 0;
+                if (showcaseWheelResetTimer) {
+                    window.clearTimeout(showcaseWheelResetTimer);
+                    showcaseWheelResetTimer = null;
+                }
+            }
+
+            function queueShowcaseWheelReset() {
+                if (showcaseWheelResetTimer) {
+                    window.clearTimeout(showcaseWheelResetTimer);
+                }
+                showcaseWheelResetTimer = window.setTimeout(resetShowcaseWheelAccumulator, 110);
+            }
+
+            function scrollShowcase(direction) {
+                if (!showcaseGrid) {
+                    return;
+                }
+
+                var step = getShowcaseStep();
+                var maxScrollLeft = Math.max(0, showcaseGrid.scrollWidth - showcaseGrid.clientWidth);
+                var nextScrollLeft = showcaseGrid.scrollLeft + (direction * step);
+
+                if (direction > 0 && nextScrollLeft > maxScrollLeft - 4) {
+                    nextScrollLeft = maxScrollLeft;
+                }
+
+                if (direction < 0 && nextScrollLeft < 4) {
+                    nextScrollLeft = 0;
+                }
+
+                showcaseGrid.scrollTo({
+                    left: nextScrollLeft,
+                    behavior: 'smooth'
+                });
+            }
+
+            if (showcaseGrid && showcasePrevButton && showcaseNextButton) {
+                showcasePrevButton.addEventListener('click', function () {
+                    scrollShowcase(-1);
+                });
+
+                showcaseNextButton.addEventListener('click', function () {
+                    scrollShowcase(1);
+                });
+
+                showcaseGrid.addEventListener('scroll', updateShowcaseControls, { passive: true });
+                showcaseGrid.addEventListener('wheel', function (event) {
+                    var maxScrollLeft = Math.max(0, showcaseGrid.scrollWidth - showcaseGrid.clientWidth);
+                    var absX = Math.abs(event.deltaX);
+                    var absY = Math.abs(event.deltaY);
+
+                    if (maxScrollLeft <= 4 || (absX === 0 && absY === 0)) {
+                        return;
+                    }
+
+                    if (absY > absX && absX > 0) {
+                        event.preventDefault();
+                        window.scrollBy({
+                            top: event.deltaY,
+                            behavior: 'auto'
+                        });
+                        resetShowcaseWheelAccumulator();
+                        return;
+                    }
+
+                    if (absX > 0) {
+                        event.preventDefault();
+                        queueShowcaseWheelReset();
+                        showcaseWheelAccumulator += event.deltaX;
+
+                        if (Math.abs(showcaseWheelAccumulator) < 26) {
+                            return;
+                        }
+
+                        var nextScrollLeft = showcaseGrid.scrollLeft + (showcaseWheelAccumulator * 0.82);
+                        nextScrollLeft = Math.max(0, Math.min(maxScrollLeft, nextScrollLeft));
+                        showcaseGrid.scrollTo({
+                            left: nextScrollLeft,
+                            behavior: 'auto'
+                        });
+                        resetShowcaseWheelAccumulator();
+                        updateShowcaseControls();
+                    }
+                }, { passive: false });
+                window.addEventListener('resize', updateShowcaseControls);
+                updateShowcaseControls();
+            }
+
+            var visibleFeaturedProducts = document.querySelector('.featured-section:not([hidden]) .featured-products');
+            if (false && visibleFeaturedProducts && !visibleFeaturedProducts.querySelector('[data-product-id="zuiverende-zeep"]')) {
+                var featuredSoapCard = document.createElement('div');
+                featuredSoapCard.className = 'product-card featured-card featured-card--rear-right';
+                featuredSoapCard.setAttribute('data-product-id', 'zuiverende-zeep');
+                featuredSoapCard.setAttribute('data-category', 'zeepjes');
+                featuredSoapCard.innerHTML = '' +
+                    '<div class="product-img-container">' +
+                    '<span class="product-tag">Schuimt zacht</span>' +
+                    '<a class="product-link" href="/producten/zuiverende-zeep">' +
+                    '<img src="https://images.unsplash.com/photo-1600857544200-b2f666a9a2ec?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Zuiverende Zeep">' +
+                    '</a>' +
+                    '<button class="add-btn js-add-home-cart" type="button" aria-label="Voeg Zuiverende Zeep toe aan winkelwagen">+</button>' +
+                    '</div>' +
+                    '<div class="product-info">' +
+                    '<div class="p-meta-top">' +
+                    '<span>120 G</span>' +
+                    '<span>4,9</span>' +
+                    '</div>' +
+                    '<h3 class="p-title">Zuiverende Zeep</h3>' +
+                    '<p class="p-subtitle">Milde reiniging met rijk schuim voor dagelijks gebruik.</p>' +
+                    '<p class="p-price">€10,95</p>' +
+                    '</div>';
+                visibleFeaturedProducts.appendChild(featuredSoapCard);
+            }
+
+            if (false && visibleFeaturedProducts) {
+                var visibleFeaturedCards = visibleFeaturedProducts.querySelectorAll('.featured-card');
+                visibleFeaturedCards.forEach(function (card) {
+                    card.classList.remove('featured-card--front', 'featured-card--rear-left', 'featured-card--rear-right');
+                });
+
+                if (visibleFeaturedCards[0]) {
+                    visibleFeaturedCards[0].classList.add('featured-card--front');
+                }
+                if (visibleFeaturedCards[1]) {
+                    visibleFeaturedCards[1].classList.add('featured-card--rear-left');
+                }
+                if (visibleFeaturedCards[2]) {
+                    visibleFeaturedCards[2].classList.add('featured-card--rear-right');
+                }
+            }
+
+            var featuredProductIds = ['mallow-day', 'premium-bottenbouillon', 'zuiverende-zeep'];
+            var featuredCards = [];
+            var featuredFrontIndex = 0;
+            var featuredAutoRotateTimer = null;
+            var featuredAutoRotateDelay = 3000;
+            var featuredPrefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+            function escapeFeaturedHtml(input) {
+                return String(input || '')
+                    .replace(/&/g, '&amp;')
+                    .replace(/</g, '&lt;')
+                    .replace(/>/g, '&gt;')
+                    .replace(/"/g, '&quot;')
+                    .replace(/'/g, '&#39;');
+            }
+
+            function formatFeaturedPrice(value) {
+                var amount = Number(value) || 0;
+                return '€' + amount.toFixed(2).replace('.', ',');
+            }
+
+            function getFeaturedProduct(id) {
+                if (window.MallowCatalog && typeof window.MallowCatalog.find === 'function') {
+                    return window.MallowCatalog.find(id);
+                }
+
+                return productList.find(function (product) {
+                    return product && product.id === id;
+                }) || null;
+            }
+
+            function formatRatingToStars(ratingValue) {
+                if (!Number.isFinite(ratingValue) || ratingValue <= 0) return '';
+                return '<span style="color: #D4AF37; font-size: 0.9em; letter-spacing: 0.1em;">&#9733;&#9733;&#9733;&#9733;&#9733;</span>';
+            }
+
+            function getFeaturedMeta(product) {
+                var rating = Number(product && product.ratingValue);
+                if (Number.isFinite(rating) && rating > 0) {
+                    return formatRatingToStars(rating);
+                }
+
+                return escapeFeaturedHtml(String((product && product.badge) || ''));
+            }
+
+            function buildFeaturedCard(product) {
+                var badge = product && product.id === 'mallow-day'
+                    ? 'Onze Favoriet'
+                    : product && product.id === 'zuiverende-zeep'
+                        ? 'Schuimt zacht'
+                        : '';
+
+                var badgeClass = (badge === 'Onze Favoriet' || badge === 'Bestseller') ? 'product-tag product-tag--highlight' : 'product-tag';
+
+                return '' +
+                    '<div class="product-card featured-card" data-product-id="' + escapeFeaturedHtml(product.id) + '" data-category="' + escapeFeaturedHtml(product.category) + '" data-product-name="' + escapeFeaturedHtml(product.name) + '" data-product-price="' + escapeFeaturedHtml(String(product.price || 0)) + '" data-product-image="' + escapeFeaturedHtml(product.image || '') + '">' +
+                    '<div class="product-img-container">' +
+                    (badge ? '<span class="' + badgeClass + '">' + escapeFeaturedHtml(badge) + '</span>' : '') +
+                    '<a class="product-link" href="/producten/' + encodeURIComponent(String(product.slug || product.id).toLowerCase()) + '">' +
+                    '<img src="' + escapeFeaturedHtml(product.image || '') + '" alt="' + escapeFeaturedHtml(product.name || 'Product') + '">' +
+                    '</a>' +
+                    '<button class="add-btn js-add-home-cart" type="button" aria-label="Voeg ' + escapeFeaturedHtml(product.name || 'product') + ' toe aan winkelwagen">+</button>' +
+                    '</div>' +
+                    '<div class="product-info">' +
+                    '<div class="p-meta-top"><span>' + escapeFeaturedHtml(product.volume || '') + '</span><span>' + getFeaturedMeta(product) + '</span></div>' +
+                    '<h3 class="p-title">' + escapeFeaturedHtml(product.name || 'Product') + '</h3>' +
+                    '<p class="p-subtitle">' + escapeFeaturedHtml(product.subtitle || '') + '</p>' +
+                    '<p class="p-price">' + formatFeaturedPrice(product.price) + '</p>' +
+                    '</div>' +
+                    '</div>';
+            }
+
+            function applyFeaturedRoles() {
+                if (!featuredCards.length) {
+                    return;
+                }
+
+                var total = featuredCards.length;
+                var topIndex = (featuredFrontIndex - 1 + total) % total;
+                var bottomIndex = (featuredFrontIndex + 1) % total;
+                var isCompactFeaturedView = window.matchMedia && window.matchMedia('(max-width: 640px)').matches;
+
+                featuredCards.forEach(function (card, index) {
+                    var productName = card.getAttribute('data-product-name') || 'product';
+                    card.classList.remove('featured-card--front', 'featured-card--back-top', 'featured-card--back-bottom');
+                    card.style.cursor = 'pointer';
+                    card.setAttribute('tabindex', '0');
+                    card.setAttribute('aria-hidden', 'false');
+
+                    if (index === featuredFrontIndex) {
+                        card.classList.add('featured-card--front');
+                        card.setAttribute('role', 'link');
+                        card.setAttribute('aria-label', 'Bekijk ' + productName);
+                        card.setAttribute('data-featured-action', 'open');
+                    } else if (index === topIndex) {
+                        card.classList.add('featured-card--back-top');
+                        card.setAttribute('role', 'button');
+                        card.setAttribute('aria-label', 'Breng ' + productName + ' naar voren');
+                        card.setAttribute('data-featured-action', 'rotate-up');
+                        if (isCompactFeaturedView) {
+                            card.setAttribute('tabindex', '-1');
+                            card.setAttribute('aria-hidden', 'true');
+                        }
+                    } else if (index === bottomIndex) {
+                        card.classList.add('featured-card--back-bottom');
+                        card.setAttribute('role', 'button');
+                        card.setAttribute('aria-label', 'Breng ' + productName + ' naar voren');
+                        card.setAttribute('data-featured-action', 'rotate-down');
+                    }
+                });
+            }
+
+            function rotateFeatured(direction) {
+                if (!featuredCards.length) {
+                    return;
+                }
+
+                if (direction === 'up') {
+                    featuredFrontIndex = (featuredFrontIndex - 1 + featuredCards.length) % featuredCards.length;
+                } else {
+                    featuredFrontIndex = (featuredFrontIndex + 1) % featuredCards.length;
+                }
+
+                applyFeaturedRoles();
+            }
+
+            function stopFeaturedAutoplay() {
+                if (featuredAutoRotateTimer) {
+                    window.clearTimeout(featuredAutoRotateTimer);
+                    featuredAutoRotateTimer = null;
+                }
+            }
+
+            function scheduleFeaturedAutoplay() {
+                stopFeaturedAutoplay();
+
+                if (featuredPrefersReducedMotion || !visibleFeaturedProducts || featuredCards.length < 2) {
+                    return;
+                }
+
+                featuredAutoRotateTimer = window.setTimeout(function () {
+                    rotateFeatured('up');
+                    scheduleFeaturedAutoplay();
+                }, featuredAutoRotateDelay);
+            }
+
+            if (visibleFeaturedProducts) {
+                var featuredProducts = featuredProductIds.map(getFeaturedProduct).filter(Boolean);
+
+                if (featuredProducts.length) {
+                    visibleFeaturedProducts.innerHTML = featuredProducts.map(buildFeaturedCard).join('');
+                    /* visibleFeaturedProducts.innerHTML =
+                        '<div class="featured-controls" aria-label="Wissel uitgelichte producten">' +
+                            '<button class="featured-switch featured-switch--up js-featured-switch" type="button" data-direction="up" aria-label="Vorige uitgelichte product">↑</button>' +
+                            '<button class="featured-switch featured-switch--down js-featured-switch" type="button" data-direction="down" aria-label="Volgende uitgelichte product">↓</button>' +
+                        '</div>' +
+                        featuredProducts.map(buildFeaturedCard).join('');
+
+                    */
+                    featuredCards = Array.from(visibleFeaturedProducts.querySelectorAll('.featured-card'));
+                    visibleFeaturedProducts.addEventListener('mouseenter', stopFeaturedAutoplay);
+                    visibleFeaturedProducts.addEventListener('mouseleave', scheduleFeaturedAutoplay);
+                    visibleFeaturedProducts.addEventListener('focusin', stopFeaturedAutoplay);
+                    visibleFeaturedProducts.addEventListener('focusout', function () {
+                        window.setTimeout(function () {
+                            if (!visibleFeaturedProducts.contains(document.activeElement)) {
+                                scheduleFeaturedAutoplay();
+                            }
+                        }, 0);
+                    });
+                }
+            }
+
+            document.querySelectorAll('.featured-section:not([hidden]) .featured-card').forEach(function (card) {
+                var addButton = card.querySelector('.product-img-container > .add-btn');
+                if (addButton) {
+                    card.appendChild(addButton);
+                }
+            });
+
+            applyFeaturedRoles();
+            scheduleFeaturedAutoplay();
+
+            var featuredEyebrow = document.querySelector('.featured-section:not([hidden]) .featured-eyebrow');
+            if (featuredEyebrow) {
+                var featuredEyebrowText = featuredEyebrow.textContent || '';
+                var featuredEyebrowAnimated = false;
+
+                featuredEyebrow.setAttribute('data-full-text', featuredEyebrowText);
+                featuredEyebrow.textContent = '';
+                featuredEyebrow.classList.add('is-typing-ready');
+
+                function playFeaturedEyebrowTyping() {
+                    if (featuredEyebrowAnimated) {
+                        return;
+                    }
+
+                    featuredEyebrowAnimated = true;
+                    featuredEyebrow.classList.remove('is-typing-ready');
+                    featuredEyebrow.classList.add('is-typing');
+
+                    var index = 0;
+                    var typingSpeed = 58;
+
+                    function typeNextChar() {
+                        index += 1;
+                        featuredEyebrow.textContent = featuredEyebrowText.slice(0, index);
+
+                        if (index < featuredEyebrowText.length) {
+                            window.setTimeout(typeNextChar, typingSpeed);
+                            return;
+                        }
+
+                        window.setTimeout(function () {
+                            featuredEyebrow.classList.remove('is-typing');
+                            featuredEyebrow.classList.add('is-typed');
+                        }, 90);
+                    }
+
+                    window.setTimeout(typeNextChar, 80);
+                }
+
+                if ('IntersectionObserver' in window) {
+                    var featuredEyebrowObserver = new IntersectionObserver(function (entries, observer) {
+                        entries.forEach(function (entry) {
+                            if (!entry.isIntersecting) {
+                                return;
+                            }
+
+                            playFeaturedEyebrowTyping();
+                            observer.disconnect();
+                        });
+                    }, {
+                        threshold: 0.45
+                    });
+
+                    featuredEyebrowObserver.observe(featuredEyebrow);
+                } else {
+                    playFeaturedEyebrowTyping();
+                }
+            }
+
+            var originTitle = document.querySelector('.js-origin-title');
+            if (originTitle) {
+                function revealOriginTitle() {
+                    originTitle.classList.add('is-word-revealed');
+                }
+
+                if ('IntersectionObserver' in window) {
+                    var originTitleObserver = new IntersectionObserver(function (entries, observer) {
+                        entries.forEach(function (entry) {
+                            if (!entry.isIntersecting) {
+                                return;
+                            }
+
+                            revealOriginTitle();
+                            observer.disconnect();
+                        });
+                    }, {
+                        threshold: 0.5
+                    });
+
+                    originTitleObserver.observe(originTitle);
+                } else {
+                    revealOriginTitle();
+                }
+            }
+
+            var soapShineTitle = document.querySelector('.js-soap-shine-title');
+            if (soapShineTitle) {
+                var soapShineText = soapShineTitle.textContent || '';
+                var soapPrefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+                if (soapShineText) {
+                    soapShineTitle.setAttribute('aria-label', soapShineText.trim());
+                    soapShineTitle.textContent = '';
+
+                    Array.from(soapShineText).forEach(function (character, index) {
+                        if (character === ' ') {
+                            var space = document.createElement('span');
+                            space.className = 'soap-letter-space';
+                            space.setAttribute('aria-hidden', 'true');
+                            space.innerHTML = '&nbsp;';
+                            soapShineTitle.appendChild(space);
+                            return;
+                        }
+
+                        var span = document.createElement('span');
+                        span.className = 'soap-letter';
+                        span.textContent = character;
+                        span.setAttribute('aria-hidden', 'true');
+                        span.style.setProperty('--letter-index', index);
+                        soapShineTitle.appendChild(span);
+                    });
+                }
+
+                function playSoapShine() {
+                    soapShineTitle.classList.add('is-shine-active');
+                }
+
+                if (!('IntersectionObserver' in window) || soapPrefersReducedMotion) {
+                    playSoapShine();
+                } else {
+                    var soapShineObserver = new IntersectionObserver(function (entries, observer) {
+                        entries.forEach(function (entry) {
+                            if (!entry.isIntersecting) {
+                                return;
+                            }
+
+                            playSoapShine();
+                            observer.disconnect();
+                        });
+                    }, {
+                        threshold: 0.52
+                    });
+
+                    soapShineObserver.observe(soapShineTitle);
+                }
+            }
+
+            function escapeHtmlCard(input) {
+                return String(input || '')
+                    .replace(/&/g, '&amp;')
+                    .replace(/</g, '&lt;')
+                    .replace(/>/g, '&gt;')
+                    .replace(/"/g, '&quot;')
+                    .replace(/'/g, '&#39;');
+            }
+
+            function formatPrice(value) {
+                var amount = Number(value) || 0;
+                return '€' + amount.toFixed(2).replace('.', ',');
+            }
+
+            function formatRatingToStars(ratingValue) {
+                if (!Number.isFinite(ratingValue) || ratingValue <= 0) return '';
+                return '<span style="color: #D4AF37; font-size: 0.9em; letter-spacing: 0.1em;">&#9733;&#9733;&#9733;&#9733;&#9733;</span>';
+            }
+
+            function formatMetaRight(product) {
+                var rating = Number(product && product.ratingValue);
+                if (Number.isFinite(rating) && rating > 0) {
+                    return formatRatingToStars(rating);
+                }
+                return escapeHtmlCard(String((product && product.badge) || ''));
+            }
+
+            function formatHomePrice(value) {
+                var amount = Number(value) || 0;
+                return '\u20AC' + amount.toFixed(2).replace('.', ',');
+            }
+
+            function findCatalogProduct(id) {
+                if (!id) {
+                    return null;
+                }
+
+                if (window.MallowCatalog && typeof window.MallowCatalog.find === 'function') {
+                    return window.MallowCatalog.find(id);
+                }
+
+                return productList.find(function (product) {
+                    return product && product.id === id;
+                }) || null;
+            }
+
+            var homeProductConfig = {
+                balsems: [
+                    { type: 'product', id: 'mallow-day' },
+                    { type: 'product', id: 'mallow-night' },
+                    { type: 'product', id: 'mallow-rescue' },
+                    { type: 'product', id: 'mallow-calm' }
+                ],
+                zeepjes: [
+                    { type: 'product', id: 'zuiverende-zeep' },
+                    { type: 'product', id: 'Havermout-zeep' },
+                    { type: 'product', id: 'honing-zeep' },
+                    { type: 'teaser', kicker: 'Binnenkort', title: 'Nieuwe zeep', text: 'Nog een ambachtelijke bar zit in de pijplijn.' }
+                ],
+                overig: [
+                    { type: 'product', id: 'premium-bottenbouillon' },
+                    { type: 'product', id: 'tallow-kaars' },
+                    { type: 'teaser', kicker: 'Binnenkort', title: 'Nieuwe toevoeging', text: 'Een rustige aanvulling op de collectie is onderweg.' }
+                ]
+            };
+
+            function renderHomeProductCard(product) {
+                if (!product) {
+                    return '';
+                }
+
+                var badgeClass = (product.badge === 'Onze Favoriet' || product.badge === 'Best-Seller') ? 'product-tag product-tag--highlight' : 'product-tag';
+                return '' +
+                    '<article class="product-card home-grid-product-card" data-category="' + escapeHtmlCard(product.category) + '" data-product-id="' + escapeHtmlCard(product.id) + '" data-product-name="' + escapeHtmlCard(product.name) + '" data-product-price="' + escapeHtmlCard(String(product.price)) + '" data-product-image="' + escapeHtmlCard(product.image || '') + '" role="link" tabindex="0">' +
+                    '<div class="product-img-container">' +
+                    (product.badge ? '<span class="' + badgeClass + '">' + escapeHtmlCard(product.badge) + '</span>' : '') +
+                    '<a class="product-link" href="/producten/' + encodeURIComponent(String(product.slug || product.id).toLowerCase()) + '">' +
+                    '<img src="' + escapeHtmlCard(product.image || '') + '" alt="' + escapeHtmlCard(product.name || 'Product') + '">' +
+                    '</a>' +
+                    '<button class="add-btn js-add-home-cart" type="button" aria-label="Voeg ' + escapeHtmlCard(product.name || 'product') + ' toe aan winkelwagen">+</button>' +
+                    '</div>' +
+                    '<div class="product-info">' +
+                    '<div class="p-meta-top"><span>' + escapeHtmlCard(product.volume || '') + '</span><span>' + formatMetaRight(product) + '</span></div>' +
+                    '<h3 class="p-title">' + escapeHtmlCard(product.name || 'Product') + '</h3>' +
+                    '<p class="p-subtitle">' + escapeHtmlCard(product.subtitle || '') + '</p>' +
+                    '<p class="p-price">' + formatHomePrice(product.price) + '</p>' +
+                    '</div>' +
+                    '</article>';
+            }
+
+            function renderHomeTeaserCard(item) {
+                if (!item) {
+                    return '';
+                }
+
+                return '' +
+                    '<article class="product-card product-card--teaser home-grid-product-card">' +
+                    '<div class="product-img-container product-img-container--teaser" aria-hidden="true">' +
+                    '<div class="product-teaser-art"></div>' +
+                    '</div>' +
+                    '<div class="product-info product-info--teaser">' +
+                    '<div class="p-meta-top"><span>' + escapeHtmlCard(item.kicker || '') + '</span></div>' +
+                    '<h3 class="p-title">' + escapeHtmlCard(item.title || '') + '</h3>' +
+                    '<p class="p-subtitle">' + escapeHtmlCard(item.text || '') + '</p>' +
+                    '</div>' +
+                    '</article>';
+            }
+
+            function buildHomeGridState(filter) {
+                var selectedFilter = homeProductConfig[filter] ? filter : 'balsems';
+                var items = homeProductConfig[selectedFilter] || [];
+                var markup = items.map(function (item) {
+                    if (!item) {
+                        return '';
+                    }
+
+                    if (item.type === 'teaser') {
+                        return renderHomeTeaserCard(item);
+                    }
+
+                    return renderHomeProductCard(findCatalogProduct(item.id));
+                }).filter(Boolean);
+
+                return {
+                    filter: selectedFilter,
+                    columns: markup.length,
+                    markup: markup.join('')
+                };
+            }
+
+            function renderProducts(filter) {
+                if (!homeProductGrid) {
+                    return;
+                }
+
+                var gridState = buildHomeGridState(filter);
+                homeProductGrid.innerHTML = gridState.markup;
+                homeProductGrid.setAttribute('data-active-filter', gridState.filter);
+                homeProductGrid.setAttribute('data-columns', String(gridState.columns));
+            }
+
+            if (productFilterButtons.length) {
+                productFilterButtons.forEach(function (button) {
+                    button.addEventListener('click', function () {
+                        var selectedFilter = button.getAttribute('data-filter') || 'balsems';
+                        productFilterButtons.forEach(function (btn) {
+                            var isActive = btn === button;
+                            btn.classList.toggle('active', isActive);
+                            btn.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+                        });
+                        renderProducts(selectedFilter);
+                    });
+                });
+
+                var defaultFilterButton = homeProductsSection ? homeProductsSection.querySelector('.filter-btn.active') : productFilterButtons[0];
+                var defaultFilter = defaultFilterButton ? (defaultFilterButton.getAttribute('data-filter') || 'balsems') : 'balsems';
+                if (defaultFilterButton) {
+                    defaultFilterButton.classList.add('active');
+                    defaultFilterButton.setAttribute('aria-pressed', 'true');
+                }
+                renderProducts(defaultFilter);
+            } else {
+                renderProducts('balsems');
+            }
+
+            document.querySelectorAll('.featured-section .product-card[data-product-id]').forEach(function (card) {
+                card.style.cursor = 'pointer';
+                card.setAttribute('role', 'link');
+                card.setAttribute('tabindex', '0');
+                var id = card.getAttribute('data-product-id');
+                var product = window.MallowCatalog && typeof window.MallowCatalog.find === 'function'
+                    ? window.MallowCatalog.find(id)
+                    : null;
+                if (product) {
+                    card.setAttribute('data-product-name', product.name || 'Product');
+                    card.setAttribute('data-product-price', String(product.price || 0));
+                    card.setAttribute('data-product-image', product.image || '');
+                }
+            });
+
+            applyFeaturedRoles();
+
+            function openProductPageFromCard(card) {
+                var productId = card.getAttribute('data-product-id');
+                if (!productId) {
+                    return;
+                }
+                window.location.href = '/producten/' + encodeURIComponent(String(productId).toLowerCase());
+            }
+
+            function resolveCardProduct(card) {
+                var id = card.getAttribute('data-product-id');
+                if (!id || !window.MallowCatalog || typeof window.MallowCatalog.find !== 'function') {
+                    return null;
+                }
+                return window.MallowCatalog.find(id);
+            }
+
+            document.addEventListener('click', function (event) {
+                var addButton = event.target.closest('.js-add-home-cart');
+                if (addButton) {
+                    event.preventDefault();
+                    event.stopPropagation();
+
+                    var addCard = addButton.closest('.product-card, .soap-product-card');
+                    if (!addCard || !window.MallowCart) {
+                        return;
+                    }
+
+                    var product = resolveCardProduct(addCard);
+                    var item = null;
+
+                    if (product && window.MallowCatalog && typeof window.MallowCatalog.toCartItem === 'function') {
+                        item = window.MallowCatalog.toCartItem(product);
+                    }
+
+                    if (!item) {
+                        var title = addCard.getAttribute('data-product-name');
+                        if (!title) {
+                            var titleEl = addCard.querySelector('.p-title, .soap-product-info h3');
+                            title = titleEl ? titleEl.textContent.trim() : 'Product';
+                        }
+
+                        var priceRaw = addCard.getAttribute('data-product-price');
+                        if (!priceRaw) {
+                            var priceEl = addCard.querySelector('.p-price, .soap-product-info p');
+                            priceRaw = priceEl ? priceEl.textContent : '0';
+                        }
+
+                        var image = addCard.getAttribute('data-product-image');
+                        if (!image) {
+                            var imgEl = addCard.querySelector('.product-img-container img, .soap-product-img img');
+                            image = imgEl ? imgEl.src : '';
+                        }
+
+                        var fallbackId = addCard.getAttribute('data-product-id') || window.MallowCart.slugify(title);
+                        item = {
+                            id: fallbackId,
+                            name: title,
+                            price: window.MallowCart.parsePrice(priceRaw),
+                            image: image,
+                            url: '/producten/' + encodeURIComponent(String(fallbackId).toLowerCase())
+                        };
+                    }
+
+                    window.MallowCart.addItem(item, 1);
+                    window.MallowCart.notify(item.name + ' toegevoegd aan winkelwagen.');
+                    return;
+                }
+
+                var featuredCard = event.target.closest('.featured-section:not([hidden]) .featured-card[data-product-id]');
+                if (featuredCard) {
+                    var featuredAction = featuredCard.getAttribute('data-featured-action');
+
+                    if (featuredAction === 'open') {
+                        if (event.target.closest('a.product-link')) {
+                            return;
+                        }
+
+                        if (event.target.closest('button, .js-add-home-cart')) {
+                            return;
+                        }
+
+                        openProductPageFromCard(featuredCard);
+                        return;
+                    }
+
+                    event.preventDefault();
+                    rotateFeatured(featuredAction === 'rotate-up' ? 'up' : 'down');
+                    scheduleFeaturedAutoplay();
+                    return;
+                }
+
+                var card = event.target.closest('.section-products .product-card[data-product-id]');
+                if (!card) {
+                    return;
+                }
+
+                if (event.target.closest('button, a, .js-add-home-cart')) {
+                    return;
+                }
+
+                openProductPageFromCard(card);
+            });
+
+            document.addEventListener('keydown', function (event) {
+                if (event.key !== 'Enter' && event.key !== ' ') {
+                    return;
+                }
+
+                var featuredCard = event.target.closest('.featured-section:not([hidden]) .featured-card[data-product-id]');
+                if (featuredCard) {
+                    event.preventDefault();
+
+                    if (featuredCard.getAttribute('data-featured-action') === 'open') {
+                        openProductPageFromCard(featuredCard);
+                    } else {
+                        rotateFeatured(featuredCard.getAttribute('data-featured-action') === 'rotate-up' ? 'up' : 'down');
+                        scheduleFeaturedAutoplay();
+                    }
+                    return;
+                }
+
+                var card = event.target.closest('.section-products .product-card[data-product-id]');
+                if (!card) {
+                    return;
+                }
+
+                if (event.target.closest('button, a, .js-add-home-cart')) {
+                    return;
+                }
+
+                event.preventDefault();
+                openProductPageFromCard(card);
+            });
+
+            var reviewsMarquee = document.querySelector('.js-reviews-marquee');
+            var reviewsTrack = document.querySelector('.js-reviews-track');
+            var reviewsFallback = [
+                {
+                    author_name: 'Sanne V.',
+                    rating: 5,
+                    text: 'Mijn huid is in twee weken zichtbaar rustiger geworden. Mallow Day trekt snel in en voelt niet vet.',
+                    relative_time_description: '2 maanden geleden'
+                },
+                {
+                    author_name: 'Joris K.',
+                    rating: 5,
+                    text: 'Eindelijk een productlijn zonder onnodige troep. De balsem en zeep zijn beide top.',
+                    relative_time_description: '3 weken geleden'
+                },
+                {
+                    author_name: 'Mila D.',
+                    rating: 4,
+                    text: 'Premium Bottenbouillon is echt sterk van smaak en super voor herstel na sporten.',
+                    relative_time_description: '1 maand geleden'
+                },
+                {
+                    author_name: 'Noor L.',
+                    rating: 5,
+                    text: 'Mallow Night is mijn favoriet geworden. Minder droge plekjes en een rustige huid in de ochtend.',
+                    relative_time_description: '5 weken geleden'
+                },
+                {
+                    author_name: 'Thomas R.',
+                    rating: 5,
+                    text: 'Snelle levering, mooie kwaliteit en de producten voelen eerlijk en ambachtelijk.',
+                    relative_time_description: '6 dagen geleden'
+                }
+            ];
+
+            function escapeHtml(input) {
+                return String(input || '')
+                    .replace(/&/g, '&amp;')
+                    .replace(/</g, '&lt;')
+                    .replace(/>/g, '&gt;')
+                    .replace(/"/g, '&quot;')
+                    .replace(/'/g, '&#39;');
+            }
+
+            function normalizeReview(source) {
+                var review = source || {};
+                var text = String(review.text || review.comment || '').trim();
+                if (!text) {
+                    return null;
+                }
+
+                if (text.length > 220) {
+                    text = text.slice(0, 217).trim() + '...';
+                }
+
+                var rating = Number(review.rating);
+                if (!rating || rating < 1) {
+                    rating = 5;
+                }
+                if (rating > 5) {
+                    rating = 5;
+                }
+
+                return {
+                    author: String(review.author_name || review.authorName || review.author || 'Google gebruiker'),
+                    rating: Math.round(rating),
+                    text: text,
+                    time: String(review.relative_time_description || review.timeAgo || review.relativeTime || '')
+                };
+            }
+
+            function starsHtml(rating) {
+                var html = '';
+                for (var i = 1; i <= 5; i += 1) {
+                    html += i <= rating ? '&#9733;' : '<span class="star-empty">&#9733;</span>';
+                }
+                return html;
+            }
+
+            function extractReviewsFromPayload(payload) {
+                if (Array.isArray(payload)) {
+                    return payload;
+                }
+
+                if (payload && Array.isArray(payload.reviews)) {
+                    return payload.reviews;
+                }
+
+                if (payload && payload.result && Array.isArray(payload.result.reviews)) {
+                    return payload.result.reviews;
+                }
+
+                return [];
+            }
+
+            function renderReviews(reviewsInput) {
+                if (!reviewsTrack) {
+                    return;
+                }
+
+                var normalized = reviewsInput
+                    .map(normalizeReview)
+                    .filter(Boolean)
+                    .slice(0, 8);
+
+                if (!normalized.length) {
+                    reviewsTrack.innerHTML = '';
+                    return;
+                }
+
+                var cards = normalized.map(function (review) {
+                    return '' +
+                        '<article class="review-card" tabindex="0">' +
+                        '<div class="review-meta">' +
+                        '<strong class="review-author">' + escapeHtml(review.author) + '</strong>' +
+                        '<span class="review-rating">' + starsHtml(review.rating) + '</span>' +
+                        '</div>' +
+                        '<p class="review-text">' + escapeHtml(review.text) + '</p>' +
+                        '<p class="review-source">Google Review' + (review.time ? ' | ' + escapeHtml(review.time) : '') + '</p>' +
+                        '</article>';
+                }).join('');
+
+                reviewsTrack.innerHTML = cards + cards;
+                reviewsTrack.style.animationDuration = String(Math.max(28, normalized.length * 6)) + 's';
+            }
+
+            function fetchGoogleReviewsFromEndpoint(config) {
+                if (!config.endpoint) {
+                    return Promise.resolve([]);
+                }
+
+                var url = String(config.endpoint);
+                if (config.placeId) {
+                    url += (url.indexOf('?') === -1 ? '?' : '&') + 'placeId=' + encodeURIComponent(config.placeId);
+                }
+
+                return fetch(url)
+                    .then(function (response) {
+                        if (!response.ok) {
+                            throw new Error('Endpoint response not OK');
+                        }
+                        return response.json();
+                    })
+                    .then(extractReviewsFromPayload)
+                    .catch(function () {
+                        return [];
+                    });
+            }
+
+            function loadGoogleMapsPlaces(apiKey) {
+                return new Promise(function (resolve, reject) {
+                    if (window.google && window.google.maps && window.google.maps.places) {
+                        resolve(window.google);
+                        return;
+                    }
+
+                    var callbackName = 'mallowGooglePlacesReady';
+                    window[callbackName] = function () {
+                        resolve(window.google);
+                    };
+
+                    var script = document.createElement('script');
+                    script.async = true;
+                    script.defer = true;
+                    script.src = 'https://maps.googleapis.com/maps/api/js?key=' + encodeURIComponent(apiKey) + '&libraries=places&callback=' + callbackName;
+                    script.onerror = function () {
+                        reject(new Error('Kon Google Maps script niet laden.'));
+                    };
+
+                    document.head.appendChild(script);
+                });
+            }
+
+            function fetchGoogleReviewsClient(config) {
+                if (!config.apiKey || !config.placeId) {
+                    return Promise.resolve([]);
+                }
+
+                return loadGoogleMapsPlaces(config.apiKey).then(function (googleApi) {
+                    return new Promise(function (resolve) {
+                        var placesService = new googleApi.maps.places.PlacesService(document.createElement('div'));
+                        placesService.getDetails(
+                            {
+                                placeId: config.placeId,
+                                fields: ['reviews']
+                            },
+                            function (place, status) {
+                                if (status !== googleApi.maps.places.PlacesServiceStatus.OK || !place) {
+                                    resolve([]);
+                                    return;
+                                }
+                                resolve(place.reviews || []);
+                            }
+                        );
+                    });
+                }).catch(function () {
+                    return [];
+                });
+            }
+
+            if (reviewsMarquee && reviewsTrack) {
+                renderReviews(reviewsFallback);
+
+                // Verbind echte Google reviews via:
+                // window.MallowGoogleReviews = { endpoint: '/api/google-reviews', placeId: 'YOUR_PLACE_ID' }
+                // of client-side:
+                // window.MallowGoogleReviews = { apiKey: 'YOUR_BROWSER_KEY', placeId: 'YOUR_PLACE_ID' }
+                var googleReviewsConfig = window.MallowGoogleReviews || {};
+                fetchGoogleReviewsFromEndpoint(googleReviewsConfig).then(function (reviewsFromEndpoint) {
+                    if (reviewsFromEndpoint.length) {
+                        renderReviews(reviewsFromEndpoint);
+                        return;
+                    }
+
+                    return fetchGoogleReviewsClient(googleReviewsConfig).then(function (reviewsFromClient) {
+                        if (reviewsFromClient.length) {
+                            renderReviews(reviewsFromClient);
+                        }
+                    });
+                });
+            }
+
+        });
+    </script>
+
+    <script>
+        (function () {
+            var bannerLink = document.querySelector('.banner-honey-link');
+            if (!bannerLink || !('IntersectionObserver' in window)) return;
+
+            var observer = new IntersectionObserver(function (entries) {
+                if (!entries[0].isIntersecting) return;
+                bannerLink.classList.add('is-scroll-highlight');
+                observer.disconnect();
+            }, { threshold: 0.35 });
+
+            bannerLink.addEventListener('animationend', function () {
+                bannerLink.classList.remove('is-scroll-highlight');
+            }, { once: true });
+
+            observer.observe(bannerLink);
+        }());
+    </script>
+    <script>
+        (function () {
+            var grid = document.querySelector('.js-soap-showcase-grid');
+            var previousButton = document.querySelector('.js-soap-showcase-prev');
+            var nextButton = document.querySelector('.js-soap-showcase-next');
+            if (!grid || !previousButton || !nextButton) return;
+
+            function getStep() {
+                var firstCard = grid.querySelector('.showcase-item');
+                if (!firstCard) return grid.clientWidth;
+                var styles = window.getComputedStyle(grid);
+                var gap = parseFloat(styles.columnGap || styles.gap || '0') || 0;
+                return firstCard.getBoundingClientRect().width + gap;
+            }
+
+            function updateControls() {
+                var maximum = Math.max(0, grid.scrollWidth - grid.clientWidth);
+                previousButton.disabled = grid.scrollLeft <= 4;
+                nextButton.disabled = grid.scrollLeft >= maximum - 4;
+            }
+
+            function scrollCards(direction) {
+                grid.scrollBy({ left: direction * getStep(), behavior: 'smooth' });
+            }
+
+            previousButton.addEventListener('click', function () { scrollCards(-1); });
+            nextButton.addEventListener('click', function () { scrollCards(1); });
+            grid.addEventListener('scroll', updateControls, { passive: true });
+            window.addEventListener('resize', updateControls);
+            updateControls();
+        }());
+    </script>
+</body>
+
+</html>

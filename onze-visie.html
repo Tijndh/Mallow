@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Onze Visie | Eerlijke verzorging en voeding uit de bron | Mallow</title>
+    <meta name="description" content="Lees het verhaal achter Mallow: natuurlijke crèmes, zeep en voeding van binnenuit, lokaal gemaakt vanuit een bewuste levensstijl.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-bg-light: #FBF9F4;
+            --color-bg-alt: #EEE5D7;
+            --color-canopy-green: #264132;
+            --color-canopy-green-hover: #1F342A;
+            --color-burnt-orange: #264132;
+            --color-gold-hover: #1F342A;
+            --color-green-wash: #DFE7DF;
+            --color-text-main: #4A453E;
+            --color-text-muted: #837B70;
+            --font-serif: 'Cormorant Garamond', serif;
+            --font-sans: 'Montserrat', sans-serif;
+            --ease-smooth: cubic-bezier(0.215, 0.61, 0.355, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--color-bg-light);
+            color: var(--color-text-main);
+            font-family: var(--font-sans);
+            line-height: 1.65;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        img {
+            display: block;
+            max-width: 100%;
+            height: auto;
+        }
+
+        .vision-header {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            background: rgba(251, 249, 244, 0.96);
+            border-bottom: 1px solid rgba(74, 69, 62, 0.12);
+            backdrop-filter: blur(8px);
+            padding: 1.35rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: var(--font-serif);
+            font-size: 2rem;
+            letter-spacing: 0.02em;
+        }
+
+        .vision-nav {
+            display: flex;
+            align-items: center;
+            gap: 1.9rem;
+            font-size: 0.78rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+        }
+
+        .vision-nav a {
+            position: relative;
+            padding-bottom: 0.2rem;
+        }
+
+        .vision-nav a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 2px;
+            background: currentColor;
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.35s var(--ease-smooth);
+        }
+
+        .vision-nav a:hover::after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+        .cart-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.42rem;
+        }
+
+        .cart-link::after {
+            display: none;
+        }
+
+        .cart-glyph {
+            line-height: 1;
+            font-size: 1rem;
+        }
+
+        .cart-count {
+            min-width: 1.2rem;
+            height: 1.2rem;
+            border-radius: 999px;
+            background: var(--color-canopy-green);
+            color: #fff;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 0.25rem;
+            font-size: 0.62rem;
+            font-weight: 600;
+            letter-spacing: 0;
+            text-transform: none;
+        }
+
+        .vision-main {
+            padding: 2.6rem 5% 5.5rem;
+        }
+
+        .container {
+            max-width: 1180px;
+            margin: 0 auto;
+        }
+
+        .vision-hero {
+            display: grid;
+            grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+            gap: 2.4rem;
+            align-items: center;
+            margin-bottom: 5.5rem;
+        }
+
+        .eyebrow {
+            font-size: 0.72rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            font-weight: 600;
+            color: var(--color-canopy-green);
+            margin-bottom: 0.7rem;
+        }
+
+        .vision-hero h1,
+        .story-copy h2,
+        .vision-closing h2 {
+            font-family: var(--font-serif);
+            color: var(--color-canopy-green);
+            font-weight: 400;
+            line-height: 1.1;
+        }
+
+        .vision-hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4.2rem);
+            margin-bottom: 1.2rem;
+            max-width: 24ch;
+        }
+
+        .hero-intro {
+            max-width: 50ch;
+            font-size: 1rem;
+            color: var(--color-text-main);
+        }
+
+        .hero-media {
+            aspect-ratio: 4 / 5;
+            overflow: hidden;
+            border-radius: 20px;
+            background: #ddd5c2;
+        }
+
+        .hero-media img,
+        .story-media img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .story-block {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+            gap: 2.2rem;
+            align-items: center;
+            margin-bottom: 5.5rem;
+        }
+
+        .story-block.is-reverse .story-copy {
+            order: 1;
+        }
+
+        .story-block.is-reverse .story-media,
+        .story-block.is-reverse .story-media-stack {
+            order: 2;
+        }
+
+        .story-copy {
+            max-width: 520px;
+        }
+
+        .story-copy h2 {
+            font-size: clamp(2rem, 4.3vw, 3.5rem);
+            margin-bottom: 0.9rem;
+        }
+
+        .story-copy p {
+            font-size: 0.98rem;
+            color: var(--color-text-main);
+            margin-bottom: 1rem;
+        }
+
+        .story-copy p:last-child {
+            margin-bottom: 0;
+        }
+
+        .story-media {
+            overflow: hidden;
+            border-radius: 18px;
+            background: #ded7c6;
+        }
+
+        .story-media.tall {
+            aspect-ratio: 4 / 5;
+        }
+
+        .story-media.wide {
+            aspect-ratio: 5 / 4;
+        }
+
+        .story-media-stack {
+            display: grid;
+            grid-template-rows: minmax(0, 1fr) minmax(0, 0.9fr);
+            gap: 1rem;
+        }
+
+        .story-media-stack .story-media {
+            min-height: 240px;
+        }
+
+        .js-vision-reveal {
+            opacity: 0;
+            transform: translate3d(0, 14px, 0);
+            transition: opacity 0.42s ease-out, transform 0.58s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .js-vision-reveal.is-visible {
+            opacity: 1;
+            transform: translate3d(0, 0, 0);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .js-vision-reveal {
+                opacity: 1;
+                transform: none;
+                transition: none;
+            }
+        }
+
+        .vision-closing {
+            max-width: 760px;
+            margin: 0 auto;
+            padding-top: 0.5rem;
+            text-align: center;
+        }
+
+        .vision-closing h2 {
+            font-size: clamp(2rem, 4vw, 3.2rem);
+            margin-bottom: 0.9rem;
+        }
+
+        .vision-closing p {
+            font-size: 0.98rem;
+            color: var(--color-text-muted);
+            margin-bottom: 1.4rem;
+        }
+
+        .btn-subtle {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--color-canopy-green);
+            color: var(--color-canopy-green);
+            padding: 0.9rem 1.5rem;
+            font-size: 0.74rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            font-weight: 600;
+            transition: background-color 0.3s var(--ease-smooth), border-color 0.3s var(--ease-smooth), color 0.3s var(--ease-smooth);
+        }
+
+        .btn-subtle:hover {
+            background: var(--color-green-wash);
+            border-color: var(--color-canopy-green);
+            color: var(--color-canopy-green);
+        }
+
+        @media (max-width: 980px) {
+            .vision-hero,
+            .story-block {
+                grid-template-columns: 1fr;
+                gap: 1.6rem;
+            }
+
+            .story-block.is-reverse .story-copy,
+            .story-block.is-reverse .story-media,
+            .story-block.is-reverse .story-media-stack {
+                order: initial;
+            }
+
+            .vision-hero {
+                margin-bottom: 4.5rem;
+            }
+
+            .story-block {
+                margin-bottom: 4.5rem;
+            }
+
+            .story-copy {
+                max-width: 100%;
+            }
+
+            .vision-hero h1 {
+                max-width: 100%;
+            }
+        }
+
+        @media (max-width: 760px) {
+            .vision-nav {
+                display: none;
+            }
+
+            .vision-main {
+                padding-top: 2rem;
+                padding-bottom: 4rem;
+            }
+
+            .vision-hero,
+            .story-block {
+                margin-bottom: 3.5rem;
+            }
+
+            .story-media-stack {
+                grid-template-rows: none;
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="assets/footer.css">
+</head>
+<body>
+    <header class="vision-header">
+        <a href="index.html" class="logo">Mallow.</a>
+        <nav class="vision-nav">
+            <a href="shop.html">Shop</a>
+            <a href="onze-visie.html" class="is-active">Onze Visie</a>
+            <a href="insights.html">Insights</a>
+            <a href="cart.html" class="cart-link" aria-label="Winkelwagen">
+                <span class="cart-glyph">&#128722;</span>
+                <span class="cart-count js-cart-count">0</span>
+            </a>
+        </nav>
+    </header>
+
+    <main class="vision-main">
+        <div class="container">
+            <section class="vision-hero js-vision-reveal">
+                <div class="hero-copy">
+                    <p class="eyebrow">Onze Visie</p>
+                    <h1>Terug naar de oorsprong van eerlijke verzorging en voeding.</h1>
+                    <p class="hero-intro">Bijna ieder product dat wij verkopen is ontstaan vanuit een eigen verlangen naar een betere variant dan de standaard. In ons huis zijn we bewust bezig met gezondheid: van de olie waarin we bakken tot wat we op onze huid smeren, de stoffen die we dragen, wel of niet vaccineren, en zelfs het soort licht in de avond. Mallow is daaruit ontstaan, uit een bewuste manier van leven en uit het verlangen naar verzorging en voeding die dichter bij de oorsprong blijven.</p>
+                </div>
+                <figure class="hero-media">
+                    <img src="https://hetreestdal.nl/wp/wp-content/uploads/2016/10/Mooie-relatie-tussen-boer-en-zijn-vee2.jpg" alt="Boer met koeien in het veld">
+                </figure>
+            </section>
+
+            <section class="story-block js-vision-reveal">
+                <figure class="story-media tall">
+                    <img src="lavendel%20hand.jpg" alt="Hand met lavendel in zacht avondlicht">
+                </figure>
+                <div class="story-copy">
+                    <p class="eyebrow">Hoe Mallow begon</p>
+                    <h2>Van wat we thuis zelf misten naar wat we nu delen.</h2>
+                    <p>Onze moeder, Chantal, begon thuis met het maken van crèmes en zeepjes. Die werden meteen veel gebruikt en, na een paar kleine verbeteringen, stapten we al snel allemaal volledig over.</p>
+                    <p>Vrienden en familie begonnen de producten ook te gebruiken en waren verrast door hoe goed ze werkten, zelfs voor mensen met een zeer gevoelige huid.</p>
+                    <p>Vanuit daar ontstond het idee om er meer mee te doen en het beschikbaar te maken voor de rest van Nederland: voor iedereen die op zoek is naar gezonde, kwalitatieve producten die minstens zo goed, of zelfs beter, werken dan wat we gewend zijn.</p>
+                </div>
+            </section>
+
+            <section class="story-block is-reverse js-vision-reveal" id="samenwerkingen">
+                <div class="story-copy">
+                    <p class="eyebrow">Lokaal en met aandacht</p>
+                    <h2>Wat we gebruiken, willen we kunnen herleiden.</h2>
+                    <p>De ingrediënten die Chantal gebruikt, komen daarom vanaf het begin grotendeels van eigen bodem of uit de buurt. Zo halen we onze producten bij een boer een paar kilometer verderop en bij een imker één straat verder.</p>
+                    <p>Het lokale aspect is voor ons belangrijk: het ondersteunt de mensen om ons heen, en het voelt simpelweg puurder en voedzamer.</p>
+                    <p>We waarderen het wanneer iets met aandacht en oprechtheid wordt gemaakt. Dat voel je terug in onze natuurlijke huidverzorging, in crèmes en zeep, en in de rust waarmee we producten willen maken.</p>
+                </div>
+                <div class="story-media-stack">
+                    <figure class="story-media wide">
+                        <img src="honing%20zeep.png" alt="Honingzeep van Mallow">
+                    </figure>
+                    <figure class="story-media wide">
+                        <img src="havermout%20zeep.png" alt="Havermoutzeep van Mallow">
+                    </figure>
+                </div>
+            </section>
+
+            <section class="story-block js-vision-reveal">
+                <figure class="story-media wide">
+                    <img src="https://www.clovermeadowsbeef.com/wp-content/uploads/2022/11/beef-bone-broth.png" alt="Premium bottenbouillon">
+                </figure>
+                <div class="story-copy">
+                    <p class="eyebrow">Hoe wij leven</p>
+                    <h2>Wat we maken komt voort uit hoe we zelf willen leven.</h2>
+                    <p>Diezelfde levensstijl zie je terug in hoe we zelf leven. We hebben ons eigen voedselbos en groentetuinen, kippetjes die vrij rondlopen, en plannen om in de toekomst ook geiten te houden.</p>
+                    <p>Dezelfde passie is zichtbaar bij onze zus Marije, die met haar bedrijf Mary’s Magic vanuit dezelfde visie werkt.</p>
+                    <p>Zij maakt chocoladeproducten, normaal gesproken iets om van te genieten, maar vaak ongezond, tot een oprecht genietmoment. En misschien wel het mooiste: ze gebruikt alleen echt voedzame ingrediënten, zodat je ervan kunt genieten zonder schuldgevoel.</p>
+                </div>
+            </section>
+
+            <section class="story-block is-reverse js-vision-reveal">
+                <div class="story-copy">
+                    <p class="eyebrow">Waarom we dit delen</p>
+                    <h2>Gezondheid hoort weer dichter bij de oorsprong te komen.</h2>
+                    <p>Ook Chantal helpt wekelijks vrouwen die moeite hebben om op een gezond gewicht te komen of te blijven. Ze begeleidt hen terug naar de tradities van onze voorouders, met als resultaat dat ze vaak bijna moeiteloos afvallen.</p>
+                    <p>Volgens veel klanten voelt het niet eens als een dieet. Zoals je merkt, leeft er in ons huis een oprechte passie voor gezondheid. Die willen we graag delen, om anderen te helpen en te inspireren om echt gezond te worden en te blijven.</p>
+                    <p>We geven iedereen graag een zetje in de goede richting. In dit geval: een duwtje terug, terug naar de oorsprong.</p>
+                </div>
+                <figure class="story-media wide">
+                    <img src="https://hetreestdal.nl/wp/wp-content/uploads/2016/10/Mooie-relatie-tussen-boer-en-zijn-vee2.jpg" alt="Boerderijleven dicht bij de oorsprong">
+                </figure>
+            </section>
+
+            <section class="vision-closing js-vision-reveal">
+                <p class="eyebrow">Terug naar de oorsprong</p>
+                <h2>Dat is de richting waar Mallow steeds naar terugkeert.</h2>
+                <p>Voor ons blijft de richting hetzelfde: betere varianten dan de standaard, lokaal en met aandacht gemaakt, met verzorging van buiten en voeding van binnen die dichter bij de bron mogen blijven. Dat is wat we met Mallow willen delen.</p>
+                <a href="shop.html" class="btn-subtle">Bekijk onze producten</a>
+            </section>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="site-footer-inner">
+            <div class="site-footer-top">
+                <div class="site-footer-brand">
+                    <a href="index.html" class="site-footer-logo">mallow.</a>
+                    <p class="site-footer-tagline">Eerlijke verzorging en voeding uit lokale bron, gemaakt voor een rustige huid en een sterk lichaam.</p>
+                </div>
+                <div class="site-footer-social">
+                    <a href="https://instagram.com/mallow" target="_blank" rel="noopener noreferrer" aria-label="Volg Mallow op Instagram">Instagram</a>
+                </div>
+            </div>
+            <div class="site-footer-trust" aria-label="Vertrouwenssignalen">
+                <p class="site-footer-trust-item">Veilig betalen met Stripe</p>
+                <p class="site-footer-trust-item">Gratis verzending vanaf €50</p>
+                <p class="site-footer-trust-item">Lokaal geproduceerd in Nederland</p>
+            </div>
+            <div class="site-footer-grid">
+                <section class="site-footer-col" aria-label="Navigatie">
+                    <h2>Navigatie</h2>
+                    <div class="site-footer-links">
+                        <a href="index.html">Home</a>
+                        <a href="shop.html">Winkel</a>
+                        <a href="shop.html">Producten</a>
+                        <a href="cart.html">Winkelwagen</a>
+                        <a href="onze-visie.html">Onze Visie</a>
+                        <a href="insights.html">Insights</a>
+                    </div>
+                </section>
+                <section class="site-footer-col" aria-label="Klantenservice">
+                    <h2>Klantenservice</h2>
+                    <div class="site-footer-links">
+                        <a href="mailto:hello@mallow.nl">Contact</a>
+                        <a href="insights.html">Alle insights</a>
+                        <a href="verzending.html">Verzending</a>
+                        <a href="retouren.html">Retouren</a>
+                    </div>
+                </section>
+                <section class="site-footer-col" aria-label="Juridisch">
+                    <h2>Juridisch</h2>
+                    <div class="site-footer-links">
+                        <a href="privacy.html">Privacybeleid</a>
+                        <a href="voorwaarden.html">Algemene voorwaarden</a>
+                        <a href="retouren.html">Retourbeleid</a>
+                        <a href="verzending.html">Verzendbeleid</a>
+                    </div>
+                </section>
+                <section class="site-footer-col" aria-label="Contactgegevens">
+                    <h2>Contact</h2>
+                    <div class="site-footer-contact">
+                        <p>E-mail: <a href="mailto:hello@mallow.nl">hello@mallow.nl</a></p>
+                        <p>Telefoon: <a href="tel:+31612345678">+31 6 12 34 56 78</a></p>
+                        <p>Boerderijweg 12, 7241 AA Lochem, Nederland</p>
+                    </div>
+                </section>
+            </div>
+            <div class="site-footer-bottom">
+                <p class="site-footer-copy">&copy; 2026 mallow. Alle rechten voorbehouden.</p>
+                <div class="site-footer-meta">
+                    <a href="privacy.html">Privacy</a>
+                    <a href="voorwaarden.html">Voorwaarden</a>
+                    <a href="verzending.html">Verzending</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="cart.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var revealSections = document.querySelectorAll('.js-vision-reveal');
+            if (!revealSections.length) {
+                return;
+            }
+
+            var prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            if (!('IntersectionObserver' in window) || prefersReducedMotion) {
+                revealSections.forEach(function (section) {
+                    section.classList.add('is-visible');
+                });
+                return;
+            }
+
+            var observer = new IntersectionObserver(function (entries, activeObserver) {
+                entries.forEach(function (entry) {
+                    if (!entry.isIntersecting) {
+                        return;
+                    }
+
+                    entry.target.classList.add('is-visible');
+                    activeObserver.unobserve(entry.target);
+                });
+            }, {
+                threshold: 0.18,
+                rootMargin: '0px 0px -8% 0px'
+            });
+
+            revealSections.forEach(function (section) {
+                observer.observe(section);
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,15 @@
+node_modules/
+.env
+.env.*
+!.env.example
+data/
+*.log
+*.zip
+__home_check_*.js
+.DS_Store
+Thumbs.db
+# Local helper/generated files that are not part of the deployable app
+order_sections.js
+restyle_showcase.js
+build-journey.js
+YTDown.com_*.mp4
