@@ -24,3 +24,5 @@ services:
         sync: false
       - key: DATABASE_SSL
         value: require
+      - key: ADMIN_TOKEN
+        sync: false
