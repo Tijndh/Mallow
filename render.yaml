@@ -2,7 +2,7 @@ services:
   - type: web
     name: mallow-site
     runtime: node
-    plan: starter
+    plan: free
     buildCommand: npm ci && npm run preflight
     startCommand: npm start
     healthCheckPath: /api/health
