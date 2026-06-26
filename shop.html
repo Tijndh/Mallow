@@ -302,29 +302,63 @@
             position: absolute;
             right: 0.62rem;
             bottom: 0.62rem;
-            width: 26px;
-            height: 26px;
+            height: 34px;
+            min-width: 34px;
             border-radius: 999px;
-            border: 1px solid rgba(38, 65, 50, 0.42);
-            background: transparent;
+            border: 1px solid rgba(38, 65, 50, 0.15);
+            background: rgba(255, 252, 247, 0.95);
             color: var(--color-canopy-green);
+            backdrop-filter: blur(4px);
             display: inline-flex;
             align-items: center;
             justify-content: center;
             font-family: var(--font-sans);
-            font-size: 0.95rem;
-            font-weight: 500;
+            font-size: 1.1rem;
+            font-weight: 400;
             line-height: 1;
             cursor: pointer;
-            transition: transform 0.25s ease, background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+            transition: all 0.5s var(--ease-smooth);
             z-index: 3;
+            box-shadow: 0 4px 10px rgba(18, 29, 23, 0.06);
+            padding: 0;
+            box-sizing: border-box;
+            overflow: hidden;
         }
 
-        .add-btn:hover {
+        .add-btn::after {
+            content: 'VOEG TOE';
+            font-size: 0.65rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            max-width: 0;
+            opacity: 0;
+            white-space: nowrap;
+            transition: all 0.5s var(--ease-smooth);
+        }
+
+        .shop-card:hover .add-btn,
+        .shop-card:focus-within .add-btn {
+            background: rgba(255, 255, 255, 1);
+            box-shadow: 0 6px 14px rgba(38, 65, 50, 0.1);
+        }
+
+        .shop-card .add-btn:hover,
+        .shop-card .add-btn:focus-visible {
             transform: translateY(-1px);
             background: var(--color-canopy-green);
             border-color: var(--color-canopy-green);
             color: var(--color-bg-light);
+            box-shadow: 0 6px 14px rgba(38, 65, 50, 0.15);
+            padding-left: 0.45rem;
+        }
+
+        .shop-card .add-btn:hover::after,
+        .shop-card .add-btn:focus-visible::after {
+            max-width: 90px;
+            opacity: 1;
+            margin-left: 0.35rem;
+            padding-right: 0.70rem;
         }
 
         .add-btn:focus-visible {
